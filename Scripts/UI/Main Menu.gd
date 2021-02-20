@@ -14,7 +14,7 @@ func _ready():
 	p4.setProperties(4, Color(1, 1, 0))
 
 func startGame():
-	tree.change_scene("res://Scenes/Game.tscn")
+	tree.change_scene("res://Scenes/Screens/Game.tscn")
 
 func quitGame():
 	tree.quit()
