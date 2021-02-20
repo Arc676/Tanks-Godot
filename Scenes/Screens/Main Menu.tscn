@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/UI/Tank Creator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Terrain Btn Group.tres" type="ButtonGroup" id=2]
-[ext_resource path="res://Scripts/UI/Main Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Screens/Main Menu.gd" type="Script" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
