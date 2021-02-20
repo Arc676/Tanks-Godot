@@ -1,0 +1,118 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/Tank Creator.gd" type="Script" id=1]
+
+[node name="Tank Creator" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Presence" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Player Number" type="Label" parent="Presence"]
+margin_top = 5.0
+margin_right = 51.0
+margin_bottom = 19.0
+text = "Player 1"
+
+[node name="Tank Enabled" type="CheckBox" parent="Presence"]
+margin_left = 55.0
+margin_right = 168.0
+margin_bottom = 24.0
+pressed = true
+text = "Enable Player"
+
+[node name="Identification" type="HBoxContainer" parent="."]
+margin_top = 28.0
+margin_right = 1024.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Identification"]
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 19.0
+text = "Name"
+
+[node name="Tank Name" type="LineEdit" parent="Identification"]
+margin_left = 42.0
+margin_right = 942.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Tank Color" type="ColorPickerButton" parent="Identification"]
+margin_left = 946.0
+margin_right = 1024.0
+margin_bottom = 24.0
+text = "Tank Color"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Team" type="HBoxContainer" parent="."]
+margin_top = 56.0
+margin_right = 1024.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="Team"]
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 19.0
+text = "Team"
+
+[node name="Tank Team" type="LineEdit" parent="Team"]
+margin_left = 39.0
+margin_right = 1024.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="AI Mode" type="HBoxContainer" parent="."]
+margin_top = 84.0
+margin_right = 1024.0
+margin_bottom = 108.0
+
+[node name="CC" type="CheckBox" parent="AI Mode"]
+margin_right = 91.0
+margin_bottom = 24.0
+text = "Computer"
+
+[node name="Difficulty" type="OptionButton" parent="AI Mode"]
+margin_left = 95.0
+margin_right = 557.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Easy"
+items = [ "Easy", null, false, 0, null, "Medium", null, false, 1, null, "Hard", null, false, 2, null ]
+selected = 0
+
+[node name="Style" type="OptionButton" parent="AI Mode"]
+margin_left = 561.0
+margin_right = 1024.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Defensive"
+items = [ "Defensive", null, false, 0, null, "Aggressive", null, false, 1, null, "Random", null, false, 2, null ]
+selected = 0
+
+[node name="Disk" type="HBoxContainer" parent="."]
+margin_top = 112.0
+margin_right = 1024.0
+margin_bottom = 132.0
+
+[node name="Load" type="Button" parent="Disk"]
+margin_right = 510.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Load"
+
+[node name="Unload" type="Button" parent="Disk"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Unload"
