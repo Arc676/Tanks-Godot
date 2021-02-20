@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Tanks
+Comment=Tank combat game built with Godot based on a flash game of the same name
+Exec=godot --main-pack tanks.pck
+Icon=icon.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+X-Ubuntu-Supported-Orientations=landscape
