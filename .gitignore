@@ -1,3 +1,4 @@
 /[Bb]inaries/
 *.ignore
 *.import
+.import
