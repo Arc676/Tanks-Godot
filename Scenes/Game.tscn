@@ -1,3 +1,192 @@
 [gd_scene format=2]
 
-[node name="Node2D" type="Node2D"]
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 94.0
+color = Color( 0.784314, 0.784314, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="HBoxContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player Stats" type="VBoxContainer" parent="ColorRect/HUD"]
+margin_right = 209.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+
+[node name="Identification" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
+margin_right = 209.0
+margin_bottom = 20.0
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/HUD/Player Stats/Identification"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+
+[node name="Player Name" type="Label" parent="ColorRect/HUD/Player Stats/Identification"]
+margin_left = 24.0
+margin_top = 3.0
+margin_right = 63.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player"
+
+[node name="Health" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
+margin_top = 24.0
+margin_right = 209.0
+margin_bottom = 38.0
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Health"]
+margin_right = 18.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "HP"
+
+[node name="TextureProgress" type="TextureProgress" parent="ColorRect/HUD/Player Stats/Health"]
+margin_left = 22.0
+margin_right = 23.0
+margin_bottom = 14.0
+
+[node name="Firepower" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
+margin_top = 42.0
+margin_right = 209.0
+margin_bottom = 56.0
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Firepower"]
+margin_right = 63.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Firepower"
+
+[node name="Fuel" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
+margin_top = 60.0
+margin_right = 209.0
+margin_bottom = 74.0
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Fuel"]
+margin_right = 27.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Fuel"
+
+[node name="Weapon" type="VBoxContainer" parent="ColorRect/HUD"]
+margin_left = 229.0
+margin_right = 439.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Weapon"]
+margin_right = 210.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Weapon"
+
+[node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon"]
+margin_top = 18.0
+margin_right = 210.0
+margin_bottom = 32.0
+
+[node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
+margin_right = 64.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Tank Shell"
+
+[node name="Ammo" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
+margin_left = 68.0
+margin_right = 84.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "99"
+
+[node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
+margin_left = 459.0
+margin_right = 668.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
+margin_right = 209.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Wind"
+
+[node name="TextureProgress" type="TextureProgress" parent="ColorRect/HUD/Wind"]
+margin_top = 18.0
+margin_right = 209.0
+margin_bottom = 19.0
+fill_mode = 6
+
+[node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
+margin_left = 688.0
+margin_right = 898.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+
+[node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
+margin_right = 210.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player X: 0"
+
+[node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
+margin_top = 18.0
+margin_right = 210.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player X: 0"
+
+[node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
+margin_top = 36.0
+margin_right = 210.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player X: 0"
+
+[node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
+margin_top = 54.0
+margin_right = 210.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player X: 0"
+
+[node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
+margin_left = 918.0
+margin_right = 1004.0
+margin_bottom = 84.0
+size_flags_vertical = 3
+
+[node name="SFX" type="CheckBox" parent="ColorRect/HUD/Controls"]
+margin_right = 86.0
+margin_bottom = 24.0
+custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+pressed = true
+text = "SFX"
+
+[node name="Draw Game" type="Button" parent="ColorRect/HUD/Controls"]
+margin_top = 28.0
+margin_right = 86.0
+margin_bottom = 48.0
+text = "Draw Game"
+
+[node name="Game Scene" type="Node2D" parent="."]
