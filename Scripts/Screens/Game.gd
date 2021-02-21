@@ -25,10 +25,12 @@ onready var pFuel = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Fuel Bar"
 onready var windSpeed = $"ColorRect/HUD/Wind/Wind Bar"
 
 # HUD - Scoreboard
-onready var p1Score = $"ColorRect/HUD/Scoreboard/Score 1"
-onready var p2Score = $"ColorRect/HUD/Scoreboard/Score 2"
-onready var p3Score = $"ColorRect/HUD/Scoreboard/Score 3"
-onready var p4Score = $"ColorRect/HUD/Scoreboard/Score 4"
+onready var scores = [
+	$"ColorRect/HUD/Scoreboard/Score 1",
+	$"ColorRect/HUD/Scoreboard/Score 2",
+	$"ColorRect/HUD/Scoreboard/Score 3",
+	$"ColorRect/HUD/Scoreboard/Score 4"
+]
 
 # Game
 var activePlayer = 0
@@ -50,6 +52,12 @@ func _ready():
 		add_child_below_node($"Game Scene", tank)
 		players.append(tank)
 
+	# Remove unused scoreboard entries
+	for i in range(4):
+		scores[i].visible = len(players) >= i + 1
+
+	setActiveTank(0)
+
 func toggleSFX(pressed):
 	AudioServer.set_bus_mute(1, !pressed)
 
@@ -60,3 +68,12 @@ func _process(_delta):
 	pHP.value = players[activePlayer].hp
 	pFirepower.value = players[activePlayer].firepower
 	pFuel.value = players[activePlayer].fuel
+
+	for i in range(len(players)):
+		var tank = players[i]
+		scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+
+func setActiveTank(idx):
+	players[idx].isActiveTank = true
+	pColor.color = players[idx].color
+	pName.text = players[idx].tankName

@@ -22,6 +22,7 @@ onready var teleport = $Teleportation
 # Stats
 var tankName = ""
 var team = ""
+var color
 var hp = 100
 var fuel = 100
 var money = 0
@@ -51,13 +52,15 @@ var firingAngle = 0
 var firepower = 50
 
 # Tank state
+var isActiveTank = false
 var hasFired = false
 var turnEnded = false
 var isTargeting = false
 var isFalling = false
 var isTeleporting = false
 
-func setColor(color):
+func setColor(newColor):
+	color = newColor
 	$Sprite.modulate = color
 
 func reset():
@@ -79,6 +82,8 @@ func _draw():
 	draw_set_transform_matrix(Transform2D.IDENTITY)
 
 func _process(_delta):
+	if !isActiveTank:
+		return
 	if Input.is_action_pressed("ui_down") and firingAngle > -PI:
 		rotate(-1)
 	elif Input.is_action_pressed("ui_up") and firingAngle < 0:

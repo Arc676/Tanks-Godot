@@ -99,7 +99,6 @@ align = 2
 
 [node name="Bars" type="VBoxContainer" parent="ColorRect/HUD/Player Stats/HBoxContainer"]
 margin_left = 67.0
-margin_top = 1.0
 margin_right = 217.0
 margin_bottom = 50.0
 size_flags_horizontal = 3

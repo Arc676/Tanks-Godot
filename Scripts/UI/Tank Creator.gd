@@ -34,7 +34,7 @@ func getTank():
 	if !enableTank.pressed:
 		return null
 	var tank = tankObj.instance()
-	tank.name = tankName.text
+	tank.tankName = tankName.text
 	tank.team = tankTeam.text
 	tank.setColor(tankColor.color)
 	return tank
