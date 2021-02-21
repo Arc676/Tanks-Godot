@@ -16,6 +16,35 @@ extends VBoxContainer
 
 onready var tankObj = preload("res://Scenes/Entities/Tank.tscn")
 
+const names = [
+	"Alpha",
+	"Bravo",
+	"Charlie",
+	"Delta",
+	"Echo",
+	"Foxtrot",
+	"Golf",
+	"Hotel",
+	"India",
+	"Juliet",
+	"Kilo",
+	"Lima",
+	"Mike",
+	"November",
+	"Oscar",
+	"Papa",
+	"Quebec",
+	"Romeo",
+	"Sierra",
+	"Tango",
+	"Uniform",
+	"Victor",
+	"Whiskey",
+	"X-ray",
+	"Yankee",
+	"Zulu"
+]
+
 # Enable tank?
 onready var enableTank = $"Presence/Tank Enabled"
 onready var pNum = $"Presence/Player Number"
@@ -34,7 +63,12 @@ func getTank():
 	if !enableTank.pressed:
 		return null
 	var tank = tankObj.instance()
-	tank.tankName = tankName.text
+	if tankName.text == "":
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		tank.tankName = names[rng.randi_range(0, 25)]
+	else:
+		tank.tankName = tankName.text
 	tank.team = tankTeam.text
 	tank.setColor(tankColor.color)
 	return tank
