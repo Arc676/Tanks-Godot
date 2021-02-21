@@ -16,10 +16,17 @@ extends Control
 
 onready var tree = get_tree()
 
+# Players
 onready var p1 = $"Players/Player 1"
 onready var p2 = $"Players/Player 2"
 onready var p3 = $"Players/Player 3"
 onready var p4 = $"Players/Player 4"
+
+# Terrain selection
+onready var desert = $Terrain/Desert
+onready var plains = $Terrain/Plains
+onready var hills = $Terrain/Hills
+onready var random = $Terrain/Random
 
 func _ready():
 	p1.setProperties(1, Color(0, 0, 1))
@@ -28,6 +35,24 @@ func _ready():
 	p4.setProperties(4, Color(1, 1, 0))
 
 func startGame():
+	Globals.players = [
+		p1.getTank(), p2.getTank()
+	]
+	var tank3 = p3.getTank()
+	if tank3:
+		Globals.players.append(tank3)
+	var tank4 = p4.getTank()
+	if tank4:
+		Globals.players.append(tank4)
+
+	if desert.pressed:
+		Globals.selectedTerrain = Terrain.TerrainType.DESERT
+	elif plains.pressed:
+		Globals.selectedTerrain = Terrain.TerrainType.PLAINS
+	elif hills.pressed:
+		Globals.selectedTerrain = Terrain.TerrainType.HILLS
+	else:
+		Globals.selectedTerrain = Terrain.TerrainType.RANDOM
 	tree.change_scene("res://Scenes/Screens/Game.tscn")
 
 func quitGame():

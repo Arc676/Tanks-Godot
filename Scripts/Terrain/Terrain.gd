@@ -13,6 +13,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extends StaticBody2D
+class_name Terrain
 
 enum TerrainType {
 	DESERT,
@@ -22,6 +23,7 @@ enum TerrainType {
 }
 
 const chunkCount = 41
+var chunkSize = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -71,7 +73,7 @@ func generateNewTerrain(type, height, width):
 	terrainHeight = height
 	terrainWidth = width
 
-	var chunkSize = width / (chunkCount - 1)
+	chunkSize = width / (chunkCount - 1)
 
 	var points = ground.polygon
 	points[0] = Vector2(0, rng.randf_range(height / 2, height * 0.75))
