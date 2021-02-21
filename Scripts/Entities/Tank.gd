@@ -84,6 +84,6 @@ func _process(_delta):
 	elif Input.is_action_pressed("ui_up") and firingAngle < 0:
 		rotate(1)
 	if Input.is_action_pressed("ui_page_up"):
-		firepower += 1
+		firepower = clamp(firepower + 1, 0, 100)
 	elif Input.is_action_pressed("ui_page_down"):
-		firepower -= 1
+		firepower = clamp(firepower - 1, 0, 100)

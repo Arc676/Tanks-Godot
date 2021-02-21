@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Screens/Game.gd" type="Script" id=2]
+[ext_resource path="res://Textures/Red.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Black.png" type="Texture" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -39,12 +41,12 @@ __meta__ = {
 }
 
 [node name="Player Stats" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_right = 209.0
+margin_right = 217.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Identification" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
-margin_right = 209.0
+margin_right = 217.0
 margin_bottom = 20.0
 
 [node name="Player Color" type="ColorRect" parent="ColorRect/HUD/Player Stats/Identification"]
@@ -60,59 +62,90 @@ margin_bottom = 17.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player"
 
-[node name="Health" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
 margin_top = 24.0
-margin_right = 209.0
-margin_bottom = 38.0
-
-[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Health"]
-margin_right = 18.0
-margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "HP"
-
-[node name="Health Bar" type="TextureProgress" parent="ColorRect/HUD/Player Stats/Health"]
-margin_left = 22.0
-margin_right = 23.0
-margin_bottom = 14.0
-
-[node name="Firepower" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
-margin_top = 42.0
-margin_right = 209.0
-margin_bottom = 56.0
-
-[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Firepower"]
-margin_right = 63.0
-margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Firepower"
-
-[node name="Fuel" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
-margin_top = 60.0
-margin_right = 209.0
+margin_right = 217.0
 margin_bottom = 74.0
 
-[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/Fuel"]
-margin_right = 27.0
+[node name="Labels" type="VBoxContainer" parent="ColorRect/HUD/Player Stats/HBoxContainer"]
+margin_right = 63.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="ColorRect/HUD/Player Stats/HBoxContainer/Labels"]
+margin_right = 63.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "HP"
+align = 2
+
+[node name="Label2" type="Label" parent="ColorRect/HUD/Player Stats/HBoxContainer/Labels"]
+margin_top = 18.0
+margin_right = 63.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Firepower"
+align = 2
+
+[node name="Label3" type="Label" parent="ColorRect/HUD/Player Stats/HBoxContainer/Labels"]
+margin_top = 36.0
+margin_right = 63.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Fuel"
+align = 2
+
+[node name="Bars" type="VBoxContainer" parent="ColorRect/HUD/Player Stats/HBoxContainer"]
+margin_left = 67.0
+margin_top = 1.0
+margin_right = 217.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="Health Bar" type="TextureProgress" parent="ColorRect/HUD/Player Stats/HBoxContainer/Bars"]
+margin_right = 150.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+value = 100.0
+texture_progress = ExtResource( 3 )
+
+[node name="Firepower Bar" type="TextureProgress" parent="ColorRect/HUD/Player Stats/HBoxContainer/Bars"]
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+value = 100.0
+texture_progress = ExtResource( 3 )
+
+[node name="Fuel Bar" type="TextureProgress" parent="ColorRect/HUD/Player Stats/HBoxContainer/Bars"]
+margin_top = 36.0
+margin_right = 150.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+value = 100.0
+texture_progress = ExtResource( 4 )
 
 [node name="Weapon" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 229.0
-margin_right = 439.0
+margin_left = 237.0
+margin_right = 444.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Weapon"]
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Weapon"
 
 [node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon"]
 margin_top = 18.0
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 32.0
 
 [node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
@@ -129,52 +162,52 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "99"
 
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 459.0
-margin_right = 668.0
+margin_left = 464.0
+margin_right = 671.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
-margin_right = 209.0
+margin_right = 207.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Wind"
 
 [node name="Wind Bar" type="TextureProgress" parent="ColorRect/HUD/Wind"]
 margin_top = 18.0
-margin_right = 209.0
+margin_right = 207.0
 margin_bottom = 19.0
 fill_mode = 6
 
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 688.0
+margin_left = 691.0
 margin_right = 898.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 18.0
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 36.0
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 54.0
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
