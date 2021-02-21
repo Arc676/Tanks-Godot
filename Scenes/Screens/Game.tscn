@@ -200,5 +200,5 @@ margin_top = 28.0
 margin_right = 86.0
 margin_bottom = 48.0
 text = "Draw Game"
-[connection signal="pressed" from="ColorRect/HUD/Controls/SFX" to="." method="toggleSFX"]
+[connection signal="toggled" from="ColorRect/HUD/Controls/SFX" to="." method="toggleSFX"]
 [connection signal="pressed" from="ColorRect/HUD/Controls/Draw Game" to="." method="drawGame"]

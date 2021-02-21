@@ -44,8 +44,8 @@ func _ready():
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 10
 		add_child_below_node($"Game Scene", tank)
 
-func toggleSFX():
-	pass # Replace with function body.
+func toggleSFX(pressed):
+	AudioServer.set_bus_mute(1, !pressed)
 
 func drawGame():
 	pass # Replace with function body.
