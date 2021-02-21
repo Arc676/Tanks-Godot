@@ -46,9 +46,12 @@ func _ready():
 	terrain.generateNewTerrain(Globals.selectedTerrain,
 		get_viewport().size.y,
 		get_viewport().size.x)
+	var z = 1
 	for tank in Globals.players:
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)
-		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 10
+		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
+		tank.z_index = z
+		z += 1
 		add_child_below_node($"Game Scene", tank)
 		players.append(tank)
 

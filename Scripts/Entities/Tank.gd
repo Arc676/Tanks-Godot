@@ -14,6 +14,9 @@
 
 extends KinematicBody2D
 
+const GRAVITY = 981
+const MOVE_SPEED = 50
+
 # Sounds
 onready var barrelRotation = $Barrel
 onready var explosion = $Explosion
@@ -58,6 +61,7 @@ var turnEnded = false
 var isTargeting = false
 var isFalling = false
 var isTeleporting = false
+var velocity = Vector2.ZERO
 
 func setColor(newColor):
 	color = newColor
@@ -92,3 +96,18 @@ func _process(_delta):
 		firepower = clamp(firepower + 1, 0, 100)
 	elif Input.is_action_pressed("ui_page_down"):
 		firepower = clamp(firepower - 1, 0, 100)
+
+func _physics_process(delta):
+	velocity.y += GRAVITY * delta
+	if isActiveTank and is_on_floor() and fuel > 0:
+		if Input.is_action_pressed("ui_left"):
+			velocity.x = -MOVE_SPEED
+			fuel -= 20 * delta / engineEfficiency
+		elif Input.is_action_pressed("ui_right"):
+			velocity.x = MOVE_SPEED
+			fuel -= 20 * delta / engineEfficiency
+		else:
+			velocity.x = 0
+	if fuel <= 0:
+		velocity.x = 0
+	velocity = move_and_slide(velocity, Vector2.UP, true)
