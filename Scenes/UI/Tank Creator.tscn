@@ -95,8 +95,8 @@ margin_left = 561.0
 margin_right = 1024.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-text = "Defensive"
-items = [ "Defensive", null, false, 0, null, "Aggressive", null, false, 1, null, "Random", null, false, 2, null ]
+text = "Aggressive"
+items = [ "Aggressive", null, false, 0, null, "Defensive", null, false, 1, null, "Random", null, false, 2, null ]
 selected = 0
 
 [node name="Disk" type="HBoxContainer" parent="."]

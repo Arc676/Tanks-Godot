@@ -17,6 +17,19 @@ extends KinematicBody2D
 const GRAVITY = 981
 const MOVE_SPEED = 50
 
+enum AILevel {
+	EASY, MEDIUM, HARD
+}
+
+enum AIStyle {
+	AGGRESSIVE, DEFENSIVE
+}
+
+# Computer controlled tanks
+var isCC = false
+var aiLvl = AILevel.EASY
+var aiStyle = AIStyle.AGGRESSIVE
+
 # Sounds
 onready var barrelRotation = $Barrel
 onready var explosion = $Explosion

@@ -54,6 +54,11 @@ onready var tankName = $"Identification/Tank Name"
 onready var tankColor = $"Identification/Tank Color"
 onready var tankTeam = $"Team/Tank Team"
 
+# Computer controlled tank
+onready var tankIsCC = $"AI Mode/CC"
+onready var aiDiff = $"AI Mode/Difficulty"
+onready var aiStyle = $"AI Mode/Style"
+
 func setProperties(num, color):
 	enableTank.visible = num >= 3
 	pNum.text = "Player %d" % num
@@ -62,13 +67,20 @@ func setProperties(num, color):
 func getTank():
 	if !enableTank.pressed:
 		return null
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
 	var tank = tankObj.instance()
 	if tankName.text == "":
-		var rng = RandomNumberGenerator.new()
-		rng.randomize()
 		tank.tankName = names[rng.randi_range(0, 25)]
 	else:
 		tank.tankName = tankName.text
 	tank.team = tankTeam.text
 	tank.setColor(tankColor.color)
+	if tankIsCC.pressed:
+		tank.isCC = true
+		tank.aiLvl = aiDiff.selected
+		if aiStyle.selected == 2:
+			tank.aiStyle = rng.randi_range(0, 1)
+		else:
+			tank.aiStyle = aiStyle.selected
 	return tank
