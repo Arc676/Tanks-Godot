@@ -22,18 +22,20 @@ onready var sound = $AudioStreamPlayer2D
 
 var hasImpacted = false
 var blastRadius
+var srcPlayer
 
 # warning-ignore:shadowed_variable
-func init(blastRadius, velocity, isBig = false):
+func init(blastRadius, velocity, isBig, src):
 	self.blastRadius = blastRadius
 	linear_velocity = velocity
+	srcPlayer = src
 	if isBig:
 		sound.stream = exBig
 	else:
 		sound.stream = exSmall
 
 func _draw():
-	draw_circle(position, 5, Color.black)
+	draw_circle(Vector2.ZERO, 5, Color.black)
 
 func _process(_delta):
 	if position.x < 0 or position.x > Globals.SCR_WIDTH \
@@ -44,9 +46,12 @@ func _process(_delta):
 			queue_free()
 
 func impact(_body):
+	if hasImpacted:
+		return
 	var boom = explosion.instance()
 	boom.position = position
+	get_parent().add_child(boom)
 	boom.init(true, self.blastRadius)
-	get_tree().add_child(boom)
 	sound.play()
 	hasImpacted = true
+	visible = false
