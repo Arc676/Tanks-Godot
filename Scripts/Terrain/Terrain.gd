@@ -28,6 +28,7 @@ var chunkSize = 0
 var rng = RandomNumberGenerator.new()
 
 onready var ground = $Ground
+onready var cloudObj = preload("res://Scenes/Effects/Cloud.tscn")
 
 # Terrain state
 var terrainType = TerrainType.DESERT
@@ -92,3 +93,19 @@ func generateNewTerrain(type, height, width):
 
 func newWindSpeed():
 	windSpeed = rng.randf_range(-2, 2)
+	for cloud in clouds:
+		cloud.queue_free()
+	clouds.clear()
+	for _i in range(rng.randi_range(0, 4)):
+		var cloud = cloudObj.instance()
+		cloud.position = Vector2(
+			rng.randf_range(0, Globals.SCR_WIDTH),
+			rng.randf_range(150, 175)
+		)
+		cloud.linear_velocity = Vector2(windSpeed * 500, 0)
+		add_child(cloud)
+		cloud.sprite.scale = Vector2(
+			rng.randf_range(5, 20),
+			rng.randf_range(2, 4)
+		)
+		clouds.append(cloud)
