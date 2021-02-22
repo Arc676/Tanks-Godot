@@ -113,14 +113,26 @@ func _draw():
 func _process(_delta):
 	if !isActiveTank:
 		return
+
 	if Input.is_action_pressed("ui_down") and firingAngle > -PI:
 		rotate(-1)
 	elif Input.is_action_pressed("ui_up") and firingAngle < 0:
 		rotate(1)
+
 	if Input.is_action_pressed("ui_page_up"):
 		firepower = clamp(firepower + 1, 0, 100)
 	elif Input.is_action_pressed("ui_page_down"):
 		firepower = clamp(firepower - 1, 0, 100)
+
+	if Input.is_action_just_pressed("fire"):
+		pass
+
+	if Input.is_action_just_pressed("next_weapon"):
+		selectedWeapon = (selectedWeapon + 1) % weapons.size()
+	elif Input.is_action_just_pressed("prev_weapon"):
+		selectedWeapon -= 1
+		if selectedWeapon < 0:
+			selectedWeapon = weapons.size() - 1
 
 func _physics_process(delta):
 	velocity.y += Globals.GRAVITY * delta

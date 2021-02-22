@@ -23,6 +23,10 @@ onready var pHP = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Health Bar"
 onready var pFirepower = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Firepower Bar"
 onready var pFuel = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Fuel Bar"
 
+# HUD - Weapon
+onready var weaponName = $"ColorRect/HUD/Weapon/Current Weapon/Weapon Name"
+onready var availableAmmo = $"ColorRect/HUD/Weapon/Current Weapon/Ammo"
+
 # HUD - Terrain data
 onready var windL = $"ColorRect/HUD/Wind/Bars/Wind Bar L"
 onready var windR = $"ColorRect/HUD/Wind/Bars/Wind Bar R"
@@ -65,6 +69,7 @@ func _ready():
 		scores[i].visible = len(players) >= i + 1
 
 	setActiveTank(0)
+	updateHUD()
 
 func toggleSFX(pressed):
 	AudioServer.set_bus_mute(1, !pressed)
@@ -90,29 +95,38 @@ func gameOver():
 				return false
 	return true
 
+func updateHUD():
+	if terrain.windSpeed < 0:
+		windL.value = abs(terrain.windSpeed) * 100
+		windR.value = 0
+	else:
+		windL.value = 0
+		windR.value = terrain.windSpeed * 100
+
+	for i in range(len(players)):
+		var tank = players[i]
+		scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+
 func _process(_delta):
-	pHP.value = players[activePlayer].hp
-	pFirepower.value = players[activePlayer].firepower
-	pFuel.value = players[activePlayer].fuel
+	var activeTank = players[activePlayer]
+
+	pHP.value = activeTank.hp
+	pFirepower.value = activeTank.firepower
+	pFuel.value = activeTank.fuel
+
+	var weapon = activeTank.weapons.keys()[activeTank.selectedWeapon]
+	weaponName.text = weapon
+	availableAmmo.text = "%d" % activeTank.weapons[weapon]
 
 	var turnEnded = false
-	if players[activePlayer].turnEnded:
+	if activeTank.turnEnded:
 		turnEnded = true
-		players[activePlayer].resetState()
+		activeTank.resetState()
 		activePlayer = (activePlayer + 1) % len(players)
 		setActiveTank(activePlayer)
 
 		terrain.newWindSpeed()
-		if terrain.windSpeed < 0:
-			windL.value = abs(terrain.windSpeed) * 100
-			windR.value = 0
-		else:
-			windL.value = 0
-			windR.value = terrain.windSpeed * 100
-
-		for i in range(len(players)):
-			var tank = players[i]
-			scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+		updateHUD()
 
 	if turnEnded and gameOver():
 		tree.change_scene("res://Scenes/Screens/Store.tscn")
