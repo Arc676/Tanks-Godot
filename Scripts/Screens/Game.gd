@@ -73,9 +73,6 @@ func _process(_delta):
 	pFirepower.value = players[activePlayer].firepower
 	pFuel.value = players[activePlayer].fuel
 
-	if Input.is_action_just_pressed("ui_accept"):
-		terrain.newWindSpeed()
-
 	if terrain.windSpeed < 0:
 		windL.value = abs(terrain.windSpeed) * 100
 		windR.value = 0

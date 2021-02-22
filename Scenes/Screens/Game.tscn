@@ -132,19 +132,19 @@ texture_progress = ExtResource( 4 )
 
 [node name="Weapon" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 237.0
-margin_right = 444.0
+margin_right = 321.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Weapon"]
-margin_right = 207.0
+margin_right = 84.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Weapon"
 
 [node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon"]
 margin_top = 18.0
-margin_right = 207.0
+margin_right = 84.0
 margin_bottom = 32.0
 
 [node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
@@ -161,13 +161,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "99"
 
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 464.0
-margin_right = 671.0
+margin_left = 341.0
+margin_right = 1146.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
-margin_right = 207.0
+margin_right = 805.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Wind"
@@ -175,12 +175,12 @@ align = 1
 
 [node name="Bars" type="HBoxContainer" parent="ColorRect/HUD/Wind"]
 margin_top = 18.0
-margin_right = 207.0
+margin_right = 805.0
 margin_bottom = 28.0
 custom_constants/separation = 0
 
 [node name="Wind Bar L" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
-margin_right = 101.0
+margin_right = 400.0
 margin_bottom = 10.0
 size_flags_horizontal = 3
 max_value = 200.0
@@ -188,56 +188,56 @@ texture_progress = ExtResource( 5 )
 fill_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect/HUD/Wind/Bars"]
-margin_left = 101.0
-margin_right = 106.0
+margin_left = 400.0
+margin_right = 405.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 5, 10 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="Wind Bar R" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
-margin_left = 106.0
-margin_right = 207.0
+margin_left = 405.0
+margin_right = 805.0
 margin_bottom = 10.0
 size_flags_horizontal = 3
 max_value = 200.0
 texture_progress = ExtResource( 5 )
 
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 691.0
-margin_right = 898.0
+margin_left = 1166.0
+margin_right = 1233.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
-margin_right = 207.0
+margin_right = 67.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 18.0
-margin_right = 207.0
+margin_right = 67.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 36.0
-margin_right = 207.0
+margin_right = 67.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 54.0
-margin_right = 207.0
+margin_right = 67.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 918.0
-margin_right = 1004.0
+margin_left = 1253.0
+margin_right = 1339.0
 margin_bottom = 84.0
 size_flags_vertical = 3
 
