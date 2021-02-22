@@ -61,7 +61,7 @@ func _ready():
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
 		tank.z_index = z
 		z += 1
-		add_child_below_node($"Game Scene", tank)
+		$"Game Scene".add_child(tank)
 		players.append(tank)
 
 	# Remove unused scoreboard entries

@@ -35,6 +35,7 @@ onready var explosion = $Explosion
 onready var teleport = $Teleportation
 
 # Stats
+var tankNum
 var tankName = ""
 var team = ""
 var color
@@ -96,6 +97,14 @@ func isTeammate(tank):
 		return false
 	return team == tank.team
 
+func getNozzlePosition(dy = 0):
+	var c = cos(firingAngle)
+	var s = sin(firingAngle)
+	return position + Vector2(
+		20 * c - dy * s,
+		-8 - dy * c + 20 * s
+	)
+
 func rotate(angle):
 	firingAngle += deg2rad(angle)
 	firingAngle = clamp(firingAngle, -PI, 0)
@@ -125,7 +134,18 @@ func _process(_delta):
 		firepower = clamp(firepower - 1, 0, 100)
 
 	if Input.is_action_just_pressed("fire"):
-		pass
+		var weapon = weapons.keys()[selectedWeapon]
+		if Weapons.isTargetedWeapon(weapon):
+			isTargeting = true
+		else:
+			Weapons.fireWeapon(
+				get_parent(),
+				weapon,
+				firingAngle,
+				firepower,
+				getNozzlePosition(),
+				tankNum
+			)
 
 	if Input.is_action_just_pressed("next_weapon"):
 		selectedWeapon = (selectedWeapon + 1) % weapons.size()
