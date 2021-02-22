@@ -22,7 +22,8 @@ onready var pFirepower = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Firepow
 onready var pFuel = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Fuel Bar"
 
 # HUD - Terrain data
-onready var windSpeed = $"ColorRect/HUD/Wind/Wind Bar"
+onready var windL = $"ColorRect/HUD/Wind/Bars/Wind Bar L"
+onready var windR = $"ColorRect/HUD/Wind/Bars/Wind Bar R"
 
 # HUD - Scoreboard
 onready var scores = [
@@ -71,6 +72,16 @@ func _process(_delta):
 	pHP.value = players[activePlayer].hp
 	pFirepower.value = players[activePlayer].firepower
 	pFuel.value = players[activePlayer].fuel
+
+	if Input.is_action_just_pressed("ui_accept"):
+		terrain.newWindSpeed()
+
+	if terrain.windSpeed < 0:
+		windL.value = abs(terrain.windSpeed) * 100
+		windR.value = 0
+	else:
+		windL.value = 0
+		windR.value = terrain.windSpeed * 100
 
 	for i in range(len(players)):
 		var tank = players[i]
