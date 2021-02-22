@@ -14,6 +14,11 @@
 
 extends Node
 
+const GRAVITY = 981
+
+onready var SCR_HEIGHT = get_viewport().size.y
+onready var SCR_WIDTH = get_viewport().size.x
+
 var _loaded = false
 var players = []
 var selectedTerrain = Terrain.TerrainType.DESERT

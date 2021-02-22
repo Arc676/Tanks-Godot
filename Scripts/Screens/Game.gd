@@ -44,8 +44,8 @@ func _ready():
 	players = []
 
 	terrain.generateNewTerrain(Globals.selectedTerrain,
-		get_viewport().size.y,
-		get_viewport().size.x)
+		Globals.SCR_HEIGHT,
+		Globals.SCR_WIDTH)
 	var z = 1
 	for tank in Globals.players:
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)

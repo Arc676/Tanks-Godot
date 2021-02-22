@@ -14,7 +14,6 @@
 
 extends KinematicBody2D
 
-const GRAVITY = 981
 const MOVE_SPEED = 50
 
 enum AILevel {
@@ -111,7 +110,7 @@ func _process(_delta):
 		firepower = clamp(firepower - 1, 0, 100)
 
 func _physics_process(delta):
-	velocity.y += GRAVITY * delta
+	velocity.y += Globals.GRAVITY * delta
 	if isActiveTank and is_on_floor() and fuel > 0:
 		if Input.is_action_pressed("ui_left"):
 			velocity.x = -MOVE_SPEED
