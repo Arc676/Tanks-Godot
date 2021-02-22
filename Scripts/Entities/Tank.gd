@@ -83,6 +83,19 @@ func reset():
 	hp = 100
 	fuel = startingFuel
 
+func resetState():
+	hasFired = false
+	turnEnded = false
+
+func endTurn():
+	turnEnded = true
+	# TODO: remove weapons for which the count is 0
+
+func isTeammate(tank):
+	if team == "":
+		return false
+	return team == tank.team
+
 func rotate(angle):
 	firingAngle += deg2rad(angle)
 	firingAngle = clamp(firingAngle, -PI, 0)

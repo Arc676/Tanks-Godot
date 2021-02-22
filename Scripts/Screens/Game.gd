@@ -14,6 +14,8 @@
 
 extends Control
 
+onready var tree = get_tree()
+
 # HUD - Player data
 onready var pColor = $"ColorRect/HUD/Player Stats/Identification/Player Color"
 onready var pName = $"ColorRect/HUD/Player Stats/Identification/Player Name"
@@ -36,6 +38,7 @@ onready var scores = [
 # Game
 var activePlayer = 0
 var players = []
+var drawDeclared = false
 onready var terrain = $"Game Scene/Terrain"
 
 func _ready():
@@ -43,6 +46,7 @@ func _ready():
 	rng.randomize()
 
 	players = []
+	drawDeclared = false
 
 	terrain.generateNewTerrain(Globals.selectedTerrain,
 		Globals.SCR_HEIGHT,
@@ -66,23 +70,52 @@ func toggleSFX(pressed):
 	AudioServer.set_bus_mute(1, !pressed)
 
 func drawGame():
-	pass # Replace with function body.
+	players[activePlayer].endTurn()
+	for tank in players:
+		if tank.hp > 0:
+			tank.score += 100
+			tank.money += 100
+		remove_child(tank)
+	drawDeclared = true
+
+func gameOver():
+	if drawDeclared:
+		return true
+	var firstSurvivor = null
+	for tank in players:
+		if tank.hp > 0:
+			if firstSurvivor == null:
+				firstSurvivor = tank
+			elif !tank.isTeammate(firstSurvivor):
+				return false
+	return true
 
 func _process(_delta):
 	pHP.value = players[activePlayer].hp
 	pFirepower.value = players[activePlayer].firepower
 	pFuel.value = players[activePlayer].fuel
 
-	if terrain.windSpeed < 0:
-		windL.value = abs(terrain.windSpeed) * 100
-		windR.value = 0
-	else:
-		windL.value = 0
-		windR.value = terrain.windSpeed * 100
+	var turnEnded = false
+	if players[activePlayer].turnEnded:
+		turnEnded = true
+		players[activePlayer].resetState()
+		activePlayer = (activePlayer + 1) % len(players)
+		setActiveTank(activePlayer)
 
-	for i in range(len(players)):
-		var tank = players[i]
-		scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+		terrain.newWindSpeed()
+		if terrain.windSpeed < 0:
+			windL.value = abs(terrain.windSpeed) * 100
+			windR.value = 0
+		else:
+			windL.value = 0
+			windR.value = terrain.windSpeed * 100
+
+		for i in range(len(players)):
+			var tank = players[i]
+			scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+
+	if turnEnded and gameOver():
+		tree.change_scene("res://Scenes/Screens/Store.tscn")
 
 func setActiveTank(idx):
 	players[idx].isActiveTank = true
