@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Scripts/Singletons/Globals.gd"
+Weapons="*res://Scripts/Singletons/Weapons.gd"
 
 [input]
 

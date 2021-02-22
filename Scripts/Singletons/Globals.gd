@@ -25,7 +25,7 @@ var selectedTerrain = Terrain.TerrainType.DESERT
 
 func _enter_tree():
 	if Globals._loaded:
-		printerr("Error: Players is an AutoLoad singleton and it shouldn't be instanced elsewhere.")
+		printerr("Error: Globals is an AutoLoad singleton and it shouldn't be instanced elsewhere.")
 		printerr("Please delete the instance at: " + get_path())
 	else:
 		Globals._loaded = true
