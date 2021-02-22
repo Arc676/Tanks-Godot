@@ -28,6 +28,16 @@ config/icon="res://icon.png"
 
 Globals="*res://Scripts/Singletons/Globals.gd"
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Tanks"
+2d_physics/layer_3="Projectiles"
+
+[physics]
+
+2d/default_gravity=981
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
