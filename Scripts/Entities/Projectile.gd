@@ -14,6 +14,8 @@
 
 extends RigidBody2D
 
+onready var projObj = load("res://Scenes/Entities/Projectile.tscn")
+
 onready var explosion = preload("res://Scenes/Effects/Explosion.tscn")
 onready var exBig = preload("res://Sound/ex_large.wav")
 onready var exSmall = preload("res://Sound/ex_small.wav")
@@ -23,6 +25,7 @@ onready var sound = $AudioStreamPlayer2D
 var hasImpacted = false
 var blastRadius
 var srcPlayer
+var isShrapnelRound
 
 # warning-ignore:shadowed_variable
 func init(blastRadius, velocity, isBig, src):
@@ -53,5 +56,17 @@ func impact(_body):
 	get_parent().add_child(boom)
 	boom.init(true, self.blastRadius)
 	sound.play()
+	if isShrapnelRound:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		for _i in range(4):
+			var projectile = projObj.instance()
+			var velocity = Vector2(
+				rng.randf_range(-200, 200),
+				rng.randf_range(-200, 0)
+			)
+			projectile.position = position + 5 * Vector2.UP
+			get_parent().add_child(projectile)
+			projectile.init(blastRadius, velocity, false, srcPlayer)
 	hasImpacted = true
 	visible = false

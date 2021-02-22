@@ -128,12 +128,13 @@ func isTargetedWeapon(name):
 	return "Airstrike" in name or name == "Space Laser"
 
 func fireWeapon(tree, name, angle, firepower, pos, src):
-	if name in STANDARD_WEAPONS:
+	if name in STANDARD_WEAPONS or name == "Shrapnel Round":
 		var velocity = Vector2(
 			cos(angle), sin(angle)
 		) * firepower * 20
 		var projectile = projObj.instance()
 		projectile.position = pos
+		projectile.isShrapnelRound = name == "Shrapnel Round"
 		tree.add_child(projectile)
 		projectile.init(
 			WEAPON_PROPERTIES[name]["radius"],
@@ -145,10 +146,21 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		pass
 	elif name == "Space Laser":
 		pass
-	elif name == "Shrapnel Shot":
-		pass
 	elif "Hailfire" in name:
-		pass
+		var velocity = Vector2(
+			cos(angle), sin(angle)
+		) * firepower * 20
+		var dv = 20 * Vector2.RIGHT
+		for i in range(WEAPON_PROPERTIES[name]["count"]):
+			var projectile = projObj.instance()
+			projectile.position = pos
+			tree.add_child(projectile)
+			projectile.init(
+				WEAPON_PROPERTIES[name]["radius"],
+				velocity + i * dv,
+				name in LARGE_EXPLOSIONS,
+				src
+			)
 	elif "Laser Beam" in name:
 		pass
 
