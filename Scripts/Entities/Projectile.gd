@@ -72,7 +72,7 @@ func impact(_body):
 			var dist = (position - tank.position).length()
 			if dist < blastRadius:
 				var score = 2 * floor(50 * blastRadius / max(1, dist))
-				var dmg = damage / pow(dist / 20, 2) if dist > 10 else damage * 1.5
+				var dmg = damage / pow(dist / 30, 2) if dist > 10 else damage * 1.5
 				tank.takeDamage(dmg)
 				if tank.hp <= 0:
 					score *= 2
@@ -93,7 +93,7 @@ func impact(_body):
 				rng.randf_range(-200, 0)
 			)
 			projectile.position = position + 5 * Vector2.UP
-			get_parent().add_child(projectile)
-			projectile.init(blastRadius, velocity, false, srcPlayer)
+			get_parent().call_deferred("add_child", projectile)
+			projectile.call_deferred("init", blastRadius, damage, velocity, false, srcPlayer)
 	hasImpacted = true
 	visible = false
