@@ -49,6 +49,9 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
+	Weapons.airstrikeSound = $"Game Scene/Bomber"
+	Weapons.laserSound = $"Game Scene/Laser"
+
 	players = []
 	drawDeclared = false
 

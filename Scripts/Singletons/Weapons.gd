@@ -122,6 +122,9 @@ const WEAPON_PROPERTIES = {
 	}
 }
 
+var airstrikeSound
+var laserSound
+
 var _loaded = false
 
 func isTargetedWeapon(name):
@@ -143,7 +146,19 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			src
 		)
 	elif "Airstrike" in name:
-		pass
+		airstrikeSound.play()
+		var count = WEAPON_PROPERTIES[name]["count"]
+		for i in range(-count / 2, count / 2):
+			var projPos = Vector2(pos.x + i * 20, 0)
+			var projectile = projObj.instance()
+			projectile.position = projPos
+			tree.add_child(projectile)
+			projectile.init(
+				WEAPON_PROPERTIES[name]["radius"],
+				Vector2.ZERO,
+				true,
+				src
+			)
 	elif name == "Space Laser":
 		pass
 	elif "Hailfire" in name:
