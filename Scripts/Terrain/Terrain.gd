@@ -122,7 +122,10 @@ func deform(radius, x):
 		if block >= 0 and block < chunkCount:
 			var opp2 = pow(dx * chunkSize, 2)
 			if opp2 < r2:
-				points[block].y += sqrt(r2 - opp2)
+				points[block].y = min(
+					points[block].y + sqrt(r2 - opp2),
+					terrainHeight
+				)
 		dx += 1
 	ground.set_polygon(points)
 	update()
