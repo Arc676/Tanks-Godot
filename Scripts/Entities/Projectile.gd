@@ -45,13 +45,17 @@ func _draw():
 func _physics_process(delta):
 	add_central_force(Vector2.RIGHT * Weapons.terrain.windSpeed * 500 * delta)
 
+func despawn():
+	Weapons.projCount -= 1
+	queue_free()
+
 func _process(_delta):
 	if position.x < 0 or position.x > Globals.SCR_WIDTH \
 		or position.y > Globals.SCR_HEIGHT:
-		queue_free()
+		despawn()
 	if hasImpacted:
 		if !sound.playing:
-			queue_free()
+			despawn()
 
 func impact(_body):
 	if hasImpacted:
@@ -81,6 +85,7 @@ func impact(_body):
 	if isShrapnelRound:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
+		Weapons.projCount += 4
 		for _i in range(4):
 			var projectile = projObj.instance()
 			var velocity = Vector2(

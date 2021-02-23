@@ -125,6 +125,8 @@ const WEAPON_PROPERTIES = {
 var airstrikeSound
 var laserSound
 
+var projCount = 0
+
 var terrain
 
 var _loaded = false
@@ -148,9 +150,11 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			name in LARGE_EXPLOSIONS,
 			src
 		)
+		projCount += 1
 	elif "Airstrike" in name:
 		airstrikeSound.play()
 		var count = WEAPON_PROPERTIES[name]["count"]
+		projCount += count
 		for i in range(-count / 2, count / 2):
 			var projPos = Vector2(pos.x + i * 20, 0)
 			var projectile = projObj.instance()
@@ -170,7 +174,9 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			cos(angle), sin(angle)
 		) * firepower * 20
 		var dv = 20 * Vector2.RIGHT
-		for i in range(WEAPON_PROPERTIES[name]["count"]):
+		var count = WEAPON_PROPERTIES[name]["count"]
+		projCount += count
+		for i in range(count):
 			var projectile = projObj.instance()
 			projectile.position = pos
 			tree.add_child(projectile)
