@@ -97,7 +97,10 @@ func resetState():
 func endTurn():
 	turnEnded = true
 	isActiveTank = false
-	# TODO: remove weapons for which the count is 0
+	for key in weapons.keys():
+		if weapons[key] == 0:
+			weapons.erase(key)
+			selectedWeapon = 0
 
 func takeDamage(dmg):
 	if activeShield:
@@ -145,6 +148,20 @@ func explode():
 	$Sprite.visible = false
 	update()
 
+func fireProjectile(pos):
+	var weapon = weapons.keys()[selectedWeapon]
+	Weapons.fireWeapon(
+		get_parent(),
+		weapon,
+		firingAngle,
+		firepower,
+		pos,
+		self
+	)
+	if weapon != "Tank Shell":
+		weapons[weapon] -= 1
+	hasFired = true
+
 func _process(_delta):
 	if hp <= 0 and !boom:
 		endTurn()
@@ -154,9 +171,20 @@ func _process(_delta):
 		hp = 0
 		explode()
 
-	if !isActiveTank:
-		return
+	if isActiveTank:
+		if turnEnded or hasFired:
+			if Weapons.projCount == 0:
+				endTurn()
+			return
+		if isCC:
+			ccUpdate()
+		else:
+			playerUpdate()
 
+func ccUpdate():
+	pass
+
+func playerUpdate():
 	if Input.is_action_pressed("ui_down") and firingAngle > -PI:
 		rotate(-1)
 	elif Input.is_action_pressed("ui_up") and firingAngle < 0:
@@ -172,13 +200,7 @@ func _process(_delta):
 			target.queue_free()
 			isTargeting = false
 		elif Input.is_action_just_pressed("click"):
-			Weapons.fireWeapon(
-				get_parent(),
-				weapons.keys()[selectedWeapon],
-				0, 0,
-				get_global_mouse_position(),
-				self
-			)
+			fireProjectile(get_global_mouse_position())
 			target.queue_free()
 			isTargeting = false
 	elif Input.is_action_just_pressed("fire"):
@@ -188,14 +210,7 @@ func _process(_delta):
 			target = targetObj.instance()
 			get_parent().add_child(target)
 		else:
-			Weapons.fireWeapon(
-				get_parent(),
-				weapon,
-				firingAngle,
-				firepower,
-				getNozzlePosition(),
-				self
-			)
+			fireProjectile(getNozzlePosition())
 
 	if Input.is_action_just_pressed("next_weapon"):
 		selectedWeapon = (selectedWeapon + 1) % weapons.size()
