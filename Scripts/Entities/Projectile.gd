@@ -24,12 +24,14 @@ onready var sound = $AudioStreamPlayer2D
 
 var hasImpacted = false
 var blastRadius
+var damage
 var srcPlayer
 var isShrapnelRound
 
 # warning-ignore:shadowed_variable
-func init(blastRadius, velocity, isBig, src):
+func init(blastRadius, dmg, velocity, isBig, src):
 	self.blastRadius = blastRadius
+	damage = dmg
 	linear_velocity = velocity
 	srcPlayer = src
 	if isBig:
@@ -60,6 +62,22 @@ func impact(_body):
 	boom.init(true, blastRadius)
 	sound.play()
 	Weapons.terrain.deform(blastRadius, position.x)
+
+	for tank in Globals.players:
+		if tank.hp > 0:
+			var dist = (position - tank.position).length()
+			if dist < blastRadius:
+				var score = 2 * floor(50 * blastRadius / max(1, dist))
+				var dmg = damage / pow(dist / 20, 2) if dist > 10 else damage * 1.5
+				tank.takeDamage(dmg)
+				if tank.hp <= 0:
+					score *= 2
+				if tank == srcPlayer or tank.isTeammate(srcPlayer):
+					score *= -1
+				else:
+					srcPlayer.money += round(score * 1.5)
+				srcPlayer.score += score
+
 	if isShrapnelRound:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()

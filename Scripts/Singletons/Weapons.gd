@@ -143,6 +143,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		tree.add_child(projectile)
 		projectile.init(
 			WEAPON_PROPERTIES[name]["radius"],
+			WEAPON_PROPERTIES[name]["dmg"],
 			velocity,
 			name in LARGE_EXPLOSIONS,
 			src
@@ -157,6 +158,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			tree.add_child(projectile)
 			projectile.init(
 				WEAPON_PROPERTIES[name]["radius"],
+				WEAPON_PROPERTIES[name]["dmg"],
 				Vector2.ZERO,
 				true,
 				src
@@ -174,6 +176,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			tree.add_child(projectile)
 			projectile.init(
 				WEAPON_PROPERTIES[name]["radius"],
+				WEAPON_PROPERTIES[name]["dmg"],
 				velocity + i * dv,
 				name in LARGE_EXPLOSIONS,
 				src

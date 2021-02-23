@@ -27,6 +27,9 @@ enum AIStyle {
 onready var targetObj = preload("res://Scenes/Effects/Target.tscn")
 var target
 
+onready var explosionObj = preload("res://Scenes/Effects/Explosion.tscn")
+var boom
+
 # Computer controlled tanks
 var isCC = false
 var aiLvl = AILevel.EASY
@@ -38,7 +41,6 @@ onready var explosion = $Explosion
 onready var teleport = $Teleportation
 
 # Stats
-var tankNum
 var tankName = ""
 var team = ""
 var color
@@ -86,6 +88,7 @@ func setColor(newColor):
 func reset():
 	hp = 100
 	fuel = startingFuel
+	$Sprite.visible = true
 
 func resetState():
 	hasFired = false
@@ -93,7 +96,16 @@ func resetState():
 
 func endTurn():
 	turnEnded = true
+	isActiveTank = false
 	# TODO: remove weapons for which the count is 0
+
+func takeDamage(dmg):
+	if activeShield:
+		pass
+	else:
+		hp -= dmg / armor
+	if hp <= 0:
+		explode()
 
 func isTeammate(tank):
 	if team == "":
@@ -116,13 +128,32 @@ func rotate(angle):
 	update()
 
 func _draw():
+	if hp <= 0:
+		return
 	# Draw tank barrel
 	var barrel = Rect2(0, -3, 20, 6)
 	draw_set_transform(Vector2(0, -2), firingAngle, Vector2.ONE)
 	draw_rect(barrel, Color.black)
 	draw_set_transform_matrix(Transform2D.IDENTITY)
 
+func explode():
+	boom = explosionObj.instance()
+	boom.position = position
+	get_parent().add_child(boom)
+	boom.init(true, 40)
+	explosion.play()
+	$Sprite.visible = false
+	update()
+
 func _process(_delta):
+	if hp <= 0 and !boom:
+		endTurn()
+		return
+
+	if position.y > Globals.SCR_HEIGHT - 10:
+		hp = 0
+		explode()
+
 	if !isActiveTank:
 		return
 
@@ -146,7 +177,7 @@ func _process(_delta):
 				weapons.keys()[selectedWeapon],
 				0, 0,
 				get_global_mouse_position(),
-				tankNum
+				self
 			)
 			target.queue_free()
 			isTargeting = false
@@ -163,7 +194,7 @@ func _process(_delta):
 				firingAngle,
 				firepower,
 				getNozzlePosition(),
-				tankNum
+				self
 			)
 
 	if Input.is_action_just_pressed("next_weapon"):
