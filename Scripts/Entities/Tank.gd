@@ -187,3 +187,4 @@ func _physics_process(delta):
 	if fuel <= 0:
 		velocity.x = 0
 	velocity = move_and_slide(velocity, Vector2.UP, true)
+	velocity.x = 0

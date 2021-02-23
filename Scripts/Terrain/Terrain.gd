@@ -109,3 +109,20 @@ func newWindSpeed():
 			rng.randf_range(2, 4)
 		)
 		clouds.append(cloud)
+
+func deform(radius, x):
+	var xMin = round((x - radius) / chunkSize)
+	var xMax = round((x + radius) / chunkSize)
+	var r2 = pow(radius, 2)
+
+	var points = ground.polygon
+
+	var dx = xMin - x / chunkSize
+	for block in range(xMin, xMax + 1):
+		if block >= 0 and block < chunkCount:
+			var opp2 = pow(dx * chunkSize, 2)
+			if opp2 < r2:
+				points[block].y += sqrt(r2 - opp2)
+		dx += 1
+	ground.set_polygon(points)
+	update()

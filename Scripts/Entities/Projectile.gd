@@ -57,8 +57,9 @@ func impact(_body):
 	var boom = explosion.instance()
 	boom.position = position
 	get_parent().add_child(boom)
-	boom.init(true, self.blastRadius)
+	boom.init(true, blastRadius)
 	sound.play()
+	Weapons.terrain.deform(blastRadius, position.x)
 	if isShrapnelRound:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
