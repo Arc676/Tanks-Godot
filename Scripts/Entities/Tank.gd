@@ -103,6 +103,16 @@ func endTurn():
 			weapons.erase(key)
 			selectedWeapon = 0
 
+func purchaseItem(name, type, price):
+	if money >= price:
+		money -= price
+		if type == "Ammo":
+			weapons[name] = weapons.get(name, 0) + 1
+
+func getAmountOwned(name, type):
+	if type == "Ammo":
+		return weapons.get(name, 0)
+
 func takeDamage(dmg):
 	if activeShield:
 		pass

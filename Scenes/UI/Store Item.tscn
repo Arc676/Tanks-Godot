@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/Store Item.gd" type="Script" id=1]
+
+[node name="Item" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_right = 243.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Item"
+valign = 1
+
+[node name="Type" type="Label" parent="."]
+margin_left = 247.0
+margin_right = 490.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Type"
+align = 1
+valign = 1
+
+[node name="Price" type="Label" parent="."]
+margin_left = 494.0
+margin_right = 737.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "$0"
+align = 1
+valign = 1
+
+[node name="Owned" type="Label" parent="."]
+margin_left = 741.0
+margin_right = 984.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "0"
+align = 1
+valign = 1
+
+[node name="Buy" type="Button" parent="."]
+margin_left = 988.0
+margin_right = 1024.0
+margin_bottom = 600.0
+text = "Buy"
+[connection signal="pressed" from="Buy" to="." method="buyItem"]
