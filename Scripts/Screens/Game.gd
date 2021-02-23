@@ -52,6 +52,8 @@ func _ready():
 	Weapons.airstrikeSound = $"Game Scene/Bomber"
 	Weapons.laserSound = $"Game Scene/Laser"
 
+	Weapons.terrain = terrain
+
 	players = []
 	drawDeclared = false
 

@@ -125,6 +125,8 @@ const WEAPON_PROPERTIES = {
 var airstrikeSound
 var laserSound
 
+var terrain
+
 var _loaded = false
 
 func isTargetedWeapon(name):

@@ -40,6 +40,9 @@ func init(blastRadius, velocity, isBig, src):
 func _draw():
 	draw_circle(Vector2.ZERO, 5, Color.black)
 
+func _physics_process(delta):
+	add_central_force(Vector2.RIGHT * Weapons.terrain.windSpeed * 500 * delta)
+
 func _process(_delta):
 	if position.x < 0 or position.x > Globals.SCR_WIDTH \
 		or position.y > Globals.SCR_HEIGHT:
