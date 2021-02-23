@@ -88,6 +88,7 @@ func setColor(newColor):
 func reset():
 	hp = 100
 	fuel = startingFuel
+	isActiveTank = false
 	$Sprite.visible = true
 
 func resetState():

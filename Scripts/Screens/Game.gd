@@ -63,6 +63,7 @@ func _ready():
 	var z = 1
 	for tank in Globals.players:
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)
+		tank.reset()
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
 		tank.z_index = z
 		z += 1
@@ -85,7 +86,7 @@ func drawGame():
 		if tank.hp > 0:
 			tank.score += 100
 			tank.money += 100
-		remove_child(tank)
+		$"Game Scene".remove_child(tank)
 	drawDeclared = true
 
 func gameOver():
@@ -137,6 +138,7 @@ func _process(_delta):
 		tree.change_scene("res://Scenes/Screens/Store.tscn")
 
 func setActiveTank(idx):
-	players[idx].isActiveTank = true
-	pColor.color = players[idx].color
-	pName.text = players[idx].tankName
+	var tank = players[idx]
+	tank.isActiveTank = true
+	pColor.color = tank.color
+	pName.text = tank.tankName
