@@ -24,6 +24,9 @@ enum AIStyle {
 	AGGRESSIVE, DEFENSIVE
 }
 
+onready var targetObj = preload("res://Scenes/Effects/Target.tscn")
+var target
+
 # Computer controlled tanks
 var isCC = false
 var aiLvl = AILevel.EASY
@@ -133,10 +136,26 @@ func _process(_delta):
 	elif Input.is_action_pressed("ui_page_down"):
 		firepower = clamp(firepower - 1, 0, 100)
 
-	if Input.is_action_just_pressed("fire"):
+	if isTargeting:
+		if Input.is_action_just_pressed("ui_cancel"):
+			target.queue_free()
+			isTargeting = false
+		elif Input.is_action_just_pressed("click"):
+			Weapons.fireWeapon(
+				get_parent(),
+				weapons.keys()[selectedWeapon],
+				0, 0,
+				get_global_mouse_position(),
+				tankNum
+			)
+			target.queue_free()
+			isTargeting = false
+	elif Input.is_action_just_pressed("fire"):
 		var weapon = weapons.keys()[selectedWeapon]
 		if Weapons.isTargetedWeapon(weapon):
 			isTargeting = true
+			target = targetObj.instance()
+			get_parent().add_child(target)
 		else:
 			Weapons.fireWeapon(
 				get_parent(),
