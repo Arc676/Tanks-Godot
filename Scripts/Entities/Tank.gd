@@ -137,7 +137,7 @@ func useItem(name):
 	if name == "Repair Kit":
 		hp += Items.ITEM_PROPERTIES[name]["hp"]
 	elif name == "Teleport":
-		isTargeting = true
+		startTargeting()
 		isTeleporting = true
 	elif "Shield" in name:
 		if activeShield:
@@ -203,6 +203,15 @@ func _draw():
 	draw_rect(barrel, Color.black)
 	draw_set_transform_matrix(Transform2D.IDENTITY)
 
+func startTargeting():
+	isTargeting = true
+	target = targetObj.instance()
+	get_parent().add_child(target)
+
+func stopTargeting():
+	target.queue_free()
+	isTargeting = false
+
 func explode():
 	boom = explosionObj.instance()
 	boom.position = position
@@ -261,18 +270,34 @@ func playerUpdate():
 
 	if isTargeting:
 		if Input.is_action_just_pressed("ui_cancel"):
-			target.queue_free()
-			isTargeting = false
+			stopTargeting()
 		elif Input.is_action_just_pressed("click"):
-			fireProjectile(get_global_mouse_position())
-			target.queue_free()
-			isTargeting = false
+			if isTeleporting:
+				var srcTP = explosionObj.instance()
+				var dstTP = explosionObj.instance()
+
+				srcTP.position = position
+				dstTP.position = get_global_mouse_position()
+
+				get_parent().add_child(srcTP)
+				get_parent().add_child(dstTP)
+
+				srcTP.init(false, 40)
+				dstTP.init(false, 40)
+
+				teleport.play()
+
+				position = get_global_mouse_position()
+				isTeleporting = false
+				endTurn()
+			else:
+				fireProjectile(get_global_mouse_position())
+			stopTargeting()
+			hasFired = true
 	elif Input.is_action_just_pressed("fire"):
 		var weapon = weapons.keys()[selectedWeapon]
 		if Weapons.isTargetedWeapon(weapon):
-			isTargeting = true
-			target = targetObj.instance()
-			get_parent().add_child(target)
+			startTargeting()
 		else:
 			fireProjectile(getNozzlePosition())
 
