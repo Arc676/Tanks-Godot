@@ -22,6 +22,12 @@ var currentPlayer = 0
 
 signal refresh(player)
 
+func itemSetup(entry, name, type, price):
+	entry.loadProperties(name, type, price)
+	# warning-ignore:return_value_discarded
+	self.connect("refresh", entry, "updateAmt")
+	entry.connect("itemPurchased", self, "refreshBalance")
+
 func _ready():
 	for name in Weapons.WEAPON_PROPERTIES:
 		if name == "Tank Shell":
@@ -29,10 +35,12 @@ func _ready():
 		var data = Weapons.WEAPON_PROPERTIES[name]
 		var entry = storeItem.instance()
 		$Categories/Weapons.add_child(entry)
-		entry.loadProperties(name, "Ammo", data["price"])
-		# warning-ignore:return_value_discarded
-		self.connect("refresh", entry, "updateAmt")
-		entry.connect("itemPurchased", self, "refreshBalance")
+		itemSetup(entry, name, "Ammo", data["price"])
+	for name in Items.UPGRADE_PROPERTIES:
+		var data = Items.UPGRADE_PROPERTIES[name]
+		var entry = storeItem.instance()
+		$Categories/Upgrades.add_child(entry)
+		itemSetup(entry, name, "Upgrade", data["price"])
 	setPlayer(0)
 
 func refreshBalance():

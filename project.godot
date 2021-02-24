@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 Globals="*res://Scripts/Singletons/Globals.gd"
 Weapons="*res://Scripts/Singletons/Weapons.gd"
+Items="*res://Scripts/Singletons/Items.gd"
 
 [input]
 

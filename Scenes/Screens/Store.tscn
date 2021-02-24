@@ -43,6 +43,7 @@ margin_left = 50.0
 margin_top = -200.0
 margin_right = -50.0
 margin_bottom = -200.0
+custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,12 +51,12 @@ __meta__ = {
 [node name="Weapons" type="VBoxContainer" parent="Categories"]
 
 [node name="Upgrades" type="VBoxContainer" parent="Categories"]
-margin_left = 4.0
-margin_right = 4.0
+margin_left = 20.0
+margin_right = 20.0
 
 [node name="Items" type="VBoxContainer" parent="Categories"]
-margin_left = 8.0
-margin_right = 8.0
+margin_left = 40.0
+margin_right = 40.0
 
 [node name="Controls" type="HBoxContainer" parent="."]
 anchor_top = 1.0

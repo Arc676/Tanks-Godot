@@ -56,7 +56,12 @@ var weapons = {
 }
 
 # Upgrades
-var upgrades = [0, 0, 0, 0]
+var upgrades = {
+	"Engine Efficiency" : 0,
+	"Armor" : 0,
+	"Extra Fuel" : 0,
+	"Hill Climbing" : 0
+}
 
 # Items
 var activeShield = null
@@ -108,10 +113,23 @@ func purchaseItem(name, type, price):
 		money -= price
 		if type == "Ammo":
 			weapons[name] = weapons.get(name, 0) + 1
+		elif type == "Upgrade":
+			upgrades[name] += 1
+			var effect = Items.UPGRADE_PROPERTIES[name]["effect"]
+			if name == "Engine Efficiency":
+				engineEfficiency *= effect
+			elif name == "Armor":
+				armor *= effect
+			elif name == "Hill Climbing":
+				maxHillClimb *= effect
+			else:
+				startingFuel += effect
 
 func getAmountOwned(name, type):
 	if type == "Ammo":
 		return weapons.get(name, 0)
+	elif type == "Upgrade":
+		return upgrades[name]
 
 func takeDamage(dmg):
 	if activeShield:
