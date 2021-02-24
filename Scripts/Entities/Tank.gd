@@ -275,11 +275,25 @@ func playerUpdate():
 			stopTargeting()
 		elif Input.is_action_just_pressed("click"):
 			if isTeleporting:
+				var terrain = Weapons.terrain
+				var destination = get_global_mouse_position()
+				var chunk = floor(destination.x / terrain.chunkSize)
+				var x0 = chunk * terrain.chunkSize
+				var y0 = terrain.ground.polygon[chunk].y
+				var y1 = terrain.ground.polygon[chunk + 1].y
+				destination.y = lerp(
+					y0, y1,
+					(destination.x - x0) / terrain.chunkSize
+				) - 1
+
 				var srcTP = explosionObj.instance()
 				var dstTP = explosionObj.instance()
 
+				srcTP.z_index = 10
+				dstTP.z_index = 10
+
 				srcTP.position = position
-				dstTP.position = get_global_mouse_position()
+				dstTP.position = destination
 
 				get_parent().add_child(srcTP)
 				get_parent().add_child(dstTP)
@@ -289,7 +303,7 @@ func playerUpdate():
 
 				teleport.play()
 
-				position = get_global_mouse_position()
+				position = destination
 				isTeleporting = false
 				endTurn()
 			else:
