@@ -124,12 +124,16 @@ func purchaseItem(name, type, price):
 				maxHillClimb *= effect
 			else:
 				startingFuel += effect
+		elif type == "Item":
+			items[name] = items.get(name, 0) + 1
 
 func getAmountOwned(name, type):
 	if type == "Ammo":
 		return weapons.get(name, 0)
 	elif type == "Upgrade":
 		return upgrades[name]
+	elif type == "Item":
+		return items.get(name, 0)
 
 func takeDamage(dmg):
 	if activeShield:

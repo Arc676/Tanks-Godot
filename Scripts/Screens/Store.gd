@@ -39,6 +39,7 @@ func _ready():
 		var entry = storeItem.instance()
 		$Categories/Weapons.add_child(entry)
 		itemSetup(entry, name, "Ammo", data["price"])
+
 	var upgradeHeader = storeItem.instance()
 	$Categories/Upgrades.add_child(upgradeHeader)
 	upgradeHeader.makeHeaderRow()
@@ -47,6 +48,16 @@ func _ready():
 		var entry = storeItem.instance()
 		$Categories/Upgrades.add_child(entry)
 		itemSetup(entry, name, "Upgrade", data["price"])
+
+	var itemHeader = storeItem.instance()
+	$Categories/Items.add_child(itemHeader)
+	itemHeader.makeHeaderRow()
+	for name in Items.ITEM_PROPERTIES:
+		var data = Items.ITEM_PROPERTIES[name]
+		var entry = storeItem.instance()
+		$Categories/Items.add_child(entry)
+		itemSetup(entry, name, "Item", data["price"])
+
 	setPlayer(0)
 
 func refreshBalance():

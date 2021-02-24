@@ -33,6 +33,36 @@ const UPGRADE_PROPERTIES = {
 	}
 }
 
+const ITEM_PROPERTIES = {
+	"Repair Kit" : {
+		"price" : 50,
+		"hp" : 20
+	},
+	"Teleport" : {
+		"price" : 3000
+	},
+	"Weak Shield" : {
+		"price" : 100,
+		"color" : Color.yellow,
+		"hp" : 50
+	},
+	"Medium Shield" : {
+		"price" : 500,
+		"color" : Color.green,
+		"hp" : 200
+	},
+	"Strong Shield" : {
+		"price" : 1000,
+		"color" : Color.blue,
+		"hp" : 1000
+	},
+	"Ultimate Shield" : {
+		"price" : 3500,
+		"color" : Color.purple,
+		"hp" : 10000
+	}
+}
+
 var _loaded = false
 
 func _enter_tree():
