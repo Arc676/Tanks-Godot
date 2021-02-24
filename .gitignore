@@ -2,3 +2,5 @@
 *.ignore
 *.import
 .import
+*.pck
+.clickable
