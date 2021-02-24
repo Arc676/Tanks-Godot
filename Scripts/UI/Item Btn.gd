@@ -17,7 +17,11 @@ extends TextureButton
 # Textures
 onready var textures = {
 	"Repair Kit" : preload("res://Sprites/RepairKit.png"),
-	"Teleport" : preload("res://Sprites/Teleport.png")
+	"Teleport" : preload("res://Sprites/Teleport.png"),
+	"Weak Shield" : preload("res://Sprites/Weak Shield.png"),
+	"Medium Shield" : preload("res://Sprites/Medium Shield.png"),
+	"Strong Shield" : preload("res://Sprites/Strong Shield.png"),
+	"Ultimate Shield" : preload("res://Sprites/Ultimate Shield.png")
 }
 
 var player
