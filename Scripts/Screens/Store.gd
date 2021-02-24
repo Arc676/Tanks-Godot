@@ -29,6 +29,9 @@ func itemSetup(entry, name, type, price):
 	entry.connect("itemPurchased", self, "refreshBalance")
 
 func _ready():
+	var weaponHeader = storeItem.instance()
+	$Categories/Weapons.add_child(weaponHeader)
+	weaponHeader.makeHeaderRow()
 	for name in Weapons.WEAPON_PROPERTIES:
 		if name == "Tank Shell":
 			continue
@@ -36,6 +39,9 @@ func _ready():
 		var entry = storeItem.instance()
 		$Categories/Weapons.add_child(entry)
 		itemSetup(entry, name, "Ammo", data["price"])
+	var upgradeHeader = storeItem.instance()
+	$Categories/Upgrades.add_child(upgradeHeader)
+	upgradeHeader.makeHeaderRow()
 	for name in Items.UPGRADE_PROPERTIES:
 		var data = Items.UPGRADE_PROPERTIES[name]
 		var entry = storeItem.instance()

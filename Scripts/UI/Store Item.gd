@@ -18,10 +18,18 @@ var player
 
 signal itemPurchased
 
+func makeHeaderRow():
+	$Name.text = "Name"
+	$Type.text = "Type"
+	$Price.text = "Price"
+	$Owned.text = "Qty Owned"
+	$Buy.visible = false
+
 func loadProperties(name, type, price):
 	$Name.text = name
 	$Type.text = type
 	$Price.text = "$%d" % price
+	$Buy.visible = true
 
 # warning-ignore:shadowed_variable
 func updateAmt(player):
