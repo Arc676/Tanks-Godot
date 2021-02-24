@@ -72,7 +72,7 @@ func impact(_body):
 			var dist = (position - tank.position).length()
 			if dist < blastRadius:
 				var score = 2 * floor(50 * blastRadius / max(1, dist))
-				var dmg = damage / pow(dist / 30, 2) if dist > 10 else damage * 1.5
+				var dmg = damage / pow(dist / 20, 2) if dist > 20 else damage * 1.5
 				tank.takeDamage(dmg)
 				if tank.hp <= 0:
 					score *= 2
