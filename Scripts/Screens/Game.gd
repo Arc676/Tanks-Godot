@@ -141,6 +141,14 @@ func _process(_delta):
 	pFirepower.value = activeTank.firepower
 	pFuel.value = activeTank.fuel
 
+	if activeTank.activeShield:
+		shieldState.text = "%s at %d%%" % [
+			activeTank.activeShield.shieldName,
+			activeTank.activeShield.getShieldPercentage() * 100
+		]
+	else:
+		shieldState.text = ""
+
 	var weapon = activeTank.weapons.keys()[activeTank.selectedWeapon]
 	weaponName.text = weapon
 	availableAmmo.text = "%d" % activeTank.weapons[weapon]

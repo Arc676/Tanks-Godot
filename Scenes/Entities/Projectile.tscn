@@ -6,7 +6,7 @@
 
 [node name="Projectile" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 19
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )

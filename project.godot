@@ -66,6 +66,7 @@ click={
 2d_physics/layer_2="Tanks"
 2d_physics/layer_3="Projectiles"
 2d_physics/layer_4="Clouds"
+2d_physics/layer_5="Shields"
 
 [physics]
 

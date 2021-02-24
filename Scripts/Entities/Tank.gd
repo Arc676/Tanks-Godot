@@ -66,6 +66,7 @@ var upgrades = {
 }
 
 # Items
+onready var shieldObj = preload("res://Scenes/Effects/Shield.tscn")
 var activeShield = null
 var items = {}
 
@@ -139,7 +140,15 @@ func useItem(name):
 		isTargeting = true
 		isTeleporting = true
 	elif "Shield" in name:
-		pass
+		if activeShield:
+			return
+		activeShield = shieldObj.instance()
+		activeShield.init(
+			name,
+			Items.ITEM_PROPERTIES[name]["hp"],
+			Items.ITEM_PROPERTIES[name]["color"]
+		)
+		add_child(activeShield)
 	items[name] -= 1
 	if items[name] == 0:
 		items.erase(name)
@@ -155,7 +164,11 @@ func getAmountOwned(name, type):
 
 func takeDamage(dmg):
 	if activeShield:
-		pass
+		var excess = activeShield.takeDamage(dmg)
+		if excess:
+			activeShield.queue_free()
+			activeShield = null
+			takeDamage(excess)
 	else:
 		hp -= dmg / armor
 	if hp <= 0:
