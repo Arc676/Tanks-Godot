@@ -60,6 +60,10 @@ click={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [layer_names]
 
 2d_physics/layer_1="Terrain"
@@ -74,4 +78,8 @@ click={
 
 [rendering]
 
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=1
+quality/intended_usage/framebuffer_allocation.mobile=1
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
