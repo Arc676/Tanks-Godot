@@ -236,13 +236,15 @@ func fireProjectile(pos):
 	hasFired = true
 
 func _process(_delta):
-	if hp <= 0 and !boom:
-		endTurn()
+	if hp <= 0:
+		if !boom:
+			endTurn()
 		return
 
-	if position.y > Globals.SCR_HEIGHT - 10:
+	if position.y > Globals.SCR_HEIGHT - 20:
 		hp = 0
 		explode()
+		return
 
 	if isActiveTank:
 		if turnEnded or hasFired:
