@@ -97,7 +97,6 @@ func drawGame():
 		if tank.hp > 0:
 			tank.score += 100
 			tank.money += 100
-		$"Game Scene".remove_child(tank)
 	drawDeclared = true
 
 func gameOver():
@@ -157,6 +156,8 @@ func _process(_delta):
 		updateHUD()
 
 	if turnEnded and gameOver():
+		for tank in players:
+			$"Game Scene".remove_child(tank)
 		tree.change_scene("res://Scenes/Screens/Store.tscn")
 
 func setActiveTank(idx):

@@ -97,6 +97,7 @@ func reset():
 	fuel = startingFuel
 	isActiveTank = false
 	$Sprite.visible = true
+	resetState()
 
 func resetState():
 	hasFired = false
