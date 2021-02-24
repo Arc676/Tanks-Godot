@@ -138,37 +138,47 @@ size_flags_vertical = 0
 value = 100.0
 texture_progress = ExtResource( 4 )
 
-[node name="Weapon" type="VBoxContainer" parent="ColorRect/HUD"]
+[node name="Weapon, Items" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 237.0
 margin_right = 321.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="ColorRect/HUD/Weapon"]
+[node name="Label" type="Label" parent="ColorRect/HUD/Weapon, Items"]
 margin_right = 84.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Weapon"
 
-[node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon"]
+[node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 18.0
 margin_right = 84.0
 margin_bottom = 32.0
 
-[node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
+[node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
 margin_right = 64.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Tank Shell"
 
-[node name="Ammo" type="Label" parent="ColorRect/HUD/Weapon/Current Weapon"]
+[node name="Ammo" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
 margin_left = 68.0
 margin_right = 84.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "99"
+
+[node name="Shield State" type="Label" parent="ColorRect/HUD/Weapon, Items"]
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+
+[node name="Items" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
+margin_top = 54.0
+margin_right = 84.0
+margin_bottom = 54.0
 
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 341.0

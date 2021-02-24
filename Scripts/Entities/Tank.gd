@@ -24,6 +24,8 @@ enum AIStyle {
 	AGGRESSIVE, DEFENSIVE
 }
 
+signal itemsChanged
+
 onready var targetObj = preload("res://Scenes/Effects/Target.tscn")
 var target
 
@@ -126,6 +128,21 @@ func purchaseItem(name, type, price):
 				startingFuel += effect
 		elif type == "Item":
 			items[name] = items.get(name, 0) + 1
+
+func useItem(name):
+	if not name in items:
+		return
+	if name == "Repair Kit":
+		hp += Items.ITEM_PROPERTIES[name]["hp"]
+	elif name == "Teleport":
+		isTargeting = true
+		isTeleporting = true
+	elif "Shield" in name:
+		pass
+	items[name] -= 1
+	if items[name] == 0:
+		items.erase(name)
+	emit_signal("itemsChanged")
 
 func getAmountOwned(name, type):
 	if type == "Ammo":

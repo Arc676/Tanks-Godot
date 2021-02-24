@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/Item Btn.gd" type="Script" id=1]
+
+[node name="Item Button" type="TextureButton"]
+margin_right = 40.0
+margin_bottom = 40.0
+shortcut_in_tooltip = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="." to="." method="itemUsed"]

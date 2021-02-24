@@ -16,6 +16,8 @@ extends Control
 
 onready var tree = get_tree()
 
+onready var itemBtn = preload("res://Scenes/UI/Item Btn.tscn")
+
 # HUD - Player data
 onready var pColor = $"ColorRect/HUD/Player Stats/Identification/Player Color"
 onready var pName = $"ColorRect/HUD/Player Stats/Identification/Player Name"
@@ -24,8 +26,12 @@ onready var pFirepower = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Firepow
 onready var pFuel = $"ColorRect/HUD/Player Stats/HBoxContainer/Bars/Fuel Bar"
 
 # HUD - Weapon
-onready var weaponName = $"ColorRect/HUD/Weapon/Current Weapon/Weapon Name"
-onready var availableAmmo = $"ColorRect/HUD/Weapon/Current Weapon/Ammo"
+onready var weaponName = $"ColorRect/HUD/Weapon, Items/Current Weapon/Weapon Name"
+onready var availableAmmo = $"ColorRect/HUD/Weapon, Items/Current Weapon/Ammo"
+
+# HUD - Items
+onready var shieldState = $"ColorRect/HUD/Weapon, Items/Shield State"
+onready var pItems = $"ColorRect/HUD/Weapon, Items/Items"
 
 # HUD - Terrain data
 onready var windL = $"ColorRect/HUD/Wind/Bars/Wind Bar L"
@@ -62,11 +68,16 @@ func _ready():
 		Globals.SCR_WIDTH)
 	var z = 1
 	for tank in Globals.players:
-		var idx = rng.randi_range(4, terrain.chunkCount - 4)
 		tank.reset()
+
+		var idx = rng.randi_range(4, terrain.chunkCount - 4)
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
+
 		tank.z_index = z
 		z += 1
+
+		tank.connect("itemsChanged", self, "updateItems")
+
 		$"Game Scene".add_child(tank)
 		players.append(tank)
 
@@ -112,6 +123,17 @@ func updateHUD():
 	for i in range(len(players)):
 		var tank = players[i]
 		scores[i].text = "%s: %d" % [tank.tankName, tank.score]
+
+	updateItems()
+
+func updateItems():
+	for btn in pItems.get_children():
+		btn.queue_free()
+	var tank = players[activePlayer]
+	for item in tank.items:
+		var btn = itemBtn.instance()
+		pItems.add_child(btn)
+		btn.init(item, tank)
 
 func _process(_delta):
 	var activeTank = players[activePlayer]
