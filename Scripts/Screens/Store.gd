@@ -18,6 +18,10 @@ onready var storeItem = preload("res://Scenes/UI/Store Item.tscn")
 
 onready var tree = get_tree()
 
+onready var weapons = $Categories/Weapons
+onready var upgrades = $Categories/Items/Upgrades
+onready var items = $Categories/Items/Items
+
 var currentPlayer = 0
 
 signal refresh(player)
@@ -30,32 +34,29 @@ func itemSetup(entry, name, type, price):
 
 func _ready():
 	var weaponHeader = storeItem.instance()
-	$Categories/Weapons.add_child(weaponHeader)
+	weapons.add_child(weaponHeader)
 	weaponHeader.makeHeaderRow()
 	for name in Weapons.WEAPON_PROPERTIES:
 		if name == "Tank Shell":
 			continue
 		var data = Weapons.WEAPON_PROPERTIES[name]
 		var entry = storeItem.instance()
-		$Categories/Weapons.add_child(entry)
+		weapons.add_child(entry)
 		itemSetup(entry, name, "Ammo", data["price"])
 
 	var upgradeHeader = storeItem.instance()
-	$Categories/Upgrades.add_child(upgradeHeader)
+	upgrades.add_child(upgradeHeader)
 	upgradeHeader.makeHeaderRow()
 	for name in Items.UPGRADE_PROPERTIES:
 		var data = Items.UPGRADE_PROPERTIES[name]
 		var entry = storeItem.instance()
-		$Categories/Upgrades.add_child(entry)
+		upgrades.add_child(entry)
 		itemSetup(entry, name, "Upgrade", data["price"])
 
-	var itemHeader = storeItem.instance()
-	$Categories/Items.add_child(itemHeader)
-	itemHeader.makeHeaderRow()
 	for name in Items.ITEM_PROPERTIES:
 		var data = Items.ITEM_PROPERTIES[name]
 		var entry = storeItem.instance()
-		$Categories/Items.add_child(entry)
+		items.add_child(entry)
 		itemSetup(entry, name, "Item", data["price"])
 
 	setPlayer(0)

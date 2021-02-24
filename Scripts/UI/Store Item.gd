@@ -15,19 +15,20 @@
 extends HBoxContainer
 
 var player
+var type
 
 signal itemPurchased
 
 func makeHeaderRow():
 	$Name.text = "Name"
-	$Type.text = "Type"
 	$Price.text = "Price"
 	$Owned.text = "Qty Owned"
 	$Buy.visible = false
 
+# warning-ignore:shadowed_variable
 func loadProperties(name, type, price):
 	$Name.text = name
-	$Type.text = type
+	self.type = type
 	$Price.text = "$%d" % price
 	$Buy.visible = true
 
@@ -37,12 +38,12 @@ func updateAmt(player):
 	if player.isCC:
 		$Owned.text = "-"
 	else:
-		$Owned.text = "%d" % player.getAmountOwned($Name.text, $Type.text)
+		$Owned.text = "%d" % player.getAmountOwned($Name.text, type)
 
 
 func buyItem():
 	if player.isCC:
 		return
-	player.purchaseItem($Name.text, $Type.text, int($Price.text))
-	$Owned.text = "%d" % player.getAmountOwned($Name.text, $Type.text)
+	player.purchaseItem($Name.text, type, int($Price.text))
+	$Owned.text = "%d" % player.getAmountOwned($Name.text, type)
 	emit_signal("itemPurchased")

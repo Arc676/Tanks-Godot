@@ -11,7 +11,7 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="."]
-margin_right = 243.0
+margin_right = 325.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -19,20 +19,9 @@ size_flags_vertical = 5
 text = "Item"
 valign = 1
 
-[node name="Type" type="Label" parent="."]
-margin_left = 247.0
-margin_right = 490.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 5
-text = "Type"
-align = 1
-valign = 1
-
 [node name="Price" type="Label" parent="."]
-margin_left = 494.0
-margin_right = 737.0
+margin_left = 329.0
+margin_right = 654.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 50, 0 )
 size_flags_horizontal = 3
@@ -42,7 +31,7 @@ align = 1
 valign = 1
 
 [node name="Owned" type="Label" parent="."]
-margin_left = 741.0
+margin_left = 658.0
 margin_right = 984.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 50, 0 )
