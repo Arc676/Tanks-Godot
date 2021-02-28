@@ -51,6 +51,11 @@ var isCC = false
 var aiLvl = AILevel.EASY
 var aiStyle = AIStyle.AGGRESSIVE
 
+var targetTank
+var targetAngle
+var targetFirepower
+var needsRecalc = true
+
 # Sounds
 onready var barrelRotation = $Barrel
 onready var explosion = $Explosion
@@ -194,6 +199,7 @@ func reset():
 	isActiveTank = false
 	$Sprite.visible = true
 	velocity = Vector2.ZERO
+	targetTank = null
 	resetState()
 
 func resetState():
@@ -221,6 +227,23 @@ func installUpgrade(name, times = 1):
 		maxHillClimb *= pow(effect, times)
 	else:
 		startingFuel += effect * times
+
+func makePurchases():
+	# No items on easy mode
+	if !isCC or aiLvl == AILevel.EASY:
+		return
+	# Only high level, defensive CC tanks save money
+	if aiLvl == AILevel.HARD and aiStyle == AIStyle.DEFENSIVE and money < 3000:
+		return
+	if aiStyle == AIStyle.DEFENSIVE:
+		purchaseItem("Armor", "Upgrade", Items.UPGRADE_PROPERTIES["Armor"]["price"])
+		var itemCount = Items.ITEM_PROPERTIES.keys().size()
+		var shields = Items.ITEM_PROPERTIES.keys().slice(-4, itemCount - 1)
+		shields.invert()
+		for shield in shields:
+			var price = Items.ITEM_PROPERTIES[shield]["price"]
+			while money >= price and getAmountOwned(shield, "Item") < 3:
+					purchaseItem(shield, "Item", price)
 
 func purchaseItem(name, type, price):
 	if money >= price:
@@ -338,6 +361,16 @@ func fireProjectile(pos):
 	if weapon != "Tank Shell":
 		weapons[weapon] -= 1
 	hasFired = true
+	if isCC:
+		needsRecalc = true
+		if !activeShield:
+			var itemCount = Items.ITEM_PROPERTIES.keys().size()
+			var shields = Items.ITEM_PROPERTIES.keys().slice(-4, itemCount - 1)
+			shields.invert()
+			for shield in shields:
+				if getAmountOwned(shield, "Item") > 0:
+					useItem(shield)
+					break
 
 func _process(_delta):
 	if hp <= 0:
@@ -360,8 +393,115 @@ func _process(_delta):
 		else:
 			playerUpdate()
 
+func ccUncertainty(lvl, rad = true):
+	var k = deg2rad(1) if rad else 1.0
+	if lvl == AILevel.EASY:
+		return 10 * k
+	elif lvl == AILevel.MEDIUM:
+		return 5 * k
+	return 0
+
+# warning-ignore:shadowed_variable
+func recalculate(target):
+	var nozzle = getNozzlePosition()
+	var x = target.x - nozzle.x
+	var y = -(target.y - nozzle.y)
+
+	var b = (y / -x) - x
+	var a1 = 0.001
+
+	var chunkRange
+	var posChunk = floor(position.x) / Weapons.terrain.chunkSize
+	var targetChunk = floor(target.x) / Weapons.terrain.chunkSize
+	if abs(posChunk - targetChunk) >= 2:
+		if x < 0:
+			chunkRange = range(targetChunk + 1, posChunk)
+		else:
+			chunkRange = range(posChunk + 1, targetChunk)
+
+		for i in chunkRange:
+			var xc = i * Weapons.terrain.chunkSize - position.x
+			var h = -(Weapons.terrain.ground.polygon[i].y - position.y)
+			if -a1 * xc * (xc + b) < h:
+				a1 = -(h + 1) / (xc * (xc + b))
+
+	targetAngle = -atan(-a1 * b)
+	if x < 0:
+		targetAngle -= PI
+
+	var s = sin(targetAngle)
+	var c = cos(targetAngle)
+	var sc = s * c
+
+	var den1 = 2 * Weapons.terrain.windSpeed * 5 * (x * s * s - y * sc)
+	var den2 = 2 * 9.81 * (x * sc - y * c * c)
+
+	if den1 + den2 < 0:
+		targetFirepower = 100
+	else:
+		targetFirepower = abs(round(
+			(Weapons.terrain.windSpeed * 5 * y + 9.81 * x) / sqrt(den1 + den2) / 5
+		))
+
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	targetAngle += rng.randf_range(0, 1) * ccUncertainty(aiLvl)
+	targetFirepower += rng.randi_range(0, ccUncertainty(aiLvl, false) - 1)
+
+	targetAngle = clamp(targetAngle, -PI, 0)
+	if targetFirepower > 100:
+		targetFirepower = 100
+		return false
+
+	selectedWeapon = weapons.keys().size() - 1
+
+	needsRecalc = false
+	return true
+
+func chooseNewTarget():
+	targetTank = null
+	var possibleTargets = []
+	for tank in Globals.players:
+		if tank != self and tank.hp > 0 and !isTeammate(tank):
+			possibleTargets.append(tank)
+	if possibleTargets.size() == 0:
+		return
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	while true:
+		var idx = rng.randi_range(0, possibleTargets.size() - 1)
+		targetTank = possibleTargets[idx]
+		if possibleTargets.size() == 1 or recalculate(targetTank.position):
+			break
+		possibleTargets.remove(idx)
+
 func ccUpdate():
-	pass
+	if !targetTank or targetTank.hp <= 0:
+		chooseNewTarget()
+		if !targetTank:
+			endTurn()
+			return
+	if needsRecalc:
+		if !recalculate(targetTank.position):
+			chooseNewTarget()
+			if !targetTank:
+				endTurn()
+				return
+	if abs(targetAngle - firingAngle) <= deg2rad(2):
+		firingAngle = targetAngle
+		update()
+		if firepower == targetFirepower:
+			fireProjectile(getNozzlePosition())
+		else:
+			if firepower < targetFirepower:
+				firepower += 1
+			else:
+				firepower -= 1
+	else:
+		if firingAngle < targetAngle:
+			rotate(1)
+		else:
+			rotate(-1)
 
 func playerUpdate():
 	if input_CW() and firingAngle < 0:
