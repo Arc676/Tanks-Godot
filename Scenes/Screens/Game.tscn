@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Screens/Game.gd" type="Script" id=2]
@@ -7,6 +7,13 @@
 [ext_resource path="res://Textures/Blue.png" type="Texture" id=5]
 [ext_resource path="res://Sound/bomber.wav" type="AudioStream" id=6]
 [ext_resource path="res://Sound/laser.wav" type="AudioStream" id=7]
+[ext_resource path="res://Textures/Left.png" type="Texture" id=8]
+[ext_resource path="res://Textures/Right.png" type="Texture" id=9]
+[ext_resource path="res://Textures/CW.png" type="Texture" id=10]
+[ext_resource path="res://Textures/Minus.png" type="Texture" id=11]
+[ext_resource path="res://Textures/Plus.png" type="Texture" id=12]
+[ext_resource path="res://Textures/CCW.png" type="Texture" id=13]
+[ext_resource path="res://Textures/Fire.png" type="Texture" id=14]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -260,12 +267,13 @@ text = "Player X: 0"
 [node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 1261.0
 margin_right = 1347.0
-margin_bottom = 84.0
-size_flags_vertical = 3
+margin_bottom = 74.0
+size_flags_vertical = 0
 
 [node name="SFX" type="CheckBox" parent="ColorRect/HUD/Controls"]
 margin_right = 86.0
-margin_bottom = 24.0
+margin_bottom = 35.0
+size_flags_vertical = 3
 custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -274,9 +282,99 @@ pressed = true
 text = "SFX"
 
 [node name="Draw Game" type="Button" parent="ColorRect/HUD/Controls"]
-margin_top = 28.0
+margin_top = 39.0
 margin_right = 86.0
-margin_bottom = 48.0
+margin_bottom = 74.0
+size_flags_vertical = 3
 text = "Draw Game"
+
+[node name="Touch Controls" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -20.0
+margin_right = -20.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="GridContainer" parent="Touch Controls"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -124.0
+margin_right = 188.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CCW" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 13 )
+expand = true
+
+[node name="CW" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 10 )
+expand = true
+
+[node name="Firepower Up" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_left = 128.0
+margin_right = 188.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 12 )
+expand = true
+
+[node name="Move Left" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_top = 64.0
+margin_right = 60.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
+action_mode = 0
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Move Right" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 124.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
+action_mode = 0
+texture_normal = ExtResource( 9 )
+expand = true
+
+[node name="Firepower Down" type="TextureButton" parent="Touch Controls/Buttons"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 188.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="Fire" type="TextureButton" parent="Touch Controls"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -60.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="toggled" from="ColorRect/HUD/Controls/SFX" to="." method="toggleSFX"]
 [connection signal="pressed" from="ColorRect/HUD/Controls/Draw Game" to="." method="drawGame"]

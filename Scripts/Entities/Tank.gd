@@ -32,6 +32,15 @@ var target
 onready var explosionObj = preload("res://Scenes/Effects/Explosion.tscn")
 var boom
 
+# Touch controls
+var touchMoveLeft
+var touchMoveRight
+var touchCW
+var touchCCW
+var touchFirepowerUp
+var touchFirepowerDown
+var touchFire
+
 # Computer controlled tanks
 var isCC = false
 var aiLvl = AILevel.EASY
@@ -260,14 +269,14 @@ func ccUpdate():
 	pass
 
 func playerUpdate():
-	if Input.is_action_pressed("ui_down") and firingAngle > -PI:
-		rotate(-1)
-	elif Input.is_action_pressed("ui_up") and firingAngle < 0:
+	if input_CW() and firingAngle < 0:
 		rotate(1)
+	elif input_CCW() and firingAngle > -PI:
+		rotate(-1)
 
-	if Input.is_action_pressed("ui_page_up"):
+	if input_firepowerUp():
 		firepower = clamp(firepower + 1, 0, 100)
-	elif Input.is_action_pressed("ui_page_down"):
+	elif input_firepowerDown():
 		firepower = clamp(firepower - 1, 0, 100)
 
 	if isTargeting:
@@ -310,7 +319,7 @@ func playerUpdate():
 				fireProjectile(get_global_mouse_position())
 			stopTargeting()
 			hasFired = true
-	elif Input.is_action_just_pressed("fire"):
+	elif input_fire():
 		var weapon = weapons.keys()[selectedWeapon]
 		if Weapons.isTargetedWeapon(weapon):
 			startTargeting()
@@ -327,10 +336,10 @@ func playerUpdate():
 func _physics_process(delta):
 	velocity.y += Globals.GRAVITY * delta
 	if isActiveTank and is_on_floor() and fuel > 0:
-		if Input.is_action_pressed("ui_left"):
+		if input_moveLeft():
 			velocity.x = -MOVE_SPEED
 			fuel -= 20 * delta / engineEfficiency
-		elif Input.is_action_pressed("ui_right"):
+		elif input_moveRight():
 			velocity.x = MOVE_SPEED
 			fuel -= 20 * delta / engineEfficiency
 		else:
@@ -339,3 +348,24 @@ func _physics_process(delta):
 		velocity.x = 0
 	velocity = move_and_slide(velocity, Vector2.UP, true)
 	velocity.x = 0
+
+func input_moveLeft():
+	return Input.is_action_pressed("ui_left") or touchMoveLeft.pressed
+
+func input_moveRight():
+	return Input.is_action_pressed("ui_right") or touchMoveRight.pressed
+
+func input_firepowerUp():
+	return Input.is_action_pressed("ui_page_up") or touchFirepowerUp.pressed
+
+func input_firepowerDown():
+	return Input.is_action_pressed("ui_page_down") or touchFirepowerDown.pressed
+
+func input_CCW():
+	return Input.is_action_pressed("ui_down") or touchCCW.pressed
+
+func input_CW():
+	return Input.is_action_pressed("ui_up") or touchCW.pressed
+
+func input_fire():
+	return Input.is_action_just_pressed("fire") or touchFire.pressed
