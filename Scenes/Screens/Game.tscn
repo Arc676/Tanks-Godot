@@ -186,7 +186,7 @@ margin_bottom = 54.0
 margin_left = 341.0
 margin_right = 1146.0
 margin_bottom = 84.0
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
 margin_right = 805.0
@@ -199,12 +199,13 @@ align = 1
 margin_top = 18.0
 margin_right = 805.0
 margin_bottom = 28.0
+size_flags_horizontal = 0
 custom_constants/separation = 0
+alignment = 1
 
 [node name="Wind Bar L" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
-margin_right = 400.0
 margin_bottom = 10.0
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 max_value = 200.0
 texture_progress = ExtResource( 5 )
 fill_mode = 1
@@ -218,48 +219,47 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Wind Bar R" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
 margin_left = 405.0
-margin_right = 805.0
 margin_bottom = 10.0
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 max_value = 200.0
 texture_progress = ExtResource( 5 )
 
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 1166.0
-margin_right = 1233.0
+margin_right = 1241.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
-margin_right = 67.0
+margin_right = 75.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 18.0
-margin_right = 67.0
+margin_right = 75.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 36.0
-margin_right = 67.0
+margin_right = 75.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 54.0
-margin_right = 67.0
+margin_right = 75.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 1253.0
-margin_right = 1339.0
+margin_left = 1261.0
+margin_right = 1347.0
 margin_bottom = 84.0
 size_flags_vertical = 3
 

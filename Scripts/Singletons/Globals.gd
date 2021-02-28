@@ -16,8 +16,8 @@ extends Node
 
 const GRAVITY = 981
 
-onready var SCR_HEIGHT = get_viewport().size.y
-onready var SCR_WIDTH = get_viewport().size.x
+var SCR_WIDTH
+var SCR_HEIGHT
 
 var _loaded = false
 var players = []
@@ -29,3 +29,11 @@ func _enter_tree():
 		printerr("Please delete the instance at: " + get_path())
 	else:
 		Globals._loaded = true
+		if !OS.has_touchscreen_ui_hint():
+			get_tree().set_screen_stretch(
+				SceneTree.STRETCH_MODE_DISABLED,
+				SceneTree.STRETCH_ASPECT_IGNORE,
+				get_viewport().size
+			)
+		SCR_WIDTH = get_viewport().size.x
+		SCR_HEIGHT = get_viewport().size.y
