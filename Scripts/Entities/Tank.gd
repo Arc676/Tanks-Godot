@@ -246,7 +246,7 @@ func fireProjectile(pos):
 
 func _process(_delta):
 	if hp <= 0:
-		if !boom:
+		if !is_instance_valid(boom):
 			endTurn()
 		return
 
