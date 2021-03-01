@@ -41,6 +41,8 @@ var touchFirepowerUp
 var touchFirepowerDown
 var touchFire
 
+var weaponChangedLastFrame = 0
+
 # Computer controlled tanks
 var isCC = false
 var aiLvl = AILevel.EASY
@@ -326,12 +328,14 @@ func playerUpdate():
 		else:
 			fireProjectile(getNozzlePosition())
 
-	if Input.is_action_just_pressed("next_weapon"):
+	if input_nextWeapon():
 		selectedWeapon = (selectedWeapon + 1) % weapons.size()
-	elif Input.is_action_just_pressed("prev_weapon"):
+	elif input_prevWeapon():
 		selectedWeapon -= 1
 		if selectedWeapon < 0:
 			selectedWeapon = weapons.size() - 1
+
+	weaponChangedLastFrame = 0
 
 func _physics_process(delta):
 	velocity.y += Globals.GRAVITY * delta
@@ -369,3 +373,15 @@ func input_CW():
 
 func input_fire():
 	return Input.is_action_just_pressed("fire") or touchFire.pressed
+
+func input_nextWeapon():
+	return Input.is_action_just_pressed("next_weapon") or weaponChangedLastFrame > 0
+
+func input_prevWeapon():
+	return Input.is_action_just_pressed("prev_weapon") or weaponChangedLastFrame < 0
+
+func input_changeWeapon(btn):
+	if btn.name == "PrevWeapon":
+		weaponChangedLastFrame = -1
+	else:
+		weaponChangedLastFrame = 1

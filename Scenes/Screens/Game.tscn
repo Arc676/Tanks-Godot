@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Screens/Game.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Textures/Plus.png" type="Texture" id=12]
 [ext_resource path="res://Textures/CCW.png" type="Texture" id=13]
 [ext_resource path="res://Textures/Fire.png" type="Texture" id=14]
+[ext_resource path="res://Textures/NextWeapon.png" type="Texture" id=15]
+[ext_resource path="res://Textures/PrevWeapon.png" type="Texture" id=16]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -147,31 +149,31 @@ texture_progress = ExtResource( 4 )
 
 [node name="Weapon, Items" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 237.0
-margin_right = 321.0
+margin_right = 395.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Weapon, Items"]
-margin_right = 84.0
+margin_right = 158.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Weapon"
+text = "Selected Ammunition"
 
 [node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 18.0
-margin_right = 84.0
+margin_right = 158.0
 margin_bottom = 32.0
 
 [node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
-margin_right = 64.0
+margin_right = 77.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Tank Shell"
 
 [node name="Ammo" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
-margin_left = 68.0
-margin_right = 84.0
+margin_left = 81.0
+margin_right = 158.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -179,24 +181,24 @@ text = "99"
 
 [node name="Shield State" type="Label" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 36.0
-margin_right = 84.0
+margin_right = 158.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="Items" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 54.0
-margin_right = 84.0
+margin_right = 158.0
 margin_bottom = 54.0
 
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 341.0
-margin_right = 1146.0
+margin_left = 415.0
+margin_right = 720.0
 margin_bottom = 84.0
 size_flags_horizontal = 0
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
-margin_right = 805.0
+margin_right = 305.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Wind"
@@ -204,13 +206,14 @@ align = 1
 
 [node name="Bars" type="HBoxContainer" parent="ColorRect/HUD/Wind"]
 margin_top = 18.0
-margin_right = 805.0
+margin_right = 305.0
 margin_bottom = 28.0
 size_flags_horizontal = 0
 custom_constants/separation = 0
 alignment = 1
 
 [node name="Wind Bar L" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
+margin_right = 150.0
 margin_bottom = 10.0
 size_flags_horizontal = 4
 max_value = 200.0
@@ -218,61 +221,62 @@ texture_progress = ExtResource( 5 )
 fill_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect/HUD/Wind/Bars"]
-margin_left = 400.0
-margin_right = 405.0
+margin_left = 150.0
+margin_right = 155.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 5, 10 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="Wind Bar R" type="TextureProgress" parent="ColorRect/HUD/Wind/Bars"]
-margin_left = 405.0
+margin_left = 155.0
+margin_right = 305.0
 margin_bottom = 10.0
 size_flags_horizontal = 4
 max_value = 200.0
 texture_progress = ExtResource( 5 )
 
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 1166.0
-margin_right = 1241.0
+margin_left = 740.0
+margin_right = 898.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
-margin_right = 75.0
+margin_right = 158.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 18.0
-margin_right = 75.0
+margin_right = 158.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 36.0
-margin_right = 75.0
+margin_right = 158.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 54.0
-margin_right = 75.0
+margin_right = 158.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 1261.0
-margin_right = 1347.0
-margin_bottom = 74.0
+margin_left = 918.0
+margin_right = 1004.0
+margin_bottom = 48.0
 size_flags_vertical = 0
 
 [node name="SFX" type="CheckBox" parent="ColorRect/HUD/Controls"]
 margin_right = 86.0
-margin_bottom = 35.0
+margin_bottom = 24.0
 size_flags_vertical = 3
 custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -282,9 +286,9 @@ pressed = true
 text = "SFX"
 
 [node name="Draw Game" type="Button" parent="ColorRect/HUD/Controls"]
-margin_top = 39.0
+margin_top = 28.0
 margin_right = 86.0
-margin_bottom = 74.0
+margin_bottom = 48.0
 size_flags_vertical = 3
 text = "Draw Game"
 
@@ -300,40 +304,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="GridContainer" parent="Touch Controls"]
+[node name="UI Left" type="HBoxContainer" parent="Touch Controls"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -124.0
 margin_right = 188.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="GridContainer" parent="Touch Controls/UI Left"]
+margin_right = 188.0
+margin_bottom = 204.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CCW" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="CCW" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_right = 60.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 13 )
 expand = true
 
-[node name="CW" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="CW" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_left = 64.0
 margin_right = 124.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 10 )
 expand = true
 
-[node name="Firepower Up" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="Firepower Up" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_left = 128.0
 margin_right = 188.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 12 )
 expand = true
 
-[node name="Move Left" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="Move Left" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_top = 64.0
 margin_right = 60.0
 margin_bottom = 124.0
@@ -343,7 +357,7 @@ action_mode = 0
 texture_normal = ExtResource( 8 )
 expand = true
 
-[node name="Move Right" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="Move Right" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 124.0
@@ -354,13 +368,36 @@ action_mode = 0
 texture_normal = ExtResource( 9 )
 expand = true
 
-[node name="Firepower Down" type="TextureButton" parent="Touch Controls/Buttons"]
+[node name="Firepower Down" type="TextureButton" parent="Touch Controls/UI Left/Buttons"]
 margin_left = 128.0
 margin_top = 64.0
 margin_right = 188.0
 margin_bottom = 124.0
 rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="Weapons" type="VBoxContainer" parent="Touch Controls/UI Left"]
+margin_left = 192.0
+margin_right = 252.0
+margin_bottom = 204.0
+
+[node name="PrevWeapon" type="TextureButton" parent="Touch Controls/UI Left/Weapons"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 16 )
+expand = true
+
+[node name="NextWeapon" type="TextureButton" parent="Touch Controls/UI Left/Weapons"]
+margin_top = 64.0
+margin_right = 60.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 60, 60 )
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 15 )
 expand = true
 
 [node name="Fire" type="TextureButton" parent="Touch Controls"]

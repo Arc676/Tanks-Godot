@@ -63,6 +63,9 @@ func _ready():
 	players = []
 	drawDeclared = false
 
+	var touchNextWeapon = $"Touch Controls/UI Left/Weapons/NextWeapon"
+	var touchPrevWeapon = $"Touch Controls/UI Left/Weapons/PrevWeapon"
+
 	terrain.generateNewTerrain(Globals.selectedTerrain,
 		Globals.SCR_HEIGHT,
 		Globals.SCR_WIDTH)
@@ -73,13 +76,18 @@ func _ready():
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
 
-		tank.touchMoveLeft = $"Touch Controls/Buttons/Move Left"
-		tank.touchMoveRight = $"Touch Controls/Buttons/Move Right"
-		tank.touchCW = $"Touch Controls/Buttons/CW"
-		tank.touchCCW = $"Touch Controls/Buttons/CCW"
-		tank.touchFirepowerUp = $"Touch Controls/Buttons/Firepower Up"
-		tank.touchFirepowerDown = $"Touch Controls/Buttons/Firepower Down"
+		tank.touchMoveLeft = $"Touch Controls/UI Left/Buttons/Move Left"
+		tank.touchMoveRight = $"Touch Controls/UI Left/Buttons/Move Right"
+		tank.touchCW = $"Touch Controls/UI Left/Buttons/CW"
+		tank.touchCCW = $"Touch Controls/UI Left/Buttons/CCW"
+		tank.touchFirepowerUp = $"Touch Controls/UI Left/Buttons/Firepower Up"
+		tank.touchFirepowerDown = $"Touch Controls/UI Left/Buttons/Firepower Down"
 		tank.touchFire = $"Touch Controls/Fire"
+
+		touchNextWeapon.connect("button_up", tank, "input_changeWeapon",
+			[touchNextWeapon])
+		touchPrevWeapon.connect("button_up", tank, "input_changeWeapon",
+			[touchPrevWeapon])
 
 		tank.z_index = z
 		z += 1
@@ -181,3 +189,4 @@ func setActiveTank(idx):
 	tank.isActiveTank = true
 	pColor.color = tank.color
 	pName.text = tank.tankName
+	$"Touch Controls/UI Left/Weapons".visible = tank.weapons.size() > 1
