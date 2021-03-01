@@ -46,7 +46,7 @@ func _physics_process(delta):
 	add_central_force(Vector2.RIGHT * Weapons.terrain.windSpeed * 500 * delta)
 
 func despawn():
-	Weapons.projCount -= 1
+	Weapons.changeProjCount(-1)
 	queue_free()
 
 func _process(_delta):
@@ -85,7 +85,7 @@ func impact(_body):
 	if isShrapnelRound:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		Weapons.projCount += 4
+		Weapons.changeProjCount(4)
 		for _i in range(4):
 			var projectile = projObj.instance()
 			var velocity = Vector2(
