@@ -14,5 +14,12 @@
 
 extends Sprite
 
+onready var isTouch = OS.has_touchscreen_ui_hint()
+
+func _input(event):
+	if event is InputEventScreenDrag:
+		position = event.position
+
 func _process(_delta):
-	position = get_global_mouse_position()
+	if !isTouch:
+		position = get_global_mouse_position()

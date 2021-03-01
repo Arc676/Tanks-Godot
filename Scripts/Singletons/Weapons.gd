@@ -155,7 +155,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		airstrikeSound.play()
 		var count = WEAPON_PROPERTIES[name]["count"]
 		projCount += count
-		for i in range(-count / 2, count / 2):
+		for i in range(-count / 2, count / 2 + 1):
 			var projPos = Vector2(pos.x + i * 20, 0)
 			var projectile = projObj.instance()
 			projectile.position = projPos

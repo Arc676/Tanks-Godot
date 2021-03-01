@@ -282,9 +282,9 @@ func playerUpdate():
 		firepower = clamp(firepower - 1, 0, 100)
 
 	if isTargeting:
-		if Input.is_action_just_pressed("ui_cancel"):
+		if input_cancelTarget():
 			stopTargeting()
-		elif Input.is_action_just_pressed("click"):
+		elif input_confirmTarget():
 			if isTeleporting:
 				var terrain = Weapons.terrain
 				var destination = get_global_mouse_position()
@@ -318,7 +318,7 @@ func playerUpdate():
 				isTeleporting = false
 				endTurn()
 			else:
-				fireProjectile(get_global_mouse_position())
+				fireProjectile(target.position)
 			stopTargeting()
 			hasFired = true
 	elif input_fire():
@@ -385,3 +385,13 @@ func input_changeWeapon(btn):
 		weaponChangedLastFrame = -1
 	else:
 		weaponChangedLastFrame = 1
+
+func input_cancelTarget():
+	return Input.is_action_just_pressed("ui_cancel") or weaponChangedLastFrame != 0
+
+func input_confirmTarget():
+	return Input.is_action_just_pressed("click") or (
+		touchFire.pressed and
+		target.position.y < Globals.SCR_HEIGHT * 0.75 and
+		target.position.y > Globals.SCR_HEIGHT * 0.25
+	)
