@@ -17,16 +17,16 @@ extends Control
 onready var tree = get_tree()
 
 # Players
-onready var p1 = $"Players/Player 1"
-onready var p2 = $"Players/Player 2"
-onready var p3 = $"Players/Player 3"
-onready var p4 = $"Players/Player 4"
+onready var p1 = $"UI/P13/Player 1"
+onready var p2 = $"UI/P24/Player 2"
+onready var p3 = $"UI/P13/Player 3"
+onready var p4 = $"UI/P24/Player 4"
 
 # Terrain selection
-onready var desert = $Terrain/Desert
-onready var plains = $Terrain/Plains
-onready var hills = $Terrain/Hills
-onready var random = $Terrain/Random
+onready var desert = $UI/Terrain/Desert
+onready var plains = $UI/Terrain/Plains
+onready var hills = $UI/Terrain/Hills
+onready var random = $UI/Terrain/Random
 
 func _ready():
 	p1.setProperties(1, Color(0, 0, 1))

@@ -52,6 +52,7 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
+margin_bottom = -10.0
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,7 +60,7 @@ __meta__ = {
 
 [node name="Player Stats" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_right = 217.0
-margin_bottom = 84.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="Identification" type="HBoxContainer" parent="ColorRect/HUD/Player Stats"]
@@ -150,7 +151,7 @@ texture_progress = ExtResource( 4 )
 [node name="Weapon, Items" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 237.0
 margin_right = 395.0
-margin_bottom = 84.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Weapon, Items"]
@@ -194,7 +195,7 @@ margin_bottom = 54.0
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 415.0
 margin_right = 720.0
-margin_bottom = 84.0
+margin_bottom = 74.0
 size_flags_horizontal = 0
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Wind"]
@@ -238,7 +239,7 @@ texture_progress = ExtResource( 5 )
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 740.0
 margin_right = 898.0
-margin_bottom = 84.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
@@ -271,12 +272,11 @@ text = "Player X: 0"
 [node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 918.0
 margin_right = 1004.0
-margin_bottom = 48.0
-size_flags_vertical = 0
+margin_bottom = 74.0
 
 [node name="SFX" type="CheckBox" parent="ColorRect/HUD/Controls"]
 margin_right = 86.0
-margin_bottom = 24.0
+margin_bottom = 35.0
 size_flags_vertical = 3
 custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -286,9 +286,9 @@ pressed = true
 text = "SFX"
 
 [node name="Draw Game" type="Button" parent="ColorRect/HUD/Controls"]
-margin_top = 28.0
+margin_top = 39.0
 margin_right = 86.0
-margin_bottom = 48.0
+margin_bottom = 74.0
 size_flags_vertical = 3
 text = "Draw Game"
 
@@ -315,7 +315,7 @@ __meta__ = {
 
 [node name="Buttons" type="GridContainer" parent="Touch Controls/UI Left"]
 margin_right = 188.0
-margin_bottom = 204.0
+margin_bottom = 124.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -381,7 +381,7 @@ expand = true
 [node name="Weapons" type="VBoxContainer" parent="Touch Controls/UI Left"]
 margin_left = 192.0
 margin_right = 252.0
-margin_bottom = 204.0
+margin_bottom = 124.0
 
 [node name="PrevWeapon" type="TextureButton" parent="Touch Controls/UI Left/Weapons"]
 margin_right = 60.0

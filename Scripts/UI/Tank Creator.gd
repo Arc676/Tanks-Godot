@@ -59,6 +59,12 @@ onready var tankIsCC = $"AI Mode/CC"
 onready var aiDiff = $"AI Mode/Difficulty"
 onready var aiStyle = $"AI Mode/Style"
 
+func _enter_tree():
+	if !OS.has_touchscreen_ui_hint():
+		size_flags_vertical = SIZE_FILL
+		for node in get_children():
+			node.size_flags_vertical = SIZE_FILL
+
 func setProperties(num, color):
 	enableTank.visible = num >= 3
 	pNum.text = "Player %d" % num
