@@ -18,10 +18,13 @@ var shieldName
 var color
 var hp
 var limit
+var tank
 
 # warning-ignore:shadowed_variable
-func init(shieldName, shieldHP, shieldColor):
+# warning-ignore:shadowed_variable
+func init(shieldName, shieldHP, shieldColor, tank):
 	self.shieldName = shieldName
+	self.tank = tank
 	color = shieldColor
 	hp = shieldHP
 	limit = hp
@@ -37,6 +40,8 @@ func takeDamage(dmg):
 	return null
 
 func _draw():
+	if tank.hp <= 0:
+		return
 	var c = color
 	c.a = getShieldPercentage()
 	draw_arc(position, 30, 0, 2 * PI, 1000, c, 5, true)

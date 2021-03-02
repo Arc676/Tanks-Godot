@@ -157,7 +157,8 @@ func useItem(name):
 		activeShield.init(
 			name,
 			Items.ITEM_PROPERTIES[name]["hp"],
-			Items.ITEM_PROPERTIES[name]["color"]
+			Items.ITEM_PROPERTIES[name]["color"],
+			self
 		)
 		add_child(activeShield)
 	items[name] -= 1
@@ -231,6 +232,8 @@ func explode():
 	explosion.play()
 	$Sprite.visible = false
 	update()
+	if is_instance_valid(activeShield):
+		activeShield.update()
 
 func fireProjectile(pos):
 	var weapon = weapons.keys()[selectedWeapon]
