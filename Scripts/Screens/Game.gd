@@ -76,6 +76,8 @@ func _ready():
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
 
+		tank.terrain = terrain
+
 		tank.touchMoveLeft = $"Touch Controls/UI Left/Buttons/Move Left"
 		tank.touchMoveRight = $"Touch Controls/UI Left/Buttons/Move Right"
 		tank.touchCW = $"Touch Controls/UI Left/Buttons/CW"

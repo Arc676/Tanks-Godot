@@ -32,6 +32,8 @@ var target
 onready var explosionObj = preload("res://Scenes/Effects/Explosion.tscn")
 var boom
 
+var terrain
+
 # Touch controls
 var touchMoveLeft
 var touchMoveRight
@@ -289,7 +291,6 @@ func playerUpdate():
 			stopTargeting()
 		elif input_confirmTarget():
 			if isTeleporting:
-				var terrain = Weapons.terrain
 				var destination = get_global_mouse_position()
 				var chunk = floor(destination.x / terrain.chunkSize)
 				var x0 = chunk * terrain.chunkSize
