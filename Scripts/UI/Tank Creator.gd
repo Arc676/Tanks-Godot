@@ -45,9 +45,14 @@ const names = [
 	"Zulu"
 ]
 
+var defaultColor
+
 # Enable tank?
 onready var enableTank = $"Presence/Tank Enabled"
 onready var pNum = $"Presence/Player Number"
+
+# Disk
+var loadedTank = null
 
 # Identification
 onready var tankName = $"Identification/Tank Name"
@@ -68,11 +73,14 @@ func _enter_tree():
 func setProperties(num, color):
 	enableTank.visible = num >= 3
 	pNum.text = "Player %d" % num
+	defaultColor = color
 	tankColor.color = color
 
 func getTank():
 	if !enableTank.pressed:
 		return null
+	if is_instance_valid(loadedTank):
+		return loadedTank
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var tank = tankObj.instance()
@@ -90,3 +98,22 @@ func getTank():
 		else:
 			tank.aiStyle = aiStyle.selected
 	return tank
+
+func loadTank():
+	loadedTank = tankObj.instance()
+	if loadedTank.loadFromDisk(tankName.text):
+		tankTeam.text = loadedTank.team
+		tankColor.color = loadedTank.color
+		if loadedTank.isCC:
+			tankIsCC.pressed = true
+			aiStyle.select(loadedTank.aiLvl)
+			aiStyle.select(loadedTank.aiStyle)
+	else:
+		tankName.text = "(Failed to load tank)"
+		loadedTank.queue_free()
+
+func unloadTank():
+	loadedTank.queue_free()
+	tankName.text = ""
+	tankTeam.text = ""
+	tankColor.color = defaultColor

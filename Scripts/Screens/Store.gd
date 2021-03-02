@@ -77,3 +77,9 @@ func nextPlayer():
 	else:
 		currentPlayer += 1
 		setPlayer(currentPlayer)
+
+func saveTank():
+	Globals.players[currentPlayer].writeToDisk()
+
+func backToMain():
+	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")

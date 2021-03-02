@@ -79,7 +79,7 @@ var upgrades = {
 }
 
 # Items
-onready var shieldObj = preload("res://Scenes/Effects/Shield.tscn")
+var shieldObj = preload("res://Scenes/Effects/Shield.tscn")
 var activeShield = null
 var items = {}
 
@@ -101,6 +101,74 @@ var isTargeting = false
 var isFalling = false
 var isTeleporting = false
 var velocity = Vector2.ZERO
+
+func writeToDisk():
+	var dir = Directory.new()
+	if !dir.dir_exists("user://tanks"):
+		if dir.make_dir_recursive("user://tanks") != OK:
+			return false
+	var saveFile = File.new()
+	saveFile.open("user://tanks/%s.dat" % tankName, File.WRITE)
+
+	for property in [
+		weapons, items, team, color.to_html(false), money, score, upgrades
+	]:
+		saveFile.store_var(property)
+
+	saveFile.store_var(isCC)
+	if isCC:
+		saveFile.store_var({
+			"style" : aiStyle,
+			"lvl" : aiLvl
+		})
+	if is_instance_valid(activeShield):
+		saveFile.store_var({
+			"name" : activeShield.shieldName,
+			"hp" : activeShield.hp
+		})
+	else:
+		saveFile.store_var(0)
+	saveFile.close()
+	return true
+
+# warning-ignore:shadowed_variable
+func loadFromDisk(tankName):
+	self.tankName = tankName
+	var saveFile = File.new()
+	var path = "user://tanks/%s.dat" % tankName
+	if saveFile.file_exists(path):
+		saveFile.open(path, File.READ)
+
+		weapons = saveFile.get_var()
+		items = saveFile.get_var()
+		team = saveFile.get_var()
+		setColor(Color(saveFile.get_var()))
+		money = saveFile.get_var()
+		score = saveFile.get_var()
+		upgrades = saveFile.get_var()
+
+		isCC = saveFile.get_var()
+		if isCC:
+			var data = saveFile.get_var()
+			aiStyle = data["style"]
+			aiLvl = data["lvl"]
+
+		var shieldData = saveFile.get_var()
+		if shieldData is Dictionary:
+			activeShield = shieldObj.instance()
+			var name = shieldData["name"]
+			activeShield.init(
+				name,
+				Items.ITEM_PROPERTIES[name]["hp"],
+				Items.ITEM_PROPERTIES[name]["color"],
+				self
+			)
+			activeShield.hp = shieldData["hp"]
+			add_child(activeShield)
+
+		saveFile.close()
+		return true
+	return false
 
 func setColor(newColor):
 	color = newColor
