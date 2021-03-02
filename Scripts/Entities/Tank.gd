@@ -357,6 +357,9 @@ func playerUpdate():
 	if isTargeting:
 		if input_cancelTarget():
 			stopTargeting()
+			if isTeleporting:
+				items["Teleport"] = items.get("Teleport", 0) + 1
+				emit_signal("itemsChanged")
 		elif input_confirmTarget():
 			if isTeleporting:
 				var destination = get_global_mouse_position()
