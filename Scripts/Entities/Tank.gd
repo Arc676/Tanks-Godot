@@ -110,10 +110,15 @@ func writeToDisk():
 	var saveFile = File.new()
 	saveFile.open("user://tanks/%s.dat" % tankName, File.WRITE)
 
+	var weaponsCopy = weapons.duplicate()
+	weaponsCopy.erase("Tank Shell")
 	for property in [
-		weapons, items, team, color.to_html(false), money, score, upgrades
+		weaponsCopy, items, team, color.to_html(false), money, score
 	]:
 		saveFile.store_var(property)
+
+	for upgrade in ["Engine Efficiency", "Armor", "Extra Fuel", "Hill Climbing"]:
+		saveFile.store_var(upgrades[upgrade])
 
 	saveFile.store_var(isCC)
 	if isCC:
@@ -139,13 +144,20 @@ func loadFromDisk(tankName):
 	if saveFile.file_exists(path):
 		saveFile.open(path, File.READ)
 
-		weapons = saveFile.get_var()
+		var additionalWeapons = saveFile.get_var()
+		for weapon in additionalWeapons:
+			weapons[weapon] = additionalWeapons[weapon]
+
 		items = saveFile.get_var()
 		team = saveFile.get_var()
 		setColor(Color(saveFile.get_var()))
 		money = saveFile.get_var()
 		score = saveFile.get_var()
-		upgrades = saveFile.get_var()
+
+		for upgrade in ["Engine Efficiency", "Armor", "Extra Fuel", "Hill Climbing"]:
+			var qty = saveFile.get_var()
+			upgrades[upgrade] = qty
+			installUpgrade(upgrade, qty)
 
 		isCC = saveFile.get_var()
 		if isCC:
@@ -188,10 +200,24 @@ func resetState():
 func endTurn():
 	turnEnded = true
 	isActiveTank = false
+	var toDelete = []
 	for key in weapons.keys():
 		if weapons[key] == 0:
-			weapons.erase(key)
+			toDelete.append(key)
 			selectedWeapon = 0
+	for key in toDelete:
+		weapons.erase(toDelete)
+
+func installUpgrade(name, times = 1):
+	var effect = Items.UPGRADE_PROPERTIES[name]["effect"]
+	if name == "Engine Efficiency":
+		engineEfficiency *= pow(effect, times)
+	elif name == "Armor":
+		armor *= pow(effect, times)
+	elif name == "Hill Climbing":
+		maxHillClimb *= pow(effect, times)
+	else:
+		startingFuel += effect * times
 
 func purchaseItem(name, type, price):
 	if money >= price:
@@ -200,15 +226,7 @@ func purchaseItem(name, type, price):
 			weapons[name] = weapons.get(name, 0) + 1
 		elif type == "Upgrade":
 			upgrades[name] += 1
-			var effect = Items.UPGRADE_PROPERTIES[name]["effect"]
-			if name == "Engine Efficiency":
-				engineEfficiency *= effect
-			elif name == "Armor":
-				armor *= effect
-			elif name == "Hill Climbing":
-				maxHillClimb *= effect
-			else:
-				startingFuel += effect
+			installUpgrade(name)
 		elif type == "Item":
 			items[name] = items.get(name, 0) + 1
 
