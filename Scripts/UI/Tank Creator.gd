@@ -99,6 +99,17 @@ func getTank():
 			tank.aiStyle = aiStyle.selected
 	return tank
 
+func refreshUI():
+	var isLoaded = is_instance_valid(loadedTank)
+	tankName.editable = !isLoaded
+	tankTeam.editable = !isLoaded
+	tankColor.disabled = isLoaded
+	tankIsCC.disabled = isLoaded
+	aiDiff.disabled = isLoaded
+	aiStyle.disabled = isLoaded
+	$Disk/Load.disabled = isLoaded
+	$Disk/Unload.disabled = !isLoaded
+
 func loadTank():
 	loadedTank = tankObj.instance()
 	if loadedTank.loadFromDisk(tankName.text):
@@ -106,14 +117,17 @@ func loadTank():
 		tankColor.color = loadedTank.color
 		if loadedTank.isCC:
 			tankIsCC.pressed = true
-			aiStyle.select(loadedTank.aiLvl)
+			aiDiff.select(loadedTank.aiLvl)
 			aiStyle.select(loadedTank.aiStyle)
+		refreshUI()
 	else:
 		tankName.text = "(Failed to load tank)"
 		loadedTank.queue_free()
 
 func unloadTank():
 	loadedTank.queue_free()
+	loadedTank = null
 	tankName.text = ""
 	tankTeam.text = ""
 	tankColor.color = defaultColor
+	refreshUI()
