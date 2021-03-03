@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Screens/Game.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Textures/Black.png" type="Texture" id=4]
 [ext_resource path="res://Textures/Blue.png" type="Texture" id=5]
 [ext_resource path="res://Sound/bomber.wav" type="AudioStream" id=6]
-[ext_resource path="res://Sound/laser.wav" type="AudioStream" id=7]
 [ext_resource path="res://Textures/Left.png" type="Texture" id=8]
 [ext_resource path="res://Textures/Right.png" type="Texture" id=9]
 [ext_resource path="res://Textures/CW.png" type="Texture" id=10]
@@ -34,9 +33,7 @@ z_as_relative = false
 
 [node name="Bomber" type="AudioStreamPlayer" parent="Game Scene"]
 stream = ExtResource( 6 )
-
-[node name="Laser" type="AudioStreamPlayer" parent="Game Scene"]
-stream = ExtResource( 7 )
+bus = "SFX"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

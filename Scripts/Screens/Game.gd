@@ -56,8 +56,6 @@ func _ready():
 	rng.randomize()
 
 	Weapons.airstrikeSound = $"Game Scene/Bomber"
-	Weapons.laserSound = $"Game Scene/Laser"
-
 	Weapons.terrain = terrain
 
 	players = []

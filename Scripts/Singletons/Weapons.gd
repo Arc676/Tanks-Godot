@@ -15,6 +15,7 @@
 extends Node
 
 onready var projObj = preload("res://Scenes/Entities/Projectile.tscn")
+onready var laserObj = preload("res://Scenes/Effects/Laser.tscn")
 
 const STANDARD_WEAPONS = [
 	"Tank Shell",
@@ -72,7 +73,7 @@ const WEAPON_PROPERTIES = {
 		"price" : 600,
 		"radius" : 0,
 		"dmg" : 800,
-		"ticks" : 30
+		"ticks" : 0.5
 	},
 	"Hydrogen Bomb" : {
 		"price" : 1400,
@@ -89,7 +90,7 @@ const WEAPON_PROPERTIES = {
 		"price" : 1600,
 		"radius" : 30,
 		"dmg" : 1000,
-		"ticks" : 30
+		"ticks" : 0.5
 	},
 	"Hailfire IV" : {
 		"price" : 1800,
@@ -101,7 +102,7 @@ const WEAPON_PROPERTIES = {
 		"price" : 2000,
 		"radius" : 40,
 		"dmg" : 1100,
-		"ticks" : 60
+		"ticks" : 1
 	},
 	"Airstrike I" : {
 		"price" : 2000,
@@ -118,7 +119,8 @@ const WEAPON_PROPERTIES = {
 	"Space Laser" : {
 		"price" : 3200,
 		"radius" : 40,
-		"dmg" : 1000
+		"dmg" : 1000,
+		"ticks" : 1
 	}
 }
 
@@ -173,8 +175,18 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 				true,
 				src
 			)
-	elif name == "Space Laser":
-		pass
+	elif "Laser" in name:
+		changeProjCount(1)
+		var laser = laserObj.instance()
+		tree.add_child(laser)
+		laser.init(
+			pos,
+			WEAPON_PROPERTIES[name]["dmg"],
+			WEAPON_PROPERTIES[name]["radius"],
+			WEAPON_PROPERTIES[name]["ticks"],
+			src,
+			name == "Space Laser"
+		)
 	elif "Hailfire" in name:
 		var velocity = Vector2(
 			cos(angle), sin(angle)
@@ -193,8 +205,6 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 				name in LARGE_EXPLOSIONS,
 				src
 			)
-	elif "Laser Beam" in name:
-		pass
 
 func _enter_tree():
 	if Weapons._loaded:
