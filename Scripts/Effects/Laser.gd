@@ -35,8 +35,7 @@ var xPos = null
 onready var raycast = $RayCast2D
 onready var texLen = beamSprite.get_size().x
 
-# warning-ignore:shadowed_variable
-func init(pos, angle, damage, radius, duration, src, isStrike = false):
+func init(pos, angle, properties, src, isStrike = false):
 	if isStrike:
 		xPos = pos.x
 		texture = strikeSprite
@@ -52,10 +51,10 @@ func init(pos, angle, damage, radius, duration, src, isStrike = false):
 			if is_instance_valid(src.activeShield):
 				raycast.add_exception(src.activeShield)
 		position = src.getNozzlePosition()
-	dmg = damage
-	limit = duration
+	dmg = properties.dmg
+	limit = properties.ticks
+	radius = properties.radius
 	srcPlayer = src
-	self.radius = radius
 
 func despawn():
 	Weapons.changeProjCount(-1)

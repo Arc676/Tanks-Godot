@@ -22,11 +22,11 @@ var tank
 
 # warning-ignore:shadowed_variable
 # warning-ignore:shadowed_variable
-func init(shieldName, shieldHP, shieldColor, tank):
+func init(shieldName, properties, tank):
 	self.shieldName = shieldName
 	self.tank = tank
-	color = shieldColor
-	hp = shieldHP
+	color = properties.color
+	hp = properties.hp
 	limit = hp
 
 func getShieldPercentage():

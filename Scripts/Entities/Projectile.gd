@@ -28,10 +28,9 @@ var damage
 var srcPlayer
 var isShrapnelRound
 
-# warning-ignore:shadowed_variable
-func init(blastRadius, dmg, velocity, isBig, src):
-	self.blastRadius = blastRadius
-	damage = dmg
+func init(properties, velocity, isBig, src):
+	blastRadius = properties.radius
+	damage = properties.dmg
 	linear_velocity = velocity
 	srcPlayer = src
 	if isBig:
@@ -94,6 +93,15 @@ func impact(_body):
 			)
 			projectile.position = position + 5 * Vector2.UP
 			get_parent().call_deferred("add_child", projectile)
-			projectile.call_deferred("init", blastRadius, damage, velocity, false, srcPlayer)
+			projectile.call_deferred(
+				"init",
+				{
+					"radius" : blastRadius,
+					"dmg" : damage
+				},
+				velocity,
+				false,
+				srcPlayer
+			)
 	hasImpacted = true
 	visible = false

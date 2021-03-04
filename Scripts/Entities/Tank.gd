@@ -244,8 +244,7 @@ func useItem(name):
 		activeShield = shieldObj.instance()
 		activeShield.init(
 			name,
-			Items.ITEM_PROPERTIES[name]["hp"],
-			Items.ITEM_PROPERTIES[name]["color"],
+			Items.ITEM_PROPERTIES[name],
 			self
 		)
 		add_child(activeShield)
@@ -284,7 +283,7 @@ func getNozzlePosition():
 	var s = sin(firingAngle)
 	return position + Vector2(
 		20 * c,
-		20 * s
+		20 * s - 2
 	)
 
 func rotate(angle):

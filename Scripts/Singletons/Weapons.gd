@@ -153,8 +153,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		projectile.isShrapnelRound = name == "Shrapnel Round"
 		tree.add_child(projectile)
 		projectile.init(
-			WEAPON_PROPERTIES[name]["radius"],
-			WEAPON_PROPERTIES[name]["dmg"],
+			WEAPON_PROPERTIES[name],
 			velocity,
 			name in LARGE_EXPLOSIONS,
 			src
@@ -169,8 +168,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			projectile.position = projPos
 			tree.add_child(projectile)
 			projectile.init(
-				WEAPON_PROPERTIES[name]["radius"],
-				WEAPON_PROPERTIES[name]["dmg"],
+				WEAPON_PROPERTIES[name],
 				Vector2.ZERO,
 				true,
 				src
@@ -183,9 +181,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		laser.init(
 			pos,
 			angle,
-			WEAPON_PROPERTIES[name]["dmg"],
-			WEAPON_PROPERTIES[name]["radius"],
-			WEAPON_PROPERTIES[name]["ticks"],
+			WEAPON_PROPERTIES[name],
 			src,
 			name == "Space Laser"
 		)
@@ -201,8 +197,7 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 			projectile.position = pos
 			tree.add_child(projectile)
 			projectile.init(
-				WEAPON_PROPERTIES[name]["radius"],
-				WEAPON_PROPERTIES[name]["dmg"],
+				WEAPON_PROPERTIES[name],
 				velocity + i * dv,
 				name in LARGE_EXPLOSIONS,
 				src
