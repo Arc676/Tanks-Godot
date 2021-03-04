@@ -131,8 +131,6 @@ func writeToDisk():
 			"name" : activeShield.shieldName,
 			"hp" : activeShield.hp
 		})
-	else:
-		saveFile.store_var(0)
 	saveFile.close()
 	return true
 
@@ -165,8 +163,8 @@ func loadFromDisk(tankName):
 			aiStyle = data["style"]
 			aiLvl = data["lvl"]
 
-		var shieldData = saveFile.get_var()
-		if shieldData is Dictionary:
+		if saveFile.get_position() != saveFile.get_len():
+			var shieldData = saveFile.get_var()
 			activeShield = shieldObj.instance()
 			var name = shieldData["name"]
 			activeShield.init(
@@ -191,6 +189,7 @@ func reset():
 	fuel = startingFuel
 	isActiveTank = false
 	$Sprite.visible = true
+	velocity = Vector2.ZERO
 	resetState()
 
 func resetState():
@@ -206,7 +205,7 @@ func endTurn():
 			toDelete.append(key)
 			selectedWeapon = 0
 	for key in toDelete:
-		weapons.erase(toDelete)
+		weapons.erase(key)
 
 func installUpgrade(name, times = 1):
 	var effect = Items.UPGRADE_PROPERTIES[name]["effect"]
