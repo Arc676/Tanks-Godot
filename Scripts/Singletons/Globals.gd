@@ -16,6 +16,11 @@ extends Node
 
 const GRAVITY = 981
 
+var gameSettings = {
+	"sfx" : true,
+	"touchUI" : true
+}
+
 var SCR_WIDTH
 var SCR_HEIGHT
 
@@ -37,3 +42,23 @@ func _enter_tree():
 			)
 		SCR_WIDTH = get_viewport().size.x
 		SCR_HEIGHT = get_viewport().size.y
+
+		# Load settings
+		var file = File.new()
+		if file.file_exists("user://settings/settings.json"):
+			file.open("user://settings/settings.json", File.READ)
+			gameSettings = parse_json(file.get_line())
+			file.close()
+		else:
+			saveSettings()
+
+func saveSettings():
+	var dir = Directory.new()
+	if !dir.dir_exists("user://settings/"):
+		if dir.make_dir_recursive("user://settings/") != OK:
+			return false
+	var file = File.new()
+	file.open("user://settings/settings.json", File.WRITE)
+	file.store_line(to_json(gameSettings))
+	file.close()
+	return true

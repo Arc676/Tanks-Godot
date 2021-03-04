@@ -57,3 +57,6 @@ func startGame():
 
 func quitGame():
 	tree.quit()
+
+func goToSettings():
+	tree.change_scene("res://Scenes/Screens/Settings.tscn")

@@ -61,6 +61,10 @@ func _ready():
 	players = []
 	drawDeclared = false
 
+	$"Touch Controls".visible = Globals.gameSettings.touchUI
+	$ColorRect/HUD/Controls/SFX.pressed = Globals.gameSettings.sfx
+	toggleSFX(Globals.gameSettings.sfx)
+
 	var touchNextWeapon = $"Touch Controls/UI Left/Weapons/NextWeapon"
 	var touchPrevWeapon = $"Touch Controls/UI Left/Weapons/PrevWeapon"
 
@@ -106,6 +110,8 @@ func _ready():
 
 func toggleSFX(pressed):
 	AudioServer.set_bus_mute(1, !pressed)
+	Globals.gameSettings.sfx = pressed
+	Globals.saveSettings()
 
 func drawGame():
 	players[activePlayer].endTurn()
