@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Tank",
+"language": "GDScript",
+"path": "res://Scripts/Entities/Tank.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Terrain",
 "language": "GDScript",
 "path": "res://Scripts/Terrain/Terrain.gd"
 } ]
 _global_script_class_icons={
+"Tank": "",
 "Terrain": ""
 }
 

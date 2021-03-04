@@ -32,9 +32,11 @@ var srcPlayer
 var xPos = null
 
 # Laser beams
+onready var raycast = $RayCast2D
+onready var texLen = beamSprite.get_size().x
 
 # warning-ignore:shadowed_variable
-func init(pos, damage, radius, duration, src, isStrike = false):
+func init(pos, angle, damage, radius, duration, src, isStrike = false):
 	if isStrike:
 		xPos = pos.x
 		texture = strikeSprite
@@ -43,6 +45,13 @@ func init(pos, damage, radius, duration, src, isStrike = false):
 		position = Vector2(xPos - 20, 0)
 	else:
 		texture = beamSprite
+		rotation_degrees = rad2deg(angle)
+		if angle != -PI / 2:
+			raycast.enabled = true
+			raycast.add_exception(src)
+			if is_instance_valid(src.activeShield):
+				raycast.add_exception(src.activeShield)
+		position = src.getNozzlePosition()
 	dmg = damage
 	limit = duration
 	srcPlayer = src
@@ -53,7 +62,18 @@ func despawn():
 	sound.stop()
 	queue_free()
 
-func _process(delta):
+func hitTank(tank):
+	var score = 40
+	tank.takeDamage(dmg)
+	if tank.hp <= 0:
+		score *= 2
+	if tank == srcPlayer or tank.isTeammate(srcPlayer):
+		score *= -1
+	else:
+		srcPlayer.money += score
+	srcPlayer.score += 2 * score
+
+func _physics_process(delta):
 	if !sound.playing:
 		sound.play()
 	ticks += delta
@@ -63,12 +83,21 @@ func _process(delta):
 		Weapons.terrain.deform(radius, xPos)
 		for tank in Globals.players:
 			if tank.hp > 0 and abs(tank.position.x - xPos) < 40:
-				var score = 40
-				tank.takeDamage(dmg)
-				if tank.hp <= 0:
-					score *= 2
-				if tank == srcPlayer or tank.isTeammate(srcPlayer):
-					score *= -1
+				hitTank(tank)
+	else:
+		var scaleFactor
+		if raycast.is_colliding():
+			var hit = raycast.get_collider()
+			var hitPos = raycast.get_collision_point()
+			if hit.name == "Terrain" and radius > 0:
+				Weapons.terrain.deform(radius, hitPos.x)
+			elif hit is Tank:
+				if hit.hp <= 0:
+					raycast.add_exception(hit)
 				else:
-					srcPlayer.money += score
-				srcPlayer.score += 2 * score
+					hitTank(hit)
+			scaleFactor = (hitPos - position).length() / texLen
+		else:
+			scaleFactor = Globals.SCR_WIDTH / texLen
+		scale = Vector2(scaleFactor, 1)
+		position = srcPlayer.getNozzlePosition()

@@ -179,8 +179,10 @@ func fireWeapon(tree, name, angle, firepower, pos, src):
 		changeProjCount(1)
 		var laser = laserObj.instance()
 		tree.add_child(laser)
+		laser.z_index = 10
 		laser.init(
 			pos,
+			angle,
 			WEAPON_PROPERTIES[name]["dmg"],
 			WEAPON_PROPERTIES[name]["radius"],
 			WEAPON_PROPERTIES[name]["ticks"],

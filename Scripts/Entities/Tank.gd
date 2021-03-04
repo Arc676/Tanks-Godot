@@ -13,6 +13,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extends KinematicBody2D
+class_name Tank
 
 const MOVE_SPEED = 50
 
@@ -278,12 +279,12 @@ func isTeammate(tank):
 		return false
 	return team == tank.team
 
-func getNozzlePosition(dy = 0):
+func getNozzlePosition():
 	var c = cos(firingAngle)
 	var s = sin(firingAngle)
 	return position + Vector2(
-		20 * c - dy * s,
-		-8 - dy * c + 20 * s
+		20 * c,
+		20 * s
 	)
 
 func rotate(angle):
