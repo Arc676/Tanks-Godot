@@ -136,7 +136,7 @@ func writeToDisk():
 	return true
 
 # warning-ignore:shadowed_variable
-func loadFromDisk(tankName):
+func loadFromDisk(tankName, isInTree = true):
 	self.tankName = tankName
 	var saveFile = File.new()
 	var path = "user://tanks/%s.dat" % tankName
@@ -149,7 +149,10 @@ func loadFromDisk(tankName):
 
 		items = saveFile.get_var()
 		team = saveFile.get_var()
-		setColor(Color(saveFile.get_var()))
+		if isInTree:
+			setColor(Color(saveFile.get_var()))
+		else:
+			color = Color(saveFile.get_var())
 		money = saveFile.get_var()
 		score = saveFile.get_var()
 

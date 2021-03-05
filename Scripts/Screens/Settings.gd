@@ -14,14 +14,29 @@
 
 extends Control
 
+onready var savefile = preload("res://Scenes/UI/Save File.tscn")
+
 onready var tree = get_tree()
 
 onready var enableSFX = $"VBoxContainer/Enable SFX"
 onready var enableTouchUI = $"VBoxContainer/Enable Touch UI"
 
+onready var saveList = $"VBoxContainer/Save Files"
+
 func _ready():
 	enableSFX.pressed = Globals.gameSettings.sfx
 	enableTouchUI.pressed = Globals.gameSettings.touchUI
+
+	var dir = Directory.new()
+	if dir.open("user://tanks") == OK:
+		dir.list_dir_begin()
+		var filename = dir.get_next()
+		while filename != "":
+			if !dir.current_is_dir():
+				var entry = savefile.instance()
+				saveList.add_child(entry)
+				entry.loadSave(filename.get_basename())
+			filename = dir.get_next()
 
 func returnToMain():
 	Globals.saveSettings()

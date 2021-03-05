@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/Save File.gd" type="Script" id=1]
+
+[node name="Save File" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_top = 293.0
+margin_right = 338.0
+margin_bottom = 307.0
+size_flags_horizontal = 3
+valign = 1
+
+[node name="Color" type="ColorPickerButton" parent="."]
+margin_left = 342.0
+margin_right = 681.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete" type="Button" parent="."]
+margin_left = 685.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+text = "Delete"
+[connection signal="pressed" from="Delete" to="." method="deleteSaveFile"]

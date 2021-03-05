@@ -37,10 +37,20 @@ margin_right = 160.0
 margin_bottom = 68.0
 text = "Show Touch Controls"
 
-[node name="Back to Main" type="Button" parent="VBoxContainer"]
+[node name="Save Files" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 88.0
 margin_right = 160.0
-margin_bottom = 108.0
+margin_bottom = 102.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Save Files"]
+margin_right = 160.0
+margin_bottom = 14.0
+text = "Save Files"
+
+[node name="Back to Main" type="Button" parent="VBoxContainer"]
+margin_top = 122.0
+margin_right = 160.0
+margin_bottom = 142.0
 text = "Back"
 [connection signal="toggled" from="VBoxContainer/Enable SFX" to="." method="setSFX"]
 [connection signal="toggled" from="VBoxContainer/Enable Touch UI" to="." method="setTouchUI"]
