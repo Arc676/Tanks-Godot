@@ -16,9 +16,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -80.0
-margin_top = -71.0
+margin_top = -108.0
 margin_right = 80.0
-margin_bottom = 71.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
@@ -37,22 +37,29 @@ margin_right = 160.0
 margin_bottom = 68.0
 text = "Show Touch Controls"
 
-[node name="Save Files" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Enable Teams" type="CheckBox" parent="VBoxContainer"]
 margin_top = 88.0
 margin_right = 160.0
-margin_bottom = 102.0
+margin_bottom = 112.0
+text = "Enable Teams"
+
+[node name="Save Files" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 132.0
+margin_right = 160.0
+margin_bottom = 146.0
 
 [node name="Label" type="Label" parent="VBoxContainer/Save Files"]
 margin_right = 160.0
 margin_bottom = 14.0
-text = "Save Files"
+text = "View/Manage Save Files"
 
 [node name="Back to Main" type="Button" parent="VBoxContainer"]
-margin_top = 122.0
+margin_top = 166.0
 margin_right = 160.0
-margin_bottom = 172.0
+margin_bottom = 216.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
 [connection signal="toggled" from="VBoxContainer/Enable SFX" to="." method="setSFX"]
 [connection signal="toggled" from="VBoxContainer/Enable Touch UI" to="." method="setTouchUI"]
+[connection signal="toggled" from="VBoxContainer/Enable Teams" to="." method="setTeams"]
 [connection signal="pressed" from="VBoxContainer/Back to Main" to="." method="returnToMain"]

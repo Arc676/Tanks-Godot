@@ -18,14 +18,11 @@ onready var savefile = preload("res://Scenes/UI/Save File.tscn")
 
 onready var tree = get_tree()
 
-onready var enableSFX = $"VBoxContainer/Enable SFX"
-onready var enableTouchUI = $"VBoxContainer/Enable Touch UI"
-
-onready var saveList = $"VBoxContainer/Save Files"
 
 func _ready():
-	enableSFX.pressed = Globals.gameSettings.sfx
-	enableTouchUI.pressed = Globals.gameSettings.touchUI
+	$"VBoxContainer/Enable SFX".pressed = Globals.gameSettings.sfx
+	$"VBoxContainer/Enable Touch UI".pressed = Globals.gameSettings.touchUI
+	$"VBoxContainer/Enable Teams".pressed = Globals.gameSettings.teams
 
 	var dir = Directory.new()
 	if dir.open("user://tanks") == OK:
@@ -34,7 +31,7 @@ func _ready():
 		while filename != "":
 			if !dir.current_is_dir():
 				var entry = savefile.instance()
-				saveList.add_child(entry)
+				$"VBoxContainer/Save Files".add_child(entry)
 				entry.loadSave(filename.get_basename())
 			filename = dir.get_next()
 
@@ -47,3 +44,6 @@ func setSFX(pressed):
 
 func setTouchUI(pressed):
 	Globals.gameSettings.touchUI = pressed
+
+func setTeams(pressed):
+	Globals.gameSettings.teams = pressed

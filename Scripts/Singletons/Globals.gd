@@ -17,6 +17,7 @@ extends Node
 const GRAVITY = 981
 
 var gameSettings = {
+	"teams" : false,
 	"sfx" : true,
 	"touchUI" : true
 }

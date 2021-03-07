@@ -69,6 +69,7 @@ func _enter_tree():
 		size_flags_vertical = SIZE_FILL
 		for node in get_children():
 			node.size_flags_vertical = SIZE_FILL
+	$Team.visible = Globals.gameSettings.teams
 
 func setProperties(num, color):
 	enableTank.visible = num >= 3
@@ -99,16 +100,15 @@ func getTank():
 			tank.aiStyle = aiStyle.selected
 	return tank
 
-func refreshUI():
-	var isLoaded = is_instance_valid(loadedTank)
-	tankName.editable = !isLoaded
-	tankTeam.editable = !isLoaded
-	tankColor.disabled = isLoaded
-	tankIsCC.disabled = isLoaded
-	aiDiff.disabled = isLoaded
-	aiStyle.disabled = isLoaded
-	$Disk/Load.disabled = isLoaded
-	$Disk/Unload.disabled = !isLoaded
+func setEditable(editable, isLoaded = false):
+	tankName.editable = editable
+	tankTeam.editable = editable
+	tankColor.disabled = !editable
+	tankIsCC.disabled = !editable
+	aiDiff.disabled = !editable or !tankIsCC.pressed
+	aiStyle.disabled = !editable or !tankIsCC.pressed
+	$Disk/Load.disabled = !editable or isLoaded
+	$Disk/Unload.disabled = !editable or !isLoaded
 
 func loadTank():
 	loadedTank = tankObj.instance()
@@ -119,7 +119,7 @@ func loadTank():
 			tankIsCC.pressed = true
 			aiDiff.select(loadedTank.aiLvl)
 			aiStyle.select(loadedTank.aiStyle)
-		refreshUI()
+		setEditable(false, true)
 	else:
 		tankName.text = "(Failed to load tank)"
 		loadedTank.queue_free()
@@ -130,4 +130,11 @@ func unloadTank():
 	tankName.text = ""
 	tankTeam.text = ""
 	tankColor.color = defaultColor
-	refreshUI()
+	setEditable(true)
+
+func toggleTank(enable):
+	setEditable(enable)
+
+func toggleCC(pressed):
+	aiDiff.disabled = !pressed
+	aiStyle.disabled = !pressed

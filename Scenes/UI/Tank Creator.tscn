@@ -97,6 +97,7 @@ margin_right = 557.0
 margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+disabled = true
 text = "Easy"
 items = [ "Easy", null, false, 0, null, "Medium", null, false, 1, null, "Hard", null, false, 2, null ]
 selected = 0
@@ -107,6 +108,7 @@ margin_right = 1024.0
 margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+disabled = true
 text = "Aggressive"
 items = [ "Aggressive", null, false, 0, null, "Defensive", null, false, 1, null, "Random", null, false, 2, null ]
 selected = 0
@@ -132,5 +134,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 disabled = true
 text = "Unload"
+[connection signal="toggled" from="Presence/Tank Enabled" to="." method="toggleTank"]
+[connection signal="toggled" from="AI Mode/CC" to="." method="toggleCC"]
 [connection signal="pressed" from="Disk/Load" to="." method="loadTank"]
 [connection signal="pressed" from="Disk/Unload" to="." method="unloadTank"]
