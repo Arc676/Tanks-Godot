@@ -33,6 +33,7 @@ z_as_relative = false
 
 [node name="Bomber" type="AudioStreamPlayer" parent="Game Scene"]
 stream = ExtResource( 6 )
+volume_db = 10.0
 bus = "SFX"
 
 [node name="ColorRect" type="ColorRect" parent="."]
