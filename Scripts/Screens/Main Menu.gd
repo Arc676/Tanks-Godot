@@ -60,3 +60,6 @@ func quitGame():
 
 func goToSettings():
 	tree.change_scene("res://Scenes/Screens/Settings.tscn")
+
+func showHelp():
+	tree.change_scene("res://Scenes/Screens/Help.tscn")

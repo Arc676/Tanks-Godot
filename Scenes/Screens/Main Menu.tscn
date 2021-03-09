@@ -77,9 +77,9 @@ __meta__ = {
 }
 
 [node name="Terrain" type="VBoxContainer" parent="UI/VBoxContainer"]
-margin_top = 122.0
+margin_top = 87.0
 margin_right = 83.0
-margin_bottom = 248.0
+margin_bottom = 213.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -120,25 +120,33 @@ group = ExtResource( 2 )
 text = "Random"
 
 [node name="Start" type="Button" parent="UI/VBoxContainer"]
-margin_top = 268.0
+margin_top = 233.0
 margin_right = 83.0
-margin_bottom = 318.0
+margin_bottom = 283.0
 rect_min_size = Vector2( 0, 50 )
 text = "Start Game"
 
 [node name="Settings" type="Button" parent="UI/VBoxContainer"]
-margin_top = 338.0
+margin_top = 303.0
 margin_right = 83.0
-margin_bottom = 388.0
+margin_bottom = 353.0
 rect_min_size = Vector2( 0, 50 )
 text = "Settings"
 
-[node name="Quit" type="Button" parent="UI/VBoxContainer"]
-margin_top = 408.0
+[node name="Help" type="Button" parent="UI/VBoxContainer"]
+margin_top = 373.0
 margin_right = 83.0
-margin_bottom = 458.0
+margin_bottom = 423.0
+rect_min_size = Vector2( 0, 50 )
+text = "Help"
+
+[node name="Quit" type="Button" parent="UI/VBoxContainer"]
+margin_top = 443.0
+margin_right = 83.0
+margin_bottom = 493.0
 rect_min_size = Vector2( 0, 50 )
 text = "Quit"
 [connection signal="pressed" from="UI/VBoxContainer/Start" to="." method="startGame"]
 [connection signal="pressed" from="UI/VBoxContainer/Settings" to="." method="goToSettings"]
+[connection signal="pressed" from="UI/VBoxContainer/Help" to="." method="showHelp"]
 [connection signal="pressed" from="UI/VBoxContainer/Quit" to="." method="quitGame"]
