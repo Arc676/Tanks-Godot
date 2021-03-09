@@ -24,16 +24,10 @@ func _ready():
 	$"VBoxContainer/Enable Touch UI".pressed = Globals.gameSettings.touchUI
 	$"VBoxContainer/Enable Teams".pressed = Globals.gameSettings.teams
 
-	var dir = Directory.new()
-	if dir.open("user://tanks") == OK:
-		dir.list_dir_begin()
-		var filename = dir.get_next()
-		while filename != "":
-			if !dir.current_is_dir():
-				var entry = savefile.instance()
-				$"VBoxContainer/Save Files".add_child(entry)
-				entry.loadSave(filename.get_basename())
-			filename = dir.get_next()
+	for file in Globals.saveFiles:
+		var entry = savefile.instance()
+		$"VBoxContainer/Save Files".add_child(entry)
+		entry.loadSave(file)
 
 func returnToMain():
 	Globals.saveSettings()

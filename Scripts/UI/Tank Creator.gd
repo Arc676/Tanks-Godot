@@ -53,6 +53,7 @@ onready var pNum = $"Presence/Player Number"
 
 # Disk
 var loadedTank = null
+onready var loadDialog = $"Load Dialog"
 
 # Identification
 onready var tankName = $"Identification/Tank Name"
@@ -101,22 +102,29 @@ func getTank():
 	return tank
 
 func setEditable(editable, isLoaded = false):
-	tankName.editable = editable
-	tankTeam.editable = editable
-	tankColor.disabled = !editable
-	tankIsCC.disabled = !editable
+	tankName.editable = editable and !isLoaded
+	tankTeam.editable = editable and !isLoaded
+	tankColor.disabled = !editable or isLoaded
+	tankIsCC.disabled = !editable or isLoaded
 	aiDiff.disabled = !editable or !tankIsCC.pressed
 	aiStyle.disabled = !editable or !tankIsCC.pressed
 	$Disk/Load.disabled = !editable or isLoaded
-	$Disk/Unload.disabled = !editable or !isLoaded
+	$Disk/Unload.disabled = !isLoaded
 
 func loadTank():
+	if tankName.text.length() > 0:
+		loadTankWithName(tankName.text)
+	else:
+		loadDialog.popup_centered_ratio(0.4)
+
+func loadTankWithName(name):
 	loadedTank = tankObj.instance()
-	if loadedTank.loadFromDisk(tankName.text):
+	if loadedTank.loadFromDisk(name):
+		tankName.text = name
 		tankTeam.text = loadedTank.team
 		tankColor.color = loadedTank.color
+		tankIsCC.pressed = loadedTank.isCC
 		if loadedTank.isCC:
-			tankIsCC.pressed = true
 			aiDiff.select(loadedTank.aiLvl)
 			aiStyle.select(loadedTank.aiStyle)
 		setEditable(false, true)
@@ -133,7 +141,7 @@ func unloadTank():
 	setEditable(true)
 
 func toggleTank(enable):
-	setEditable(enable)
+	setEditable(enable, enable and is_instance_valid(loadedTank))
 
 func toggleCC(pressed):
 	aiDiff.disabled = !pressed

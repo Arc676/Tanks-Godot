@@ -22,6 +22,8 @@ var gameSettings = {
 	"touchUI" : true
 }
 
+var saveFiles = []
+
 var SCR_WIDTH
 var SCR_HEIGHT
 
@@ -52,6 +54,16 @@ func _enter_tree():
 			file.close()
 		else:
 			saveSettings()
+
+		# Find save files
+		var dir = Directory.new()
+		if dir.open("user://tanks") == OK:
+			dir.list_dir_begin()
+			var filename = dir.get_next()
+			while filename != "":
+				if !dir.current_is_dir():
+					saveFiles.append(filename.get_basename())
+				filename = dir.get_next()
 
 func saveSettings():
 	var dir = Directory.new()
