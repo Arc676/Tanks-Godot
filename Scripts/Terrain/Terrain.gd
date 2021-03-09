@@ -89,10 +89,18 @@ func generateNewTerrain(type, height, width):
 	ground.set_polygon(points)
 	update()
 
-	newWindSpeed()
+	newWindSpeed(true)
 
-func newWindSpeed():
-	windSpeed = rng.randf_range(-2, 2)
+func newWindSpeed(random = false):
+	if Globals.gameSettings.wind == Globals.WIND_SETTING.NO_WIND:
+		windSpeed = 0
+		return
+
+	if random or Globals.gameSettings.wind == Globals.WIND_SETTING.RANDOM_WIND:
+		windSpeed = rng.randf_range(-2, 2)
+	else:
+		var dev = Globals.getWindDev()
+		windSpeed += rng.randf_range(windSpeed * -dev, windSpeed * dev)
 	for cloud in clouds:
 		cloud.queue_free()
 	clouds.clear()

@@ -12,54 +12,77 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -80.0
-margin_top = -108.0
-margin_right = 80.0
-margin_bottom = 108.0
+anchor_bottom = 1.0
+margin_left = -91.5
+margin_right = 91.5
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Enable SFX" type="CheckBox" parent="VBoxContainer"]
-margin_right = 160.0
-margin_bottom = 24.0
+margin_top = 157.0
+margin_right = 183.0
+margin_bottom = 181.0
 text = "Enable SFX"
 
 [node name="Enable Touch UI" type="CheckBox" parent="VBoxContainer"]
-margin_top = 44.0
-margin_right = 160.0
-margin_bottom = 68.0
+margin_top = 201.0
+margin_right = 183.0
+margin_bottom = 225.0
 text = "Show Touch Controls"
 
 [node name="Enable Teams" type="CheckBox" parent="VBoxContainer"]
-margin_top = 88.0
-margin_right = 160.0
-margin_bottom = 112.0
+margin_top = 245.0
+margin_right = 183.0
+margin_bottom = 269.0
 text = "Enable Teams"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 289.0
+margin_right = 183.0
+margin_bottom = 339.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 18.0
+margin_right = 33.0
+margin_bottom = 32.0
+text = "Wind"
+
+[node name="Wind" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 43.0
+margin_right = 183.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 140, 50 )
+size_flags_horizontal = 3
+text = "Random"
+align = 1
+items = [ "No Wind", null, false, 0, null, "Small Changes", null, false, 1, null, "Medium Changes", null, false, 2, null, "Random", null, false, 3, null ]
+selected = 3
+
 [node name="Save Files" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 132.0
-margin_right = 160.0
-margin_bottom = 146.0
+margin_top = 359.0
+margin_right = 183.0
+margin_bottom = 373.0
 
 [node name="Label" type="Label" parent="VBoxContainer/Save Files"]
-margin_right = 160.0
+margin_right = 183.0
 margin_bottom = 14.0
 text = "View/Manage Save Files"
 
 [node name="Back to Main" type="Button" parent="VBoxContainer"]
-margin_top = 166.0
-margin_right = 160.0
-margin_bottom = 216.0
+margin_top = 393.0
+margin_right = 183.0
+margin_bottom = 443.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
 [connection signal="toggled" from="VBoxContainer/Enable SFX" to="." method="setSFX"]
 [connection signal="toggled" from="VBoxContainer/Enable Touch UI" to="." method="setTouchUI"]
 [connection signal="toggled" from="VBoxContainer/Enable Teams" to="." method="setTeams"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Wind" to="." method="changeWindSetting"]
 [connection signal="pressed" from="VBoxContainer/Back to Main" to="." method="returnToMain"]

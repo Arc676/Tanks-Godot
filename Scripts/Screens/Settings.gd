@@ -23,6 +23,7 @@ func _ready():
 	$"VBoxContainer/Enable SFX".pressed = Globals.gameSettings.sfx
 	$"VBoxContainer/Enable Touch UI".pressed = Globals.gameSettings.touchUI
 	$"VBoxContainer/Enable Teams".pressed = Globals.gameSettings.teams
+	$VBoxContainer/HBoxContainer/Wind.selected = Globals.gameSettings.wind
 
 	for file in Globals.saveFiles:
 		var entry = savefile.instance()
@@ -41,3 +42,6 @@ func setTouchUI(pressed):
 
 func setTeams(pressed):
 	Globals.gameSettings.teams = pressed
+
+func changeWindSetting(setting):
+	Globals.gameSettings.wind = setting

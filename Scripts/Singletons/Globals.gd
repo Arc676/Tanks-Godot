@@ -16,7 +16,15 @@ extends Node
 
 const GRAVITY = 981
 
+enum WIND_SETTING {
+	NO_WIND,
+	SMALL_CHANGES,
+	MEDIUM_CHANGES,
+	RANDOM_WIND
+}
+
 var gameSettings = {
+	"wind" : WIND_SETTING.RANDOM_WIND,
 	"teams" : false,
 	"sfx" : true,
 	"touchUI" : true
@@ -75,3 +83,9 @@ func saveSettings():
 	file.store_line(to_json(gameSettings))
 	file.close()
 	return true
+
+func getWindDev():
+	if gameSettings.wind == WIND_SETTING.SMALL_CHANGES:
+		return 0.1
+	elif gameSettings.wind == WIND_SETTING.MEDIUM_CHANGES:
+		return 0.5
