@@ -2,7 +2,7 @@
   "clickable_minimum_required": "6.17.1",
   "kill": "tanks",
   "builder": "custom",
-  "build": "${ROOT}/build-ubports.sh",
+  "build": "${ROOT}/build-ubports.sh 234638541",
   "build_dir": "${ROOT}/build",
   "dependencies_host": [
     "wget"
