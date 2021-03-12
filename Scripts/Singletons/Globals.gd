@@ -63,15 +63,18 @@ func _enter_tree():
 		else:
 			saveSettings()
 
-		# Find save files
-		var dir = Directory.new()
-		if dir.open("user://tanks") == OK:
-			dir.list_dir_begin()
-			var filename = dir.get_next()
-			while filename != "":
-				if !dir.current_is_dir():
-					saveFiles.append(filename.get_basename())
-				filename = dir.get_next()
+		findSaveFiles()
+
+func findSaveFiles():
+	saveFiles.clear()
+	var dir = Directory.new()
+	if dir.open("user://tanks") == OK:
+		dir.list_dir_begin()
+		var filename = dir.get_next()
+		while filename != "":
+			if !dir.current_is_dir():
+				saveFiles.append(filename.get_basename())
+			filename = dir.get_next()
 
 func saveSettings():
 	var dir = Directory.new()

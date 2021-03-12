@@ -32,6 +32,7 @@ func _ready():
 
 func returnToMain():
 	Globals.saveSettings()
+	Globals.findSaveFiles()
 	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")
 
 func setSFX(pressed):
