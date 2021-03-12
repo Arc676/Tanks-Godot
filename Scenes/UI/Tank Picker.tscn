@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/UI/Tank Picker.gd" type="Script" id=1]
 
 [node name="Load Dialog" type="PopupDialog"]
-visible = true
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
@@ -35,7 +34,6 @@ margin_right = 120.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 0, 50 )
 text = "Item 0"
-selected = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 72.0

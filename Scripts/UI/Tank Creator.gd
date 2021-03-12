@@ -54,6 +54,7 @@ onready var pNum = $"Presence/Player Number"
 # Disk
 var loadedTank = null
 onready var loadDialog = $"Load Dialog"
+onready var loadFailed = $"Load Failed"
 
 # Identification
 onready var tankName = $"Identification/Tank Name"
@@ -129,7 +130,7 @@ func loadTankWithName(name):
 			aiStyle.select(loadedTank.aiStyle)
 		setEditable(false, true)
 	else:
-		tankName.text = "(Failed to load tank)"
+		loadFailed.popup_centered_ratio(0.4)
 		loadedTank.queue_free()
 
 func unloadTank():
