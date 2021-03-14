@@ -13,16 +13,21 @@ function getNewestVersion() {
 
 # Download a build
 function download() {
-	# Accept pipeline ID as single argument
+	# Accept job ID as single argument
 	if [ $# = 1 ]; then
 		# Check if the most recently downloaded build for this architecture is from the same pipeline
-		if [ -f "$1.${ARCH}" ]; then
-			echo "Already downloaded ${ARCH} build from job $1. Using cached build."
+		if [ -f $1.* ]; then
+			echo "Already downloaded artifacts from from job $1. Using cached files."
 		else
 			# Download requested build and update version indicator
-			wget https://gitlab.com/api/v4/projects/23065313/jobs/$1/artifacts/godot.ubports.${ARCH} -O godot.ubports.${ARCH}
-			touch "$1.${ARCH}"
-			rm -f local-version.${ARCH}
+			wget https://gitlab.com/api/v4/projects/23065313/jobs/$1/artifacts -O temp.zip
+			DOWNLOADED=`unzip -Z -1 temp.zip`
+			DOWNLOADED=${DOWNLOADED##*.}
+			rm -f *.$DOWNLOADED
+			touch "$1.$DOWNLOADED"
+			echo "Downloaded build for $DOWNLOADED from job $JOB."
+			unzip -o temp.zip
+			rm temp.zip
 		fi
 	# If no argument given, download latest build
 	else
@@ -35,19 +40,16 @@ function download() {
 	fi
 }
 
-# Hardcoded ordering for architectures. If the build order in the CI pipeline ever changes, this will break
-declare -A JOB_INDICES
-JOB_INDICES=( ["amd64"]=1 ["arm64"]=2 ["armhf"]=3 )
-
 # Store everything in a separate cache directory
 mkdir -p "$CACHE_DIR"
 cd "$CACHE_DIR"
 
 # If single argument given, download from that pipeline
 if [ $# = 1 ]; then
-	JOB=`wget -qO - https://gitlab.com/api/v4/projects/23065313/pipelines/$1/jobs | tr ',' '\n' | grep -E -e "^\W+id" | sed -e 's/[^0-9]//g' | head -n ${JOB_INDICES[${ARCH}]} | tail -n 1`
-	echo "Downloading from job $JOB from pipeline $1..."
-	download $JOB
+	wget -qO - https://gitlab.com/api/v4/projects/23065313/pipelines/$1/jobs | tr ',' '\n' | grep -E -e "^\W+id" | sed -e 's/[^0-9]//g' | while read JOB; do
+		echo "Downloading artifacts from job $JOB in pipeline $1..."
+		download $JOB
+	done
 # If nothing has been downloaded before, download newest build
 elif [ ! -f "local-version.${ARCH}" ]; then
 	echo "No local copy found."
