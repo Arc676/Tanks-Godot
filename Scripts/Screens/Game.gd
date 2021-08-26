@@ -188,6 +188,7 @@ func _process(_delta):
 	if turnEnded and gameOver():
 		for tank in players:
 			$"Game Scene".remove_child(tank)
+		Weapons.clearProjectiles()
 		tree.change_scene("res://Scenes/Screens/Store.tscn")
 
 func setActiveTank(idx):

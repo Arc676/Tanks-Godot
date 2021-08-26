@@ -134,6 +134,11 @@ var terrain
 
 var _loaded = false
 
+func clearProjectiles():
+	projMutex.lock()
+	projCount = 0
+	projMutex.unlock()
+
 func changeProjCount(delta):
 	projMutex.lock()
 	projCount += delta
