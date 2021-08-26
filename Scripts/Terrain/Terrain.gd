@@ -135,5 +135,5 @@ func deform(radius, x):
 					terrainHeight
 				)
 		dx += 1
-	ground.set_polygon(points)
+	ground.set_deferred("polygon", points)
 	update()
