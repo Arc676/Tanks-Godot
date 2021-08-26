@@ -37,8 +37,10 @@ func updateAmt(player):
 	self.player = player
 	if player.isCC:
 		$Owned.text = "-"
+		$Buy.disabled = true
 	else:
 		$Owned.text = "%d" % player.getAmountOwned($Name.text, type)
+		$Buy.disabled = false
 
 
 func buyItem():
