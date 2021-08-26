@@ -123,6 +123,7 @@ const WEAPON_PROPERTIES = {
 		"ticks" : 1
 	}
 }
+var WEAPON_NAMES_REVERSED
 
 var airstrikeSound
 var laserSound
@@ -214,3 +215,5 @@ func _enter_tree():
 		printerr("Please delete the instance at: " + get_path())
 	else:
 		Weapons._loaded = true
+		WEAPON_NAMES_REVERSED = WEAPON_PROPERTIES.keys().duplicate()
+		WEAPON_NAMES_REVERSED.invert()

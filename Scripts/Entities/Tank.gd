@@ -245,6 +245,12 @@ func makePurchases():
 			var price = Items.ITEM_PROPERTIES[shield]["price"]
 			while money >= price and getAmountOwned(shield, "Item") < 3:
 					purchaseItem(shield, "Item", price)
+	for weapon in Weapons.WEAPON_NAMES_REVERSED:
+		if weapon == "Tank Shell" or "Laser" in weapon or Weapons.isTargetedWeapon(weapon):
+			continue
+		var price = Weapons.WEAPON_PROPERTIES[weapon]["price"]
+		while money >= price:
+			purchaseItem(weapon, "Ammo", price)
 
 func purchaseItem(name, type, price):
 	if money >= price:
@@ -429,6 +435,10 @@ func recalculate(target):
 	targetAngle = -atan(-a1 * b)
 	if x < 0:
 		targetAngle -= PI
+
+	if aiLvl == AILevel.HARD and needsRecalc:
+		needsRecalc = false
+		return recalculate(target)
 
 	var s = -sin(targetAngle)
 	var c = cos(targetAngle)

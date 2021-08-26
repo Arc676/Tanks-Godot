@@ -72,6 +72,9 @@ func setPlayer(num):
 	emit_signal("refresh", player)
 
 func nextPlayer():
+	var player = Globals.players[currentPlayer]
+	if player.isCC:
+		player.makePurchases()
 	if currentPlayer + 1 >= len(Globals.players):
 		tree.change_scene("res://Scenes/Screens/Game.tscn")
 	else:
