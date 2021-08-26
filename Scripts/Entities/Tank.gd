@@ -50,10 +50,11 @@ var weaponChangedLastFrame = 0
 var isCC = false
 var aiLvl = AILevel.EASY
 var aiStyle = AIStyle.AGGRESSIVE
+var rng = RandomNumberGenerator.new()
 
 var targetTank
 var targetAngle
-var targetFirepower
+var targetFirepower: int
 var needsRecalc = true
 
 # Sounds
@@ -423,27 +424,27 @@ func recalculate(target):
 			var xc = i * Weapons.terrain.chunkSize - position.x
 			var h = -(Weapons.terrain.ground.polygon[i].y - position.y)
 			if -a1 * xc * (xc + b) < h:
-				a1 = -(h + 1) / (xc * (xc + b))
+				a1 = -(h + 10) / (xc * (xc + b))
 
 	targetAngle = -atan(-a1 * b)
 	if x < 0:
 		targetAngle -= PI
 
-	var s = sin(targetAngle)
+	var s = -sin(targetAngle)
 	var c = cos(targetAngle)
 	var sc = s * c
 
-	var den1 = 2 * Weapons.terrain.windSpeed * 5 * (x * s * s - y * sc)
-	var den2 = 2 * 9.81 * (x * sc - y * c * c)
+	var den1 = 2 * Weapons.terrain.windSpeed * 500 * (x * s * s - y * sc)
+	var den2 = 2 * 981 * (x * sc - y * c * c)
 
 	if den1 + den2 < 0:
 		targetFirepower = 100
 	else:
-		targetFirepower = abs(round(
-			(Weapons.terrain.windSpeed * 5 * y + 9.81 * x) / sqrt(den1 + den2) / 5
-		))
+		# warning-ignore:narrowing_conversion
+		targetFirepower = round(abs(
+			(Weapons.terrain.windSpeed * 500 * y + 981 * x) / sqrt(den1 + den2)
+		)) / 20 + 4
 
-	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	targetAngle += rng.randf_range(0, 1) * ccUncertainty(aiLvl)
 	targetFirepower += rng.randi_range(0, ccUncertainty(aiLvl, false) - 1)
@@ -466,7 +467,6 @@ func chooseNewTarget():
 			possibleTargets.append(tank)
 	if possibleTargets.size() == 0:
 		return
-	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	while true:
 		var idx = rng.randi_range(0, possibleTargets.size() - 1)
