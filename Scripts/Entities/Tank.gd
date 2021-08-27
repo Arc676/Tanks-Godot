@@ -51,6 +51,7 @@ var isCC = false
 var aiLvl = AILevel.EASY
 var aiStyle = AIStyle.AGGRESSIVE
 var rng = RandomNumberGenerator.new()
+const WIND_COEFF = 350
 
 var targetTank
 var targetAngle
@@ -430,7 +431,7 @@ func recalculate(target):
 			var xc = i * Weapons.terrain.chunkSize - position.x
 			var h = -(Weapons.terrain.ground.polygon[i].y - position.y)
 			if -a1 * xc * (xc + b) < h:
-				a1 = -(h + 10) / (xc * (xc + b))
+				a1 = -(h + 3) / (xc * (xc + b))
 
 	targetAngle = -atan(-a1 * b)
 	if x < 0:
@@ -444,7 +445,7 @@ func recalculate(target):
 	var c = cos(targetAngle)
 	var sc = s * c
 
-	var den1 = 2 * Weapons.terrain.windSpeed * 500 * (x * s * s - y * sc)
+	var den1 = 2 * Weapons.terrain.windSpeed * WIND_COEFF * (x * s * s - y * sc)
 	var den2 = 2 * 981 * (x * sc - y * c * c)
 
 	if den1 + den2 < 0:
@@ -452,7 +453,7 @@ func recalculate(target):
 	else:
 		# warning-ignore:narrowing_conversion
 		targetFirepower = round(abs(
-			(Weapons.terrain.windSpeed * 500 * y + 981 * x) / sqrt(den1 + den2)
+			(Weapons.terrain.windSpeed * WIND_COEFF * y + 981 * x) / sqrt(den1 + den2)
 		)) / 20 + 4
 
 	rng.randomize()
