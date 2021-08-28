@@ -22,6 +22,8 @@ onready var weapons = $Categories/Weapons
 onready var upgrades = $Categories/Items/Upgrades
 onready var items = $Categories/Items/Items
 
+onready var skipCCs = $"Controls/Skip CCs"
+
 var currentPlayer = 0
 
 signal refresh(player)
@@ -59,7 +61,21 @@ func _ready():
 		items.add_child(entry)
 		itemSetup(entry, name, "Item", data["price"])
 
-	setPlayer(0)
+	skipCCs.pressed = Globals.gameSettings["storeSkipCCs"]
+
+	var shouldSkip = false
+	if skipCCs.pressed:
+		var humansExist = false
+		for player in Globals.players:
+			if !player.isCC:
+				humansExist = true
+				break
+		shouldSkip = Globals.players[0].isCC and humansExist
+
+	if shouldSkip:
+		nextPlayer()
+	else:
+		setPlayer(0)
 
 func refreshBalance():
 	$"Player Stats/Player Money".text = "($%d)" % Globals.players[currentPlayer].money
@@ -76,10 +92,16 @@ func nextPlayer():
 	if player.isCC:
 		player.makePurchases()
 	if currentPlayer + 1 >= len(Globals.players):
+		Globals.gameSettings["storeSkipCCs"] = skipCCs.pressed
+		Globals.saveSettings()
 		tree.change_scene("res://Scenes/Screens/Game.tscn")
 	else:
 		currentPlayer += 1
-		setPlayer(currentPlayer)
+		player = Globals.players[currentPlayer]
+		if player.isCC and skipCCs.pressed:
+			nextPlayer()
+		else:
+			setPlayer(currentPlayer)
 
 func saveTank():
 	Globals.players[currentPlayer].writeToDisk()

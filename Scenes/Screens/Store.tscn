@@ -102,6 +102,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Skip CCs" type="CheckBox" parent="Controls"]
+margin_left = 502.0
+margin_right = 672.0
+margin_bottom = 60.0
+text = "Skip computer players"
+
 [node name="Back to Main" type="Button" parent="Controls"]
 margin_left = 712.0
 margin_right = 818.0
@@ -119,6 +125,7 @@ margin_left = 972.0
 margin_right = 1014.0
 margin_bottom = 60.0
 text = "Next"
+
 [connection signal="pressed" from="Controls/Back to Main" to="." method="backToMain"]
 [connection signal="pressed" from="Controls/Save" to="." method="saveTank"]
 [connection signal="pressed" from="Controls/Next Player" to="." method="nextPlayer"]

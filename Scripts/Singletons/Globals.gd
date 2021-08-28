@@ -24,6 +24,7 @@ enum WIND_SETTING {
 }
 
 var gameSettings = {
+	"storeSkipCCs" : false,
 	"wind" : WIND_SETTING.RANDOM_WIND,
 	"teams" : false,
 	"sfx" : true,
