@@ -101,6 +101,9 @@ func _ready():
 		$"Game Scene".add_child(tank)
 		players.append(tank)
 
+	if Globals.gameSettings["shuffleOrder"]:
+		players.shuffle()
+
 	# Remove unused scoreboard entries
 	for i in range(4):
 		scores[i].visible = len(players) >= i + 1

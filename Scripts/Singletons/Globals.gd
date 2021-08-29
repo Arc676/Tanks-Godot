@@ -27,6 +27,7 @@ var gameSettings = {
 	"storeSkipCCs" : false,
 	"scaleDmgDist" : 1.4,
 	"scaleForCCs" : false,
+	"shuffleOrder" : true,
 	"wind" : WIND_SETTING.RANDOM_WIND,
 	"teams" : false,
 	"sfx" : true,

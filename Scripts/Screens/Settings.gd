@@ -23,6 +23,7 @@ func _ready():
 	$"Rows/Options/UI/Enable Touch UI".pressed = Globals.gameSettings.touchUI
 	$"Rows/Options/UI/Enable Teams".pressed = Globals.gameSettings.teams
 
+	$Rows/Options/Gameplay/Shuffle.pressed = Globals.gameSettings.shuffleOrder
 	$"Rows/Options/Gameplay/Difficulty/Difficulty Slider".value = 1 - inverse_lerp(
 		1, 1.8,
 		Globals.gameSettings.scaleDmgDist
@@ -57,3 +58,6 @@ func setDifficulty(value):
 
 func toggleCCScaling(pressed):
 	Globals.gameSettings.scaleForCCs = pressed
+
+func toggleShufflePlayers(pressed):
+	Globals.gameSettings.shuffleOrder = pressed

@@ -28,13 +28,13 @@ __meta__ = {
 }
 
 [node name="Options" type="HBoxContainer" parent="Rows"]
-margin_top = 82.0
+margin_top = 68.0
 margin_right = 479.0
-margin_bottom = 180.0
+margin_bottom = 194.0
 
 [node name="UI" type="VBoxContainer" parent="Rows/Options"]
 margin_right = 237.0
-margin_bottom = 98.0
+margin_bottom = 126.0
 size_flags_horizontal = 3
 
 [node name="Enable SFX" type="CheckBox" parent="Rows/Options/UI"]
@@ -57,12 +57,18 @@ text = "Enable Teams"
 [node name="Gameplay" type="VBoxContainer" parent="Rows/Options"]
 margin_left = 241.0
 margin_right = 479.0
-margin_bottom = 98.0
+margin_bottom = 126.0
 size_flags_horizontal = 3
 
-[node name="Difficulty" type="HBoxContainer" parent="Rows/Options/Gameplay"]
+[node name="Shuffle" type="CheckBox" parent="Rows/Options/Gameplay"]
 margin_right = 238.0
-margin_bottom = 16.0
+margin_bottom = 24.0
+text = "Shuffle player order"
+
+[node name="Difficulty" type="HBoxContainer" parent="Rows/Options/Gameplay"]
+margin_top = 28.0
+margin_right = 238.0
+margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="Rows/Options/Gameplay/Difficulty"]
 margin_top = 1.0
@@ -80,15 +86,15 @@ step = 0.1
 value = 0.5
 
 [node name="Enable CC Scaling" type="CheckBox" parent="Rows/Options/Gameplay"]
-margin_top = 20.0
+margin_top = 48.0
 margin_right = 238.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 text = "Difficulty affects AI tanks"
 
 [node name="Wind" type="HBoxContainer" parent="Rows/Options/Gameplay"]
-margin_top = 48.0
+margin_top = 76.0
 margin_right = 238.0
-margin_bottom = 98.0
+margin_bottom = 126.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="Rows/Options/Gameplay/Wind"]
@@ -109,9 +115,9 @@ items = [ "No Wind", null, false, 0, null, "Small Changes", null, false, 1, null
 selected = 3
 
 [node name="Save Files" type="VBoxContainer" parent="Rows"]
-margin_top = 200.0
+margin_top = 214.0
 margin_right = 479.0
-margin_bottom = 214.0
+margin_bottom = 228.0
 
 [node name="Label" type="Label" parent="Rows/Save Files"]
 margin_right = 479.0
@@ -119,15 +125,16 @@ margin_bottom = 14.0
 text = "View/Manage Save Files"
 
 [node name="Back to Main" type="Button" parent="Rows"]
-margin_top = 234.0
+margin_top = 248.0
 margin_right = 479.0
-margin_bottom = 284.0
+margin_bottom = 298.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
 
 [connection signal="toggled" from="Rows/Options/UI/Enable SFX" to="." method="setSFX"]
 [connection signal="toggled" from="Rows/Options/UI/Enable Touch UI" to="." method="setTouchUI"]
 [connection signal="toggled" from="Rows/Options/UI/Enable Teams" to="." method="setTeams"]
+[connection signal="toggled" from="Rows/Options/Gameplay/Shuffle" to="." method="toggleShufflePlayers"]
 [connection signal="value_changed" from="Rows/Options/Gameplay/Difficulty/Difficulty Slider" to="." method="setDifficulty"]
 [connection signal="toggled" from="Rows/Options/Gameplay/Enable CC Scaling" to="." method="toggleCCScaling"]
 [connection signal="item_selected" from="Rows/Options/Gameplay/Wind/Wind" to="." method="changeWindSetting"]
