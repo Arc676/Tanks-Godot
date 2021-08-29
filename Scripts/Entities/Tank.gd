@@ -401,14 +401,6 @@ func _process(_delta):
 		else:
 			playerUpdate()
 
-func ccUncertainty(lvl, rad = true):
-	var k = deg2rad(1) if rad else 1.0
-	if lvl == AILevel.EASY:
-		return 10 * k
-	elif lvl == AILevel.MEDIUM:
-		return 5 * k
-	return 0
-
 # warning-ignore:shadowed_variable
 func recalculate(target):
 	var nozzle = getNozzlePosition()
@@ -455,10 +447,6 @@ func recalculate(target):
 		targetFirepower = round(abs(
 			(Weapons.terrain.windSpeed * WIND_COEFF * y + 981 * x) / sqrt(den1 + den2)
 		)) / 20 + 4
-
-	rng.randomize()
-	targetAngle += rng.randf_range(0, 1) * ccUncertainty(aiLvl)
-	targetFirepower += rng.randi_range(0, ccUncertainty(aiLvl, false) - 1)
 
 	targetAngle = clamp(targetAngle, -PI, 0)
 	if targetFirepower > 100:
