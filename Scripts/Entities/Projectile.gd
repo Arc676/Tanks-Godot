@@ -69,6 +69,8 @@ func impact(_body):
 	for tank in Globals.players:
 		if tank.hp > 0:
 			var dist = (position - tank.position).length()
+			if !srcPlayer.isCC or Globals.gameSettings["scaleForCCs"]:
+				dist /= Globals.gameSettings["scaleDmgDist"]
 			if dist < blastRadius:
 				var score = 2 * floor(50 * blastRadius / max(1, dist))
 				var dmg = damage / pow(dist / 20, 2) if dist > 20 else damage * 1.5

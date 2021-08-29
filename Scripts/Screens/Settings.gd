@@ -18,16 +18,21 @@ onready var savefile = preload("res://Scenes/UI/Save File.tscn")
 
 onready var tree = get_tree()
 
-
 func _ready():
-	$"VBoxContainer/Enable SFX".pressed = Globals.gameSettings.sfx
-	$"VBoxContainer/Enable Touch UI".pressed = Globals.gameSettings.touchUI
-	$"VBoxContainer/Enable Teams".pressed = Globals.gameSettings.teams
-	$VBoxContainer/HBoxContainer/Wind.selected = Globals.gameSettings.wind
+	$"Rows/Options/UI/Enable SFX".pressed = Globals.gameSettings.sfx
+	$"Rows/Options/UI/Enable Touch UI".pressed = Globals.gameSettings.touchUI
+	$"Rows/Options/UI/Enable Teams".pressed = Globals.gameSettings.teams
+
+	$"Rows/Options/Gameplay/Difficulty/Difficulty Slider".value = 1 - inverse_lerp(
+		1, 1.8,
+		Globals.gameSettings.scaleDmgDist
+	)
+	$"Rows/Options/Gameplay/Enable CC Scaling".pressed = Globals.gameSettings.scaleForCCs
+	$Rows/Options/Gameplay/Wind/Wind.selected = Globals.gameSettings.wind
 
 	for file in Globals.saveFiles:
 		var entry = savefile.instance()
-		$"VBoxContainer/Save Files".add_child(entry)
+		$"Rows/Save Files".add_child(entry)
 		entry.loadSave(file)
 
 func returnToMain():
@@ -46,3 +51,9 @@ func setTeams(pressed):
 
 func changeWindSetting(setting):
 	Globals.gameSettings.wind = setting
+
+func setDifficulty(value):
+	Globals.gameSettings.scaleDmgDist = lerp(1, 1.8, 1 - value)
+
+func toggleCCScaling(pressed):
+	Globals.gameSettings.scaleForCCs = pressed
