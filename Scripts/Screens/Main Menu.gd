@@ -28,6 +28,9 @@ onready var plains = $UI/VBoxContainer/Terrain/Plains
 onready var hills = $UI/VBoxContainer/Terrain/Hills
 onready var random = $UI/VBoxContainer/Terrain/Random
 
+func _enter_tree():
+	Globals.findSaveFiles()
+
 func _ready():
 	p1.setProperties(1, Color(0, 0, 1))
 	p2.setProperties(2, Color(1, 0, 0))

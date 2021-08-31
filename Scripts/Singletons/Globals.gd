@@ -67,8 +67,6 @@ func _enter_tree():
 		else:
 			saveSettings()
 
-		findSaveFiles()
-
 func findSaveFiles():
 	saveFiles.clear()
 	var dir = Directory.new()

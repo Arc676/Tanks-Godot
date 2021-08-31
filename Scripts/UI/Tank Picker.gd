@@ -18,14 +18,22 @@ signal confirmed(tankName)
 
 onready var selection = $VBoxContainer/Selection
 
+var saveFilesPresent
+
 func _ready():
 	selection.clear()
-	for file in Globals.saveFiles:
-		selection.add_item(file)
+	if len(Globals.saveFiles) > 0:
+		saveFilesPresent = true
+		for file in Globals.saveFiles:
+			selection.add_item(file)
+	else:
+		saveFilesPresent = false
+		selection.add_item("(No save files found)")
 
 func cancelLoad():
 	hide()
 
 func confirmLoad():
-	emit_signal("confirmed", selection.items[selection.selected])
+	if saveFilesPresent:
+		emit_signal("confirmed", selection.get_item_text(selection.selected))
 	hide()

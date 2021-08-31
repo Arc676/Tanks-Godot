@@ -180,8 +180,7 @@ func loadFromDisk(tankName, isInTree = true):
 			var name = shieldData["name"]
 			activeShield.init(
 				name,
-				Items.ITEM_PROPERTIES[name]["hp"],
-				Items.ITEM_PROPERTIES[name]["color"],
+				Items.ITEM_PROPERTIES[name],
 				self
 			)
 			activeShield.hp = shieldData["hp"]
