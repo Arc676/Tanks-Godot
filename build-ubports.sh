@@ -4,7 +4,7 @@ BUILD_DIR=$PWD
 CACHE_DIR=$PWD/../.godot-ubports
 
 # The latest build can always be obtained from this URL
-URL_LATEST=https://gitlab.com/abmyii/ubports-godot/-/jobs/artifacts/ut-port-stable/download?job=xenial_${ARCH}_click
+URL_LATEST=https://gitlab.com/abmyii/ubports-godot/-/jobs/artifacts/ut-port-stable/download?job=xenial_${ARCH}_binary
 
 # Determine the ID of the latest successful pipeline
 function getNewestVersion() {
