@@ -294,13 +294,16 @@ func getAmountOwned(name, type):
 	elif type == "Item":
 		return items.get(name, 0)
 
+func destroyShield():
+	activeShield.queue_free()
+	activeShield = null
+
 func takeDamage(dmg):
 	if activeShield:
 		var excess = activeShield.takeDamage(dmg)
-		if excess:
-			activeShield.queue_free()
-			activeShield = null
-			takeDamage(excess)
+		if excess != null:
+			destroyShield()
+			return takeDamage(excess)
 	else:
 		hp -= dmg / armor
 	if hp <= 0:

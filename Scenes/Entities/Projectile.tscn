@@ -16,4 +16,5 @@ shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 bus = "SFX"
+
 [connection signal="body_entered" from="." to="." method="impact"]

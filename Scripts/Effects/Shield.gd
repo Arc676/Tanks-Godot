@@ -18,13 +18,12 @@ var shieldName
 var color
 var hp
 var limit
-var tank
+var srcTank
 
-# warning-ignore:shadowed_variable
 # warning-ignore:shadowed_variable
 func init(shieldName, properties, tank):
 	self.shieldName = shieldName
-	self.tank = tank
+	srcTank = tank
 	color = properties.color
 	hp = properties.hp
 	limit = hp
@@ -40,9 +39,16 @@ func takeDamage(dmg):
 	return null
 
 func _draw():
-	if tank.hp <= 0:
+	if srcTank.hp <= 0:
 		return
 	var c = color
 	c.a = getShieldPercentage()
 	draw_arc(position, 30, 0, 2 * PI, 1000, c, 5, true)
 	pass
+
+func impacted(body):
+	if body is Projectile and body.srcPlayer != srcTank:
+		takeDamage(body.damage / 4)
+		if hp <= 0:
+			srcTank.destroyShield()
+		body.impact(self)
