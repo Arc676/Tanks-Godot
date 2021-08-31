@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Scripts/Entities/Projectile.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Tank",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Terrain/Terrain.gd"
 } ]
 _global_script_class_icons={
+"Projectile": "",
 "Tank": "",
 "Terrain": ""
 }

@@ -13,6 +13,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extends RigidBody2D
+class_name Projectile
 
 onready var projObj = load("res://Scenes/Entities/Projectile.tscn")
 
@@ -99,7 +100,7 @@ func impact(_body):
 				"init",
 				{
 					"radius" : blastRadius,
-					"dmg" : damage
+					"dmg" : damage / 4
 				},
 				velocity,
 				false,
