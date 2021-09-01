@@ -1,8 +1,7 @@
-/[Bb]inaries/
 *.ignore
 *.import
 .import
-*.pck
+export
 .clickable
 build
 .*
