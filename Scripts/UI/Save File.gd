@@ -22,6 +22,7 @@ func loadSave(name):
 	var tank = Tank.new()
 	tank.loadFromDisk(name, false)
 	$Color.color = tank.color
+	tank.queue_free()
 
 func deleteSaveFile():
 	var dir = Directory.new()
