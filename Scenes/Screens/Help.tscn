@@ -50,7 +50,7 @@ text = "Welcome to Tanks!
 
 On the Main Menu, you can configure the parameters of the game. There have to be at least two players, and there can be up to four. Any number of tanks can be computer controlled. You can also choose the skill level and style of the computer controlled tanks.
 
-If you've saved a tank from a previous play session, you can load that tank to pick up where you left off. Computer controlled tanks can also be loaded from a save file. To load a tank, enter the tank's name and press Load. Or, simply press Load without entering a name to be given a dropdown with all the available save files that the game was able to find. You cannot modify the properties of a loaded tank. Press Unload to return to creating a new tank.
+If you've saved a tank from a previous play session, you can load that tank to pick up where you left off. Computer controlled tanks can also be loaded from a save file. To load a tank, enter the tank's name and press Load. You can also press Load without entering a name to be given a dropdown with all the available save files that the game was able to find. You cannot modify the properties of a loaded tank. Press Unload to return to creating a new tank.
 
 Your choice for the type of terrain will be set for the entire play session. After each round, you can also choose to return to the Main Menu and change your choice for the terrain type. Remember to save your tanks if you want to continue where you left off."
 
@@ -67,7 +67,7 @@ custom_constants/separation = 10
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Gameplay"]
 margin_right = 996.0
 margin_bottom = 30.0
-text = "Tanks is a turn based tank combat game. The objective of the game is to eliminate all opposing tanks. Pick your target and adjust your firepower and firing angle before firing to try to hit an enemy tank. Remember to watch out for wind. The wind changes after each player takes their turn.
+text = "Tanks is a turn based tank combat game. The objective of the game is to eliminate all opposing tanks. Pick your target and adjust your firepower and firing angle before firing to try to hit an enemy tank. Remember to watch out for wind. The wind changes after each player takes their turn. You can change this in the settings.
 
 You can control your tank using the keyboard or with the on-screen touch controls. You can hold the buttons continuously, for example to keep moving or changing firepower."
 fit_content_height = true
@@ -172,7 +172,7 @@ margin_left = 162.0
 margin_right = 996.0
 margin_bottom = 90.0
 size_flags_horizontal = 3
-text = "Use the plus and minus to adjust firepower. Press the explosion button to fire. When using a targeted weapon, such as an airstrike, point the target where you want to fire. Note that wind also affects airstrikes. If you have a mouse, the target will follow the cursor. Click to fire. On mobile devices, drag the target to the desired location and press the fire button again. To cancel a targeted strike, press ESC if you have a keyboard or change ammo type.
+text = "Use the plus and minus to adjust firepower. Press the explosion button to fire. When using a targeted weapon, such as an airstrike, point the target where you want to fire. Note that wind also affects airstrikes. If you have a mouse, the target will follow the cursor. Click to fire. On mobile devices, drag the target to the desired location and press the fire button again. To cancel a targeted strike, press ESC if you have a keyboard, or change ammo type if you're on mobile.
 
 Keyboard: PgUp and PgDn; Space"
 fit_content_height = true
@@ -181,7 +181,7 @@ fit_content_height = true
 margin_top = 260.0
 margin_right = 996.0
 margin_bottom = 290.0
-text = "The round ends if none of the surviving tanks are enemies. After each round, each player can buy ammunition, items, and upgrades to gain an edge over their opponents in the next round."
+text = "The round ends if none of the surviving tanks are enemies (see Settings). After each round, each player can buy ammunition, items, and upgrades to gain an edge over their opponents in the next round."
 fit_content_height = true
 
 [node name="Ammo" type="HBoxContainer" parent="VBoxContainer/TabContainer/Gameplay"]
@@ -228,6 +228,8 @@ text = "You can configure the game parameters to your liking in the setttings, s
 
 By default, teams are disabled to simplify the UI. You can re-enable teams in the settings to allow tanks to play as part of a team. With teams enabled, the Main Menu adapts to allow you to enter team names. Note that you cannot change the team name of a tank loaded from a save file. The round ends when only members from a single team are left.
 
+Use the slider to change the game difficulty. Damage is dealt to tanks based on how close they are to the impact point of a projectile. On easier settings, damage is dealt as if the projectile landed closer to its target. You can make this setting only effective for human controlled tanks if you wish.
+
 For an easier gameplay experience, you can disable the wind entirely. You can also adjust how much the wind changes each turn. If set to Small Changes or Medium Changes, the wind will change by a maximum of 10% or 50%, respectively. On Random, the wind blows in a random direction at a random speed each turn.
 
 You can also see all the save files the game was able to find. These are identified by name and color. From the settings, you can delete individual save files if you no longer wish to keep them."
@@ -238,4 +240,5 @@ margin_right = 1004.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="backToMain"]
