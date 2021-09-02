@@ -38,6 +38,7 @@ func _ready():
 	p4.setProperties(4, Color(1, 1, 0))
 
 func startGame():
+	Globals.clearPlayers()
 	Globals.players = [
 		p1.getTank(), p2.getTank()
 	]
@@ -59,6 +60,7 @@ func startGame():
 	tree.change_scene("res://Scenes/Screens/Game.tscn")
 
 func quitGame():
+	Globals.clearPlayers()
 	tree.quit()
 
 func goToSettings():

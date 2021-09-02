@@ -94,3 +94,7 @@ func getWindDev():
 		return 0.1
 	elif gameSettings.wind == WIND_SETTING.MEDIUM_CHANGES:
 		return 0.5
+
+func clearPlayers():
+	for player in players:
+		player.queue_free()
