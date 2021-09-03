@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Screens/Settings.gd" type="Script" id=1]
+[ext_resource path="res://Textures/BG/Settings.png" type="Texture" id=2]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1024.0
+margin_top = -600.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
