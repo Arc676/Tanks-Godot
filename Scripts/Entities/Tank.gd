@@ -234,7 +234,7 @@ func makePurchases():
 	if !isCC or aiLvl == AILevel.EASY:
 		return
 	# Only high level, defensive CC tanks save money
-	if aiLvl == AILevel.HARD and aiStyle == AIStyle.DEFENSIVE and money < 3000:
+	if aiLvl == AILevel.HARD and aiStyle == AIStyle.DEFENSIVE and money < 1000:
 		return
 	if aiStyle == AIStyle.DEFENSIVE:
 		purchaseItem("Armor", "Upgrade", Items.UPGRADE_PROPERTIES["Armor"]["price"])
@@ -296,10 +296,9 @@ func getAmountOwned(name, type):
 
 func destroyShield():
 	activeShield.queue_free()
-	activeShield = null
 
 func takeDamage(dmg):
-	if activeShield:
+	if is_instance_valid(activeShield):
 		var excess = activeShield.takeDamage(dmg)
 		if excess != null:
 			destroyShield()
@@ -431,6 +430,7 @@ func recalculate(target):
 	if x < 0:
 		targetAngle -= PI
 
+	# Hard level CC tanks calculate twice to account for the nozzle moving
 	if aiLvl == AILevel.HARD and needsRecalc:
 		needsRecalc = false
 		return recalculate(target)
@@ -455,7 +455,11 @@ func recalculate(target):
 		targetFirepower = 100
 		return false
 
-	selectedWeapon = weapons.keys().size() - 1
+	# Hard level CC tanks avoid wasting good weapons on near-impossible shots
+	if aiLvl == AILevel.HARD and targetFirepower == 100:
+		selectedWeapon = 0
+	else:
+		selectedWeapon = weapons.keys().size() - 1
 
 	needsRecalc = false
 	return true
