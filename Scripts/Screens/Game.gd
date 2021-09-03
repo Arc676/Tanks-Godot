@@ -18,6 +18,9 @@ onready var tree = get_tree()
 
 onready var itemBtn = preload("res://Scenes/UI/Item Btn.tscn")
 
+onready var muteTexture = preload("res://Textures/UI/mute_0.png")
+onready var unmuteTexture = preload("res://Textures/UI/unmute_0.png")
+
 # HUD - Player data
 onready var pColor = $"ColorRect/HUD/Player Stats/Identification/Player Color"
 onready var pName = $"ColorRect/HUD/Player Stats/Identification/Player Name"
@@ -62,8 +65,10 @@ func _ready():
 	drawDeclared = false
 
 	$"Touch Controls".visible = Globals.gameSettings.touchUI
-	$ColorRect/HUD/Controls/SFX.pressed = Globals.gameSettings.sfx
-	toggleSFX(Globals.gameSettings.sfx)
+
+	var muted = !Globals.gameSettings.sfx
+	setSFXBtnTexture(muted)
+	AudioServer.set_bus_mute(1, muted)
 
 	var touchNextWeapon = $"Touch Controls/UI Left/Weapons/NextWeapon"
 	var touchPrevWeapon = $"Touch Controls/UI Left/Weapons/PrevWeapon"
@@ -111,10 +116,20 @@ func _ready():
 	setActiveTank(0)
 	updateHUD()
 
-func toggleSFX(pressed):
-	AudioServer.set_bus_mute(1, !pressed)
-	Globals.gameSettings.sfx = pressed
+func toggleSFX():
+	Globals.gameSettings.sfx = !Globals.gameSettings.sfx
 	Globals.saveSettings()
+
+	var muted = !Globals.gameSettings.sfx
+	AudioServer.set_bus_mute(1, muted)
+
+	setSFXBtnTexture(muted)
+
+func setSFXBtnTexture(muted):
+	if muted:
+		$ColorRect/HUD/Controls/SFX.texture_normal = muteTexture
+	else:
+		$ColorRect/HUD/Controls/SFX.texture_normal = unmuteTexture
 
 func drawGame():
 	players[activePlayer].endTurn()

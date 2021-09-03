@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Screens/Game.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Textures/Colors/Black.png" type="Texture" id=4]
 [ext_resource path="res://Textures/Colors/Blue.png" type="Texture" id=5]
 [ext_resource path="res://Sound/bomber.wav" type="AudioStream" id=6]
+[ext_resource path="res://Textures/UI/unmute_0.png" type="Texture" id=7]
 [ext_resource path="res://Textures/Touch Controls/Left.png" type="Texture" id=8]
 [ext_resource path="res://Textures/Touch Controls/Right.png" type="Texture" id=9]
 [ext_resource path="res://Textures/Touch Controls/CW.png" type="Texture" id=10]
@@ -148,31 +149,31 @@ texture_progress = ExtResource( 4 )
 
 [node name="Weapon, Items" type="VBoxContainer" parent="ColorRect/HUD"]
 margin_left = 237.0
-margin_right = 395.0
+margin_right = 376.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="ColorRect/HUD/Weapon, Items"]
-margin_right = 158.0
+margin_right = 139.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Selected Ammunition"
 
 [node name="Current Weapon" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 18.0
-margin_right = 158.0
+margin_right = 139.0
 margin_bottom = 32.0
 
 [node name="Weapon Name" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
-margin_right = 77.0
+margin_right = 67.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Tank Shell"
 
 [node name="Ammo" type="Label" parent="ColorRect/HUD/Weapon, Items/Current Weapon"]
-margin_left = 81.0
-margin_right = 158.0
+margin_left = 71.0
+margin_right = 139.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -180,19 +181,19 @@ text = "99"
 
 [node name="Shield State" type="Label" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 36.0
-margin_right = 158.0
+margin_right = 139.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="Items" type="HBoxContainer" parent="ColorRect/HUD/Weapon, Items"]
 margin_top = 54.0
-margin_right = 158.0
+margin_right = 139.0
 margin_bottom = 54.0
 
 [node name="Wind" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 415.0
-margin_right = 720.0
+margin_left = 396.0
+margin_right = 701.0
 margin_bottom = 74.0
 size_flags_horizontal = 0
 
@@ -235,57 +236,54 @@ max_value = 200.0
 texture_progress = ExtResource( 5 )
 
 [node name="Scoreboard" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 740.0
-margin_right = 898.0
+margin_left = 721.0
+margin_right = 830.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="Score 1" type="Label" parent="ColorRect/HUD/Scoreboard"]
-margin_right = 158.0
+margin_right = 109.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 2" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 18.0
-margin_right = 158.0
+margin_right = 109.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 3" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 36.0
-margin_right = 158.0
+margin_right = 109.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
 [node name="Score 4" type="Label" parent="ColorRect/HUD/Scoreboard"]
 margin_top = 54.0
-margin_right = 158.0
+margin_right = 109.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player X: 0"
 
-[node name="Controls" type="VBoxContainer" parent="ColorRect/HUD"]
-margin_left = 918.0
+[node name="Controls" type="HBoxContainer" parent="ColorRect/HUD"]
+margin_left = 850.0
 margin_right = 1004.0
 margin_bottom = 74.0
 
-[node name="SFX" type="CheckBox" parent="ColorRect/HUD/Controls"]
-margin_right = 86.0
-margin_bottom = 35.0
-size_flags_vertical = 3
-custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-pressed = true
-text = "SFX"
+[node name="SFX" type="TextureButton" parent="ColorRect/HUD/Controls"]
+margin_top = 5.0
+margin_right = 64.0
+margin_bottom = 69.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+texture_normal = ExtResource( 7 )
 
 [node name="Draw Game" type="Button" parent="ColorRect/HUD/Controls"]
-margin_top = 39.0
-margin_right = 86.0
+margin_left = 68.0
+margin_right = 154.0
 margin_bottom = 74.0
 size_flags_vertical = 3
 text = "Draw Game"
@@ -412,5 +410,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="toggled" from="ColorRect/HUD/Controls/SFX" to="." method="toggleSFX"]
+[connection signal="button_up" from="ColorRect/HUD/Controls/SFX" to="." method="toggleSFX"]
 [connection signal="pressed" from="ColorRect/HUD/Controls/Draw Game" to="." method="drawGame"]
