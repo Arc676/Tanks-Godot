@@ -104,7 +104,12 @@ func nextPlayer():
 			setPlayer(currentPlayer)
 
 func saveTank():
-	Globals.players[currentPlayer].writeToDisk()
+	var player = Globals.players[currentPlayer]
+	# CC tanks make purchases pre-saving since otherwise the last tank
+	# would not be able to purchase things before leaving the store
+	if player.isCC:
+		player.makePurchases()
+	player.writeToDisk()
 
 func backToMain():
 	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")
