@@ -77,12 +77,16 @@ func generateNewTerrain(type, height, width):
 	chunkSize = width / (chunkCount - 1)
 
 	var points = ground.polygon
+	# First control point is at least 25% of the window height and at most
+	# 50% of the window height (Y-axis points downwards in Godot)
 	points[0] = Vector2(0, rng.randf_range(height / 2, height * 0.75))
 	var deviation = deviationForTerrain(type)
 	for i in range(1, chunkCount):
 		var dh = rng.randf_range(-deviation / 2, deviation / 2)
 		var nextHeight = points[i - 1].y + dh
-		nextHeight = clamp(nextHeight, height * 0.05, height * 0.75)
+		# Ensure that the terrain is never less than 5% of the window
+		# height and never more than 75% of the window height
+		nextHeight = clamp(nextHeight, height * 0.25, height * 0.95)
 		points[i] = Vector2(i * chunkSize, nextHeight)
 	points[-2] = Vector2(width, height)
 	points[-1] = Vector2(0, height)
