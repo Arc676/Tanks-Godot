@@ -1,0 +1,126 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/BackToMain.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+margin_right = 1004.0
+margin_bottom = 510.0
+size_flags_vertical = 3
+
+[node name="Tanks" type="RichTextLabel" parent="VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "Tanks was created using the Godot game engine, which is available under the MIT license. The Ubuntu Touch port of the engine is available at https://gitlab.com/abmyii/ubports-godot/. All assets used in the game are available under some Creative Commons license. The game itself is available under GPLv3.
+
+The source code for Tanks and all the assets can be downloaded from GitHub or GitLab.
+https://github.com/Arc676/Tanks-Godot
+https://gitlab.com/Arc676/tanks-godot
+
+Copyright (C) 2021 Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation (version 3)
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>."
+
+[node name="Assets" type="RichTextLabel" parent="VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "Attribution and licensing information for assets used in the Tanks project
+
+Tank turret rotation sound (CC0)
+- KieranKeegan https://freesound.org/people/KieranKeegan/sounds/418881/ (trimmed)
+
+Tank firing sound (CC0)
+- qubodup https://freesound.org/people/qubodup/sounds/168707/ (converted to MP3)
+
+Small explosion (CC BY-NC 3.0)
+- ryansnook https://freesound.org/people/ryansnook/sounds/110115/
+
+Large explosion (Sampling+)
+- inferno https://freesound.org/people/inferno/sounds/18384/
+
+Propeller plane flyby (CC BY 3.0)
+- YuriNikolai https://freesound.org/people/YuriNikolai/sounds/347973/
+
+Laser sound effect (CC BY-NC 3.0)
+- senitiel https://freesound.org/people/senitiel/sounds/131431/ (trimmed)
+
+Tank explosion effect (CC0)
+- tommccann https://freesound.org/people/tommccann/sounds/235968/ (trimmed)
+
+Teleport sound effect (CC0)
+- GameAudio https://freesound.org/people/GameAudio/sounds/220162/
+
+Save success (CC0)
+- kagateni https://freesound.org/people/kagateni/sounds/404359/ (trimmed)
+
+Save failed (CC0)
+- GabrielAraujo https://freesound.org/people/GabrielAraujo/sounds/242503/
+
+Touch UI controls (all CC0)
+- Paul Wortmann https://opengameart.org/content/buttons-for-touch-screen-display
+- Left/Right movement from original spritesheet
+- Rotation icons adapted from textures by Vellidrago https://opengameart.org/content/menu-icons-0
+- Fire icon adapted from texture by NiceGraphic https://opengameart.org/content/simple-explosion
+- Ammo changing icon adapted from texture by qubodup https://opengameart.org/content/bullet-silhouettes
+
+Mute/unmute button (CC0)
+- mikhog https://opengameart.org/content/play-pause-mute-and-unmute-buttons
+
+Settings BG cog (CC BY-SA 3.0)
+- Bluce https://opengameart.org/content/cog-sheet-2
+
+Game icon and all assets not otherwise listed here (CC BY-NC-SA 4.0)
+- Arc676/Alessandro Vinciguerra
+
+Links to licenses
+CC BY-NC-SA 4.0 - https://creativecommons.org/licenses/by-nc-sa/4.0/
+CC0 - http://creativecommons.org/publicdomain/zero/1.0/
+CC BY-NC 3.0 - http://creativecommons.org/licenses/by-nc/3.0/
+Sampling+ - http://creativecommons.org/licenses/sampling+/1.0/
+CC BY http://creativecommons.org/licenses/by/3.0/
+CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+margin_top = 530.0
+margin_right = 1004.0
+margin_bottom = 580.0
+rect_min_size = Vector2( 0, 50 )
+text = "Back"
+script = ExtResource( 1 )

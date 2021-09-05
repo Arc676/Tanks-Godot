@@ -68,3 +68,6 @@ func goToSettings():
 
 func showHelp():
 	tree.change_scene("res://Scenes/Screens/Help.tscn")
+
+func showAbout():
+	tree.change_scene("res://Scenes/Screens/About.tscn")
