@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/Screens/Help.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/UI/BackToMain.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Touch Controls/CCW.png" type="Texture" id=2]
 [ext_resource path="res://Textures/Touch Controls/Right.png" type="Texture" id=3]
 [ext_resource path="res://Textures/Touch Controls/NextWeapon.png" type="Texture" id=4]
@@ -14,7 +14,6 @@
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -240,5 +239,4 @@ margin_right = 1004.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
-
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="backToMain"]
+script = ExtResource( 1 )

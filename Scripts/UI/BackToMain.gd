@@ -12,9 +12,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends Control
+extends Button
 
 onready var tree = get_tree()
 
-func backToMain():
+func _pressed():
 	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")
