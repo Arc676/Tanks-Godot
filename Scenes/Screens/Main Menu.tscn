@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/UI/Tank Creator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Terrain Btn Group.tres" type="ButtonGroup" id=2]
 [ext_resource path="res://Scripts/Screens/Main Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/UI/Change Scene.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -132,6 +133,8 @@ margin_right = 83.0
 margin_bottom = 318.0
 rect_min_size = Vector2( 0, 50 )
 text = "Settings"
+script = ExtResource( 4 )
+targetScene = "res://Scenes/Screens/Settings.tscn"
 
 [node name="Help" type="Button" parent="UI/VBoxContainer"]
 margin_top = 338.0
@@ -139,6 +142,8 @@ margin_right = 83.0
 margin_bottom = 388.0
 rect_min_size = Vector2( 0, 50 )
 text = "Help"
+script = ExtResource( 4 )
+targetScene = "res://Scenes/Screens/Help.tscn"
 
 [node name="About" type="Button" parent="UI/VBoxContainer"]
 margin_top = 408.0
@@ -146,6 +151,8 @@ margin_right = 83.0
 margin_bottom = 458.0
 rect_min_size = Vector2( 0, 50 )
 text = "About"
+script = ExtResource( 4 )
+targetScene = "res://Scenes/Screens/About.tscn"
 
 [node name="Quit" type="Button" parent="UI/VBoxContainer"]
 margin_top = 478.0
@@ -155,7 +162,4 @@ rect_min_size = Vector2( 0, 50 )
 text = "Quit"
 
 [connection signal="pressed" from="UI/VBoxContainer/Start" to="." method="startGame"]
-[connection signal="pressed" from="UI/VBoxContainer/Settings" to="." method="goToSettings"]
-[connection signal="pressed" from="UI/VBoxContainer/Help" to="." method="showHelp"]
-[connection signal="pressed" from="UI/VBoxContainer/About" to="." method="showAbout"]
 [connection signal="pressed" from="UI/VBoxContainer/Quit" to="." method="quitGame"]

@@ -110,6 +110,3 @@ func saveTank():
 	if player.isCC:
 		player.makePurchases()
 	player.writeToDisk()
-
-func backToMain():
-	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")

@@ -14,7 +14,9 @@
 
 extends Button
 
+export(String) var targetScene
+
 onready var tree = get_tree()
 
 func _pressed():
-	tree.change_scene("res://Scenes/Screens/Main Menu.tscn")
+	tree.change_scene(targetScene)

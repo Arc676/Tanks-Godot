@@ -62,12 +62,3 @@ func startGame():
 func quitGame():
 	Globals.clearPlayers()
 	tree.quit()
-
-func goToSettings():
-	tree.change_scene("res://Scenes/Screens/Settings.tscn")
-
-func showHelp():
-	tree.change_scene("res://Scenes/Screens/Help.tscn")
-
-func showAbout():
-	tree.change_scene("res://Scenes/Screens/About.tscn")

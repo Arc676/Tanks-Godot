@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Screens/Store.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/UI/Change Scene.gd" type="Script" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -113,6 +114,8 @@ margin_left = 712.0
 margin_right = 818.0
 margin_bottom = 60.0
 text = "Return to Main"
+script = ExtResource( 2 )
+targetScene = "res://Scenes/Screens/Main Menu.tscn"
 
 [node name="Save" type="Button" parent="Controls"]
 margin_left = 858.0
@@ -126,6 +129,5 @@ margin_right = 1014.0
 margin_bottom = 60.0
 text = "Next"
 
-[connection signal="pressed" from="Controls/Back to Main" to="." method="backToMain"]
 [connection signal="pressed" from="Controls/Save" to="." method="saveTank"]
 [connection signal="pressed" from="Controls/Next Player" to="." method="nextPlayer"]
