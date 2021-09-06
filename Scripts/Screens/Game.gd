@@ -77,10 +77,14 @@ func _ready():
 		Globals.SCR_HEIGHT,
 		Globals.SCR_WIDTH)
 	var z = 1
+	var occupiedSpawns = []
 	for tank in Globals.players:
 		tank.reset()
 
 		var idx = rng.randi_range(4, terrain.chunkCount - 4)
+		while idx in occupiedSpawns:
+			idx = rng.randi_range(4, terrain.chunkCount - 4)
+		occupiedSpawns.append(idx)
 		tank.position = terrain.ground.polygon[idx] + Vector2.UP * 3
 
 		tank.terrain = terrain
