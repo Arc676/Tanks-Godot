@@ -36,7 +36,7 @@ func takeDamage(dmg):
 	update()
 	if hp <= 0:
 		return abs(hp)
-	return null
+	return 0
 
 func _draw():
 	if srcTank.hp <= 0:

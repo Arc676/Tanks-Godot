@@ -185,7 +185,7 @@ func _process(_delta):
 	pFirepower.value = activeTank.firepower
 	pFuel.value = activeTank.fuel
 
-	if activeTank.activeShield:
+	if is_instance_valid(activeTank.activeShield):
 		shieldState.text = "%s at %d%%" % [
 			activeTank.activeShield.shieldName,
 			activeTank.activeShield.getShieldPercentage() * 100

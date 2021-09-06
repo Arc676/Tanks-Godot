@@ -272,7 +272,7 @@ func useItem(name):
 		startTargeting()
 		isTeleporting = true
 	elif "Shield" in name:
-		if activeShield:
+		if is_instance_valid(activeShield):
 			return
 		activeShield = shieldObj.instance()
 		activeShield.init(
@@ -300,11 +300,11 @@ func destroyShield():
 func takeDamage(dmg):
 	if is_instance_valid(activeShield):
 		var excess = activeShield.takeDamage(dmg)
-		if excess != null:
-			destroyShield()
-			return takeDamage(excess)
-	else:
-		hp -= dmg / armor
+		if excess == 0:
+			return
+		destroyShield()
+		dmg = excess
+	hp -= dmg / armor
 	if hp <= 0:
 		explode()
 
@@ -372,7 +372,7 @@ func fireProjectile(pos):
 	hasFired = true
 	if isCC:
 		needsRecalc = true
-		if !activeShield:
+		if !is_instance_valid(activeShield):
 			var itemCount = Items.ITEM_PROPERTIES.keys().size()
 			var shields = Items.ITEM_PROPERTIES.keys().slice(-4, itemCount - 1)
 			shields.invert()
