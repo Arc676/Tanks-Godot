@@ -424,7 +424,7 @@ func recalculate(target):
 			var xc = i * Weapons.terrain.chunkSize - position.x
 			var h = -(Weapons.terrain.ground.polygon[i].y - position.y)
 			if -a1 * xc * (xc + b) < h:
-				a1 = -(h + 3) / (xc * (xc + b))
+				a1 = -(h + 5) / (xc * (xc + b))
 
 	targetAngle = -atan(-a1 * b)
 	if x < 0:
