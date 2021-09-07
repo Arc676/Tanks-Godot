@@ -53,6 +53,7 @@ func _process(_delta):
 	if position.x < 0 or position.x > Globals.SCR_WIDTH \
 		or position.y > Globals.SCR_HEIGHT:
 		despawn()
+		return
 	if hasImpacted:
 		if !sound.playing:
 			despawn()
