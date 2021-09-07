@@ -50,6 +50,8 @@ func _ready():
 	upgrades.add_child(upgradeHeader)
 	upgradeHeader.makeHeaderRow()
 	for name in Items.UPGRADE_PROPERTIES:
+		if name == "Hill Climbing":
+			continue
 		var data = Items.UPGRADE_PROPERTIES[name]
 		var entry = storeItem.instance()
 		upgrades.add_child(entry)
