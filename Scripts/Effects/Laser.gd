@@ -62,7 +62,7 @@ func despawn():
 	queue_free()
 
 func hitTank(tank):
-	var score = 40
+	var score = dmg
 	tank.takeDamage(dmg)
 	if tank.hp <= 0:
 		score *= 2
