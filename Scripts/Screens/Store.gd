@@ -22,7 +22,8 @@ onready var weapons = $Categories/Weapons
 onready var upgrades = $Categories/Items/Upgrades
 onready var items = $Categories/Items/Items
 
-onready var skipCCs = $"Controls/Skip CCs"
+onready var skipCCs = $"Controls/Keep Playing/Skip CCs"
+onready var nextBtn = $"Controls/Keep Playing/Next Player"
 
 var currentPlayer = 0
 
@@ -78,6 +79,7 @@ func _ready():
 		nextPlayer()
 	else:
 		setPlayer(0)
+	updateNextText()
 
 func refreshBalance():
 	$"Player Stats/Player Money".text = "($%d)" % Globals.players[currentPlayer].money
@@ -104,6 +106,7 @@ func nextPlayer():
 			nextPlayer()
 		else:
 			setPlayer(currentPlayer)
+		updateNextText()
 
 func saveTank():
 	var player = Globals.players[currentPlayer]
@@ -112,3 +115,19 @@ func saveTank():
 	if player.isCC:
 		player.makePurchases()
 	player.writeToDisk()
+
+func updateNextText():
+	nextBtn.text = getNextText()
+
+func getNextText():
+	var nextIndex = currentPlayer + 1
+	var playerCount = len(Globals.players)
+	if nextIndex >= playerCount:
+		return "Next round"
+	if !skipCCs.pressed:
+		return "Next player"
+	for i in range(nextIndex, playerCount):
+		var player = Globals.players[i]
+		if !player.isCC:
+			return "Next player"
+	return "Next round"

@@ -93,41 +93,49 @@ align = 1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
 margin_top = -70.0
 margin_right = -10.0
 margin_bottom = -10.0
 rect_min_size = Vector2( 0, 60 )
 custom_constants/separation = 40
-alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skip CCs" type="CheckBox" parent="Controls"]
-margin_left = 502.0
-margin_right = 672.0
-margin_bottom = 60.0
-text = "Skip computer players"
-
 [node name="Back to Main" type="Button" parent="Controls"]
-margin_left = 712.0
-margin_right = 818.0
+margin_right = 106.0
 margin_bottom = 60.0
 text = "Return to Main"
 script = ExtResource( 2 )
 targetScene = "res://Scenes/Screens/Main Menu.tscn"
 
-[node name="Save" type="Button" parent="Controls"]
-margin_left = 858.0
-margin_right = 932.0
+[node name="Keep Playing" type="HBoxContainer" parent="Controls"]
+margin_left = 146.0
+margin_right = 1004.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+custom_constants/separation = 40
+alignment = 2
+
+[node name="Skip CCs" type="CheckBox" parent="Controls/Keep Playing"]
+margin_left = 449.0
+margin_right = 619.0
+margin_bottom = 60.0
+text = "Skip computer players"
+
+[node name="Save" type="Button" parent="Controls/Keep Playing"]
+margin_left = 659.0
+margin_right = 733.0
 margin_bottom = 60.0
 text = "Save Tank"
 
-[node name="Next Player" type="Button" parent="Controls"]
-margin_left = 972.0
-margin_right = 1014.0
+[node name="Next Player" type="Button" parent="Controls/Keep Playing"]
+margin_left = 773.0
+margin_right = 858.0
 margin_bottom = 60.0
-text = "Next"
+text = "Next Player"
 
-[connection signal="pressed" from="Controls/Save" to="." method="saveTank"]
-[connection signal="pressed" from="Controls/Next Player" to="." method="nextPlayer"]
+[connection signal="pressed" from="Controls/Keep Playing/Skip CCs" to="." method="updateNextText"]
+[connection signal="pressed" from="Controls/Keep Playing/Save" to="." method="saveTank"]
+[connection signal="pressed" from="Controls/Keep Playing/Next Player" to="." method="nextPlayer"]
