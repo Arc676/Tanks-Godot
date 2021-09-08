@@ -22,6 +22,7 @@ func _ready():
 	$"Rows/Options/UI/Enable SFX".pressed = Globals.gameSettings.sfx
 	$"Rows/Options/UI/Enable Touch UI".pressed = Globals.gameSettings.touchUI
 	$"Rows/Options/UI/Enable Teams".pressed = Globals.gameSettings.teams
+	$"Rows/Options/UI/Enable Help Overlay".pressed = Globals.gameSettings.showHelpOverlay
 
 	$Rows/Options/Gameplay/Shuffle.pressed = Globals.gameSettings.shuffleOrder
 	$"Rows/Options/Gameplay/Difficulty/Difficulty Slider".value = 1 - inverse_lerp(
@@ -61,3 +62,6 @@ func toggleCCScaling(pressed):
 
 func toggleShufflePlayers(pressed):
 	Globals.gameSettings.shuffleOrder = pressed
+
+func toggleOverlay(pressed):
+	Globals.gameSettings.showHelpOverlay = pressed

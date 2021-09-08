@@ -24,6 +24,7 @@ enum WIND_SETTING {
 }
 
 var gameSettings = {
+	"showHelpOverlay" : true,
 	"storeSkipCCs" : false,
 	"scaleDmgDist" : 1.4,
 	"scaleForCCs" : false,

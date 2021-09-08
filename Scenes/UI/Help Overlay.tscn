@@ -1,0 +1,221 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Textures/Touch Controls/Plus.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Touch Controls/Fire.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Touch Controls/CCW.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Touch Controls/NextWeapon.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Touch Controls/Left.png" type="Texture" id=5]
+[ext_resource path="res://Textures/Touch Controls/Minus.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Touch Controls/Right.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Touch Controls/CW.png" type="Texture" id=8]
+[ext_resource path="res://Textures/Touch Controls/PrevWeapon.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/UI/Help Overlay.gd" type="Script" id=10]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -172, 32 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 0.294118, 0.294118, 0.294118, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gameplay" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -502.0
+margin_top = -140.0
+margin_right = 502.0
+margin_bottom = 140.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay"]
+margin_right = 1004.0
+margin_bottom = 15.0
+text = "Destroy the enemy tanks! You can control your tank using the keyboard or with the on-screen touch controls."
+fit_content_height = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay"]
+margin_top = 25.0
+margin_right = 1004.0
+margin_bottom = 75.0
+
+[node name="Rotating" type="HBoxContainer" parent="Gameplay/HBoxContainer"]
+margin_right = 500.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/HBoxContainer/Rotating"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Gameplay/HBoxContainer/Rotating"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 8 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/HBoxContainer/Rotating"]
+margin_left = 108.0
+margin_right = 500.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+text = "Rotate the cannon.
+
+Keyboard: DOWN for CCW, UP for CW"
+fit_content_height = true
+
+[node name="Moving" type="HBoxContainer" parent="Gameplay/HBoxContainer"]
+margin_left = 504.0
+margin_right = 1004.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/HBoxContainer/Moving"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 5 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Gameplay/HBoxContainer/Moving"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/HBoxContainer/Moving"]
+margin_left = 108.0
+margin_right = 500.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+text = "Move around (requires fuel).
+
+Keyboard: LEFT and RIGHT"
+fit_content_height = true
+
+[node name="Firing" type="HBoxContainer" parent="Gameplay"]
+margin_top = 85.0
+margin_right = 1004.0
+margin_bottom = 160.0
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/Firing"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Gameplay/Firing"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="Gameplay/Firing"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/Firing"]
+margin_left = 162.0
+margin_right = 1004.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+text = "Adjust firepower and then fire. When using a targeted weapon, such as an airstrike, if you have a mouse, the target will follow the cursor. Click to fire. On mobile devices, drag the target to the desired location and press the fire button again. To cancel a targeted strike, press ESC if you have a keyboard, or change ammo type if you're on mobile.
+
+Keyboard: PgUp/PgDn or Shift+UP/Shift+DOWN or Ctrl+UP/Ctrl+DOWN; Space"
+fit_content_height = true
+
+[node name="Ammo" type="HBoxContainer" parent="Gameplay"]
+margin_top = 170.0
+margin_right = 1004.0
+margin_bottom = 220.0
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/Ammo"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 9 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Gameplay/Ammo"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/Ammo"]
+margin_left = 108.0
+margin_right = 1004.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+text = "Change ammunition type (only if you have more than one kind of ammo).
+
+Keyboard: Q and W"
+fit_content_height = true
+
+[node name="Buttons" type="HBoxContainer" parent="Gameplay"]
+margin_top = 230.0
+margin_right = 1004.0
+margin_bottom = 280.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Always Show" type="CheckBox" parent="Gameplay/Buttons"]
+margin_left = 348.0
+margin_right = 574.0
+margin_bottom = 50.0
+text = "Show at the start of each round"
+
+[node name="Hide" type="Button" parent="Gameplay/Buttons"]
+margin_left = 614.0
+margin_right = 656.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+text = "Hide"
+
+[connection signal="toggled" from="Gameplay/Buttons/Always Show" to="." method="toggleOverlay"]
+[connection signal="pressed" from="Gameplay/Buttons/Hide" to="." method="hideOverlay"]

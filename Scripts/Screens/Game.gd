@@ -49,7 +49,7 @@ onready var scores = [
 ]
 
 # Game
-var activePlayer = 0
+var activePlayer = -1
 var players = []
 var drawDeclared = false
 onready var terrain = $"Game Scene/Terrain"
@@ -117,8 +117,14 @@ func _ready():
 	for i in range(4):
 		scores[i].visible = len(players) >= i + 1
 
-	setActiveTank(0)
-	updateHUD()
+	if !Globals.gameSettings.showHelpOverlay:
+		startGame()
+
+func startGame():
+	if activePlayer < 0:
+		activePlayer = 0
+		setActiveTank(0)
+		updateHUD()
 
 func toggleSFX():
 	Globals.gameSettings.sfx = !Globals.gameSettings.sfx

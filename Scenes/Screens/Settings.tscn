@@ -69,6 +69,12 @@ margin_right = 237.0
 margin_bottom = 80.0
 text = "Enable Teams"
 
+[node name="Enable Help Overlay" type="CheckBox" parent="Rows/Options/UI"]
+margin_top = 84.0
+margin_right = 237.0
+margin_bottom = 108.0
+text = "Show Help Overlay"
+
 [node name="Gameplay" type="VBoxContainer" parent="Rows/Options"]
 margin_left = 241.0
 margin_right = 479.0
@@ -149,6 +155,7 @@ text = "Back"
 [connection signal="toggled" from="Rows/Options/UI/Enable SFX" to="." method="setSFX"]
 [connection signal="toggled" from="Rows/Options/UI/Enable Touch UI" to="." method="setTouchUI"]
 [connection signal="toggled" from="Rows/Options/UI/Enable Teams" to="." method="setTeams"]
+[connection signal="toggled" from="Rows/Options/UI/Enable Help Overlay" to="." method="toggleOverlay"]
 [connection signal="toggled" from="Rows/Options/Gameplay/Shuffle" to="." method="toggleShufflePlayers"]
 [connection signal="value_changed" from="Rows/Options/Gameplay/Difficulty/Difficulty Slider" to="." method="setDifficulty"]
 [connection signal="toggled" from="Rows/Options/Gameplay/Enable CC Scaling" to="." method="toggleCCScaling"]
