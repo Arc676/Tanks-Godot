@@ -62,7 +62,10 @@ func _enter_tree():
 		var file = File.new()
 		if file.file_exists("user://settings/settings.json"):
 			file.open("user://settings/settings.json", File.READ)
-			gameSettings = parse_json(file.get_line())
+			var storedSettings = parse_json(file.get_line())
+			for key in gameSettings:
+				if key in storedSettings:
+					gameSettings[key] = storedSettings[key]
 			file.close()
 		else:
 			saveSettings()
