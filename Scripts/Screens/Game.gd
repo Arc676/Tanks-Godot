@@ -185,6 +185,9 @@ func updateItems():
 		btn.init(item, tank)
 
 func _process(_delta):
+	if activePlayer < 0:
+		return
+
 	var activeTank = players[activePlayer]
 
 	pHP.value = activeTank.hp
