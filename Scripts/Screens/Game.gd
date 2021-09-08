@@ -18,8 +18,8 @@ onready var tree = get_tree()
 
 onready var itemBtn = preload("res://Scenes/UI/Item Btn.tscn")
 
-onready var muteTexture = preload("res://Textures/UI/mute_0.png")
-onready var unmuteTexture = preload("res://Textures/UI/unmute_0.png")
+onready var muteTexture = preload("res://Textures/UI/mute.png")
+onready var unmuteTexture = preload("res://Textures/UI/unmute.png")
 
 # HUD - Player data
 onready var pColor = $"ColorRect/HUD/Player Stats/Identification/Player Color"
@@ -228,3 +228,6 @@ func setActiveTank(idx):
 	pColor.color = tank.color
 	pName.text = tank.tankName
 	$"Touch Controls/UI Left/Weapons".visible = tank.weapons.size() > 1
+
+func showHelp():
+	$"CanvasLayer/Help Overlay".visible = true
