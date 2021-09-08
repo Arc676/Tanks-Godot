@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/UI/Tank Creator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Terrain Btn Group.tres" type="ButtonGroup" id=2]
 [ext_resource path="res://Scripts/Screens/Main Menu.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/UI/Change Scene.gd" type="Script" id=4]
+[ext_resource path="res://Textures/UI/help.png" type="Texture" id=5]
+[ext_resource path="res://Textures/UI/play.png" type="Texture" id=6]
+[ext_resource path="res://Textures/UI/exit.png" type="Texture" id=7]
+[ext_resource path="res://Textures/UI/about.png" type="Texture" id=8]
+[ext_resource path="res://Textures/UI/settings.png" type="Texture" id=9]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -26,7 +31,7 @@ __meta__ = {
 }
 
 [node name="P13" type="VBoxContainer" parent="UI"]
-margin_right = 430.0
+margin_right = 432.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 custom_constants/separation = 40
@@ -35,19 +40,19 @@ alignment = 1
 [node name="Player 1" parent="UI/P13" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 430.0
+margin_right = 432.0
 margin_bottom = 270.0
 
 [node name="Player 3" parent="UI/P13" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 310.0
-margin_right = 430.0
+margin_right = 432.0
 margin_bottom = 580.0
 
 [node name="P24" type="VBoxContainer" parent="UI"]
-margin_left = 460.0
-margin_right = 891.0
+margin_left = 462.0
+margin_right = 894.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 custom_constants/separation = 40
@@ -56,18 +61,18 @@ alignment = 1
 [node name="Player 2" parent="UI/P24" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 431.0
+margin_right = 432.0
 margin_bottom = 270.0
 
 [node name="Player 4" parent="UI/P24" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 310.0
-margin_right = 431.0
+margin_right = 432.0
 margin_bottom = 580.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-margin_left = 921.0
+margin_left = 924.0
 margin_right = 1004.0
 margin_bottom = 580.0
 size_flags_horizontal = 0
@@ -78,88 +83,93 @@ __meta__ = {
 }
 
 [node name="Terrain" type="VBoxContainer" parent="UI/VBoxContainer"]
-margin_top = 52.0
-margin_right = 83.0
-margin_bottom = 178.0
+margin_top = 27.0
+margin_right = 80.0
+margin_bottom = 153.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="UI/VBoxContainer/Terrain"]
-margin_right = 83.0
+margin_right = 80.0
 margin_bottom = 14.0
 text = "Terrain Type"
 
 [node name="Desert" type="CheckBox" parent="UI/VBoxContainer/Terrain"]
 margin_top = 18.0
-margin_right = 83.0
+margin_right = 80.0
 margin_bottom = 42.0
 group = ExtResource( 2 )
 text = "Desert"
 
 [node name="Plains" type="CheckBox" parent="UI/VBoxContainer/Terrain"]
 margin_top = 46.0
-margin_right = 83.0
+margin_right = 80.0
 margin_bottom = 70.0
 group = ExtResource( 2 )
 text = "Plains"
 
 [node name="Hills" type="CheckBox" parent="UI/VBoxContainer/Terrain"]
 margin_top = 74.0
-margin_right = 83.0
+margin_right = 80.0
 margin_bottom = 98.0
 group = ExtResource( 2 )
 text = "Hills"
 
 [node name="Random" type="CheckBox" parent="UI/VBoxContainer/Terrain"]
 margin_top = 102.0
-margin_right = 83.0
+margin_right = 80.0
 margin_bottom = 126.0
 pressed = true
 group = ExtResource( 2 )
 text = "Random"
 
-[node name="Start" type="Button" parent="UI/VBoxContainer"]
-margin_top = 198.0
-margin_right = 83.0
-margin_bottom = 248.0
-rect_min_size = Vector2( 0, 50 )
-text = "Start Game"
+[node name="Start" type="TextureButton" parent="UI/VBoxContainer"]
+margin_top = 173.0
+margin_right = 80.0
+margin_bottom = 233.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 6 )
+expand = true
 
-[node name="Settings" type="Button" parent="UI/VBoxContainer"]
-margin_top = 268.0
-margin_right = 83.0
-margin_bottom = 318.0
-rect_min_size = Vector2( 0, 50 )
-text = "Settings"
+[node name="Settings" type="TextureButton" parent="UI/VBoxContainer"]
+margin_top = 253.0
+margin_right = 80.0
+margin_bottom = 313.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 9 )
+expand = true
 script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/Settings.tscn"
 
-[node name="Help" type="Button" parent="UI/VBoxContainer"]
-margin_top = 338.0
-margin_right = 83.0
-margin_bottom = 388.0
-rect_min_size = Vector2( 0, 50 )
-text = "Help"
+[node name="Help" type="TextureButton" parent="UI/VBoxContainer"]
+margin_top = 333.0
+margin_right = 80.0
+margin_bottom = 393.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 5 )
+expand = true
 script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/Help.tscn"
 
-[node name="About" type="Button" parent="UI/VBoxContainer"]
-margin_top = 408.0
-margin_right = 83.0
-margin_bottom = 458.0
-rect_min_size = Vector2( 0, 50 )
-text = "About"
+[node name="About" type="TextureButton" parent="UI/VBoxContainer"]
+margin_top = 413.0
+margin_right = 80.0
+margin_bottom = 473.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 8 )
+expand = true
 script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/About.tscn"
 
-[node name="Quit" type="Button" parent="UI/VBoxContainer"]
-margin_top = 478.0
-margin_right = 83.0
-margin_bottom = 528.0
-rect_min_size = Vector2( 0, 50 )
-text = "Quit"
+[node name="Quit" type="TextureButton" parent="UI/VBoxContainer"]
+margin_top = 493.0
+margin_right = 80.0
+margin_bottom = 553.0
+rect_min_size = Vector2( 60, 60 )
+texture_normal = ExtResource( 7 )
+expand = true
 
 [connection signal="pressed" from="UI/VBoxContainer/Start" to="." method="startGame"]
 [connection signal="pressed" from="UI/VBoxContainer/Quit" to="." method="quitGame"]
