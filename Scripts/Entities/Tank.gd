@@ -524,6 +524,7 @@ func playerUpdate():
 			stopTargeting()
 			if isTeleporting:
 				items["Teleport"] = items.get("Teleport", 0) + 1
+				isTeleporting = false
 				emit_signal("itemsChanged")
 		elif input_confirmTarget():
 			if isTeleporting:
