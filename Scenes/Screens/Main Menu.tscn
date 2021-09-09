@@ -32,7 +32,7 @@ __meta__ = {
 
 [node name="P13" type="VBoxContainer" parent="UI"]
 margin_right = 432.0
-margin_bottom = 626.0
+margin_bottom = 580.0
 size_flags_horizontal = 3
 custom_constants/separation = 40
 alignment = 1
@@ -41,19 +41,19 @@ alignment = 1
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 432.0
-margin_bottom = 293.0
+margin_bottom = 270.0
 
 [node name="Player 3" parent="UI/P13" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 333.0
+margin_top = 310.0
 margin_right = 432.0
-margin_bottom = 626.0
+margin_bottom = 580.0
 
 [node name="P24" type="VBoxContainer" parent="UI"]
 margin_left = 462.0
 margin_right = 894.0
-margin_bottom = 626.0
+margin_bottom = 580.0
 size_flags_horizontal = 3
 custom_constants/separation = 40
 alignment = 1
@@ -62,29 +62,30 @@ alignment = 1
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 432.0
-margin_bottom = 293.0
+margin_bottom = 270.0
 
 [node name="Player 4" parent="UI/P24" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 333.0
+margin_top = 310.0
 margin_right = 432.0
-margin_bottom = 626.0
+margin_bottom = 580.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 margin_left = 924.0
 margin_right = 1004.0
-margin_bottom = 626.0
+margin_bottom = 580.0
 size_flags_horizontal = 0
-custom_constants/separation = 20
+custom_constants/separation = 5
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Terrain" type="VBoxContainer" parent="UI/VBoxContainer"]
+margin_top = 14.0
 margin_right = 80.0
-margin_bottom = 126.0
+margin_bottom = 140.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -125,9 +126,9 @@ group = ExtResource( 2 )
 text = "Random"
 
 [node name="Start" type="TextureButton" parent="UI/VBoxContainer"]
-margin_top = 146.0
+margin_top = 145.0
 margin_right = 80.0
-margin_bottom = 226.0
+margin_bottom = 225.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -135,9 +136,9 @@ texture_normal = ExtResource( 6 )
 expand = true
 
 [node name="Settings" type="TextureButton" parent="UI/VBoxContainer"]
-margin_top = 246.0
+margin_top = 230.0
 margin_right = 80.0
-margin_bottom = 326.0
+margin_bottom = 310.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -147,9 +148,9 @@ script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/Settings.tscn"
 
 [node name="Help" type="TextureButton" parent="UI/VBoxContainer"]
-margin_top = 346.0
+margin_top = 315.0
 margin_right = 80.0
-margin_bottom = 426.0
+margin_bottom = 395.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -159,9 +160,9 @@ script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/Help.tscn"
 
 [node name="About" type="TextureButton" parent="UI/VBoxContainer"]
-margin_top = 446.0
+margin_top = 400.0
 margin_right = 80.0
-margin_bottom = 526.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -171,9 +172,9 @@ script = ExtResource( 4 )
 targetScene = "res://Scenes/Screens/About.tscn"
 
 [node name="Quit" type="TextureButton" parent="UI/VBoxContainer"]
-margin_top = 546.0
+margin_top = 485.0
 margin_right = 80.0
-margin_bottom = 626.0
+margin_bottom = 565.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
