@@ -162,7 +162,7 @@ margin_bottom = 75.0
 size_flags_horizontal = 3
 text = "Adjust firepower and then fire. When using a targeted weapon, such as an airstrike, if you have a mouse, the target will follow the cursor. Click to fire. On mobile devices, drag the target to the desired location and press the fire button again. To cancel a targeted strike, press ESC if you have a keyboard, or change ammo type if you're on mobile.
 
-Keyboard: PgUp/PgDn or Shift+UP/Shift+DOWN or Ctrl+UP/Ctrl+DOWN; Space"
+Keyboard: PgUp/PgDn or Shift+UP/Shift+DOWN; Space"
 fit_content_height = true
 
 [node name="Ammo" type="HBoxContainer" parent="Gameplay"]

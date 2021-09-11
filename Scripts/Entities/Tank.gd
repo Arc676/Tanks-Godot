@@ -607,10 +607,14 @@ func input_firepowerDown():
 	return Input.is_action_pressed("ui_page_down") or touchFirepowerDown.pressed
 
 func input_CCW():
-	return Input.is_action_pressed("ui_down") or touchCCW.pressed
+	return (Input.is_action_pressed("ui_down") and \
+			!Input.is_action_pressed("ui_page_down")) \
+		or touchCCW.pressed
 
 func input_CW():
-	return Input.is_action_pressed("ui_up") or touchCW.pressed
+	return (Input.is_action_pressed("ui_up") and \
+			!Input.is_action_pressed("ui_page_up")) \
+		or touchCW.pressed
 
 func input_fire():
 	return Input.is_action_just_pressed("fire") or touchFire.pressed

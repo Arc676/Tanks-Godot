@@ -173,7 +173,7 @@ margin_bottom = 90.0
 size_flags_horizontal = 3
 text = "Use the plus and minus to adjust firepower. Press the explosion button to fire. When using a targeted weapon, such as an airstrike, point the target where you want to fire. Note that wind also affects airstrikes. If you have a mouse, the target will follow the cursor. Click to fire. On mobile devices, drag the target to the desired location and press the fire button again. To cancel a targeted strike, press ESC if you have a keyboard, or change ammo type if you're on mobile.
 
-Keyboard: PgUp/PgDn or Shift+UP/Shift+DOWN or Ctrl+UP/Ctrl+DOWN; Space"
+Keyboard: PgUp/PgDn or Shift+UP/Shift+DOWN; Space"
 fit_content_height = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/TabContainer/Gameplay"]
