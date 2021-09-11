@@ -580,7 +580,7 @@ func playerUpdate():
 
 func _physics_process(delta):
 	velocity.y += Globals.GRAVITY * delta
-	if isActiveTank and is_on_floor() and fuel > 0:
+	if !isCC and isActiveTank and !hasFired and is_on_floor() and fuel > 0:
 		if input_moveLeft():
 			velocity.x = -MOVE_SPEED
 			fuel -= 20 * delta / engineEfficiency
