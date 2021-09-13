@@ -412,8 +412,8 @@ func recalculate(target):
 	var a1 = 0.001
 
 	var chunkRange
-	var posChunk = floor(position.x) / Weapons.terrain.chunkSize
-	var targetChunk = floor(target.x) / Weapons.terrain.chunkSize
+	var posChunk = floor(position.x / Weapons.terrain.chunkSize)
+	var targetChunk = floor(target.x / Weapons.terrain.chunkSize)
 	if abs(posChunk - targetChunk) >= 2:
 		if x < 0:
 			chunkRange = range(targetChunk + 1, posChunk)
@@ -424,7 +424,7 @@ func recalculate(target):
 			var xc = i * Weapons.terrain.chunkSize - position.x
 			var h = -(Weapons.terrain.ground.polygon[i].y - position.y)
 			if -a1 * xc * (xc + b) < h:
-				a1 = -(h + 6) / (xc * (xc + b))
+				a1 = -(h + 7) / (xc * (xc + b))
 
 	targetAngle = -atan(-a1 * b)
 	if x < 0:
