@@ -11,6 +11,7 @@ extents = Vector2( 4, 3 )
 
 [node name="Tank" type="KinematicBody2D"]
 collision_layer = 2
+collision/safe_margin = 0.3
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
