@@ -23,7 +23,9 @@ onready var exSmall = preload("res://Sound/ex_small.wav")
 
 onready var sound = $AudioStreamPlayer2D
 
+var impactMutex = Mutex.new()
 var hasImpacted = false
+
 var blastRadius
 var damage
 var srcPlayer
@@ -38,6 +40,18 @@ func init(properties, velocity, isBig, src):
 		sound.stream = exBig
 	else:
 		sound.stream = exSmall
+
+	# Check if spawned inside terrain
+	if isInTerrain():
+		call_deferred("impact", Weapons.terrain)
+
+# By default, check if the projectile (radius 5) is touching the terrain
+func isInTerrain(dy = -5):
+	var terrainHeight = Weapons.terrain.heightAtX(position.x)
+	# Remember that Godot's Y axis points down
+	if position.y > terrainHeight + dy:
+		return true
+	return false
 
 func _draw():
 	draw_circle(Vector2.ZERO, 5, Color.black)
@@ -57,10 +71,18 @@ func _process(_delta):
 	if hasImpacted:
 		if !sound.playing:
 			despawn()
+		return
+	# If moving quickly, do a quick collision check
+	if linear_velocity.length() > 500 and isInTerrain(10):
+		impact(Weapons.terrain)
 
 func impact(_body):
+	impactMutex.lock()
 	if hasImpacted:
+		impactMutex.unlock()
 		return
+	hasImpacted = true
+	impactMutex.unlock()
 	var boom = explosion.instance()
 	boom.position = position
 	get_parent().add_child(boom)
@@ -107,5 +129,4 @@ func impact(_body):
 				false,
 				srcPlayer
 			)
-	hasImpacted = true
 	visible = false

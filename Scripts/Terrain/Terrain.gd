@@ -141,3 +141,12 @@ func deform(radius, x):
 		dx += 1
 	ground.set_deferred("polygon", points)
 	update()
+
+func heightAtX(x):
+	var x0 = floor(x / chunkSize)
+	var x1 = ceil(x / chunkSize)
+
+	var points = ground.polygon
+	var distanceToNextChunk = fmod(x, chunkSize)
+
+	return lerp(points[x0].y, points[x1].y, distanceToNextChunk / chunkSize)

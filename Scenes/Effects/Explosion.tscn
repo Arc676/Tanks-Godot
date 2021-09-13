@@ -3,4 +3,5 @@
 [ext_resource path="res://Scripts/Effects/Explosion.gd" type="Script" id=1]
 
 [node name="Explosion" type="Sprite"]
+scale = Vector2( 1e-05, 1e-05 )
 script = ExtResource( 1 )
