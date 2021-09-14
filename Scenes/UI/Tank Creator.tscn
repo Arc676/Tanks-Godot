@@ -50,6 +50,7 @@ margin_right = 942.0
 margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+placeholder_text = "(Pick random name)"
 
 [node name="Tank Color" type="ColorPickerButton" parent="Identification"]
 margin_left = 946.0
@@ -159,6 +160,7 @@ fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="toggled" from="Presence/Tank Enabled" to="." method="toggleTank"]
 [connection signal="toggled" from="AI Mode/CC" to="." method="toggleCC"]
 [connection signal="pressed" from="Disk/Load" to="." method="loadTank"]
