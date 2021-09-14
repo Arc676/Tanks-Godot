@@ -16,8 +16,16 @@ extends Sprite
 
 onready var isTouch = OS.has_touchscreen_ui_hint()
 
+func init():
+	if OS.has_touchscreen_ui_hint():
+		position = Vector2(
+			Globals.SCR_WIDTH / 2,
+			Globals.SCR_HEIGHT / 2
+		)
+
 func _input(event):
-	if event is InputEventScreenDrag:
+	if event is InputEventScreenDrag and \
+		event.position.y < Globals.SCR_HEIGHT * 0.75:
 		position = event.position
 
 func _process(_delta):

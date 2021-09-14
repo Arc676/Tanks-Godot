@@ -72,6 +72,7 @@ func _ready():
 
 	var touchNextWeapon = $"Touch Controls/UI Left/Weapons/NextWeapon"
 	var touchPrevWeapon = $"Touch Controls/UI Left/Weapons/PrevWeapon"
+	var touchFire = $"Touch Controls/Fire"
 
 	terrain.generateNewTerrain(Globals.selectedTerrain,
 		Globals.SCR_HEIGHT,
@@ -95,12 +96,12 @@ func _ready():
 		tank.touchCCW = $"Touch Controls/UI Left/Buttons/CCW"
 		tank.touchFirepowerUp = $"Touch Controls/UI Left/Buttons/Firepower Up"
 		tank.touchFirepowerDown = $"Touch Controls/UI Left/Buttons/Firepower Down"
-		tank.touchFire = $"Touch Controls/Fire"
 
 		touchNextWeapon.connect("button_up", tank, "input_changeWeapon",
 			[touchNextWeapon])
 		touchPrevWeapon.connect("button_up", tank, "input_changeWeapon",
 			[touchPrevWeapon])
+		touchFire.connect("button_up", tank, "input_touchFire")
 
 		tank.z_index = z
 		z += 1

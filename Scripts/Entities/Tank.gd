@@ -42,9 +42,9 @@ var touchCW
 var touchCCW
 var touchFirepowerUp
 var touchFirepowerDown
-var touchFire
 
 var weaponChangedLastFrame = 0
+var firedLastFrame = false
 
 # Computer controlled tanks
 var isCC = false
@@ -340,6 +340,7 @@ func _draw():
 func startTargeting():
 	isTargeting = true
 	target = targetObj.instance()
+	target.init()
 	get_parent().add_child(target)
 
 func stopTargeting():
@@ -577,6 +578,7 @@ func playerUpdate():
 			selectedWeapon = weapons.size() - 1
 
 	weaponChangedLastFrame = 0
+	firedLastFrame = false
 
 func _physics_process(delta):
 	velocity.y += Globals.GRAVITY * delta
@@ -617,7 +619,7 @@ func input_CW():
 		or touchCW.pressed
 
 func input_fire():
-	return Input.is_action_just_pressed("fire") or touchFire.pressed
+	return Input.is_action_just_pressed("fire") or firedLastFrame
 
 func input_nextWeapon():
 	return Input.is_action_just_pressed("next_weapon") or weaponChangedLastFrame > 0
@@ -625,18 +627,27 @@ func input_nextWeapon():
 func input_prevWeapon():
 	return Input.is_action_just_pressed("prev_weapon") or weaponChangedLastFrame < 0
 
+# Called when ammo changing touch controls are released
 func input_changeWeapon(btn):
+	if !isActiveTank:
+		return
 	if btn.name == "PrevWeapon":
 		weaponChangedLastFrame = -1
 	else:
 		weaponChangedLastFrame = 1
+
+# Called when firing touch control is released
+func input_touchFire():
+	if !isActiveTank:
+		return
+	firedLastFrame = true
 
 func input_cancelTarget():
 	return Input.is_action_just_pressed("ui_cancel") or weaponChangedLastFrame != 0
 
 func input_confirmTarget():
 	return Input.is_action_just_pressed("click") or (
-		touchFire.pressed and
+		firedLastFrame and
 		target.position.y < Globals.SCR_HEIGHT * 0.75 and
 		target.position.y > Globals.SCR_HEIGHT * 0.25
 	)
